@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="color-scheme" content="light">
+  <title>7월 20-26일 생활과 봉사 집회 연구 노트</title>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css">
+  <style>
+    :root {
+      --ink:#1c2637; --muted:#5f6b7c; --line:#d6dde6; --paper:#fff;
+      --navy:#1e3a5f; --navy-deep:#152a45; --navy-soft:#e9eef6;
+      --gold:#8a6a1f; --gold-soft:#faf4e4;
+      --indigo:#524f86; --indigo-soft:#eeedf7;
+      --teal:#2e5f6b; --teal-soft:#e8f2f3;
+      --shadow:0 5px 18px rgba(21,42,69,.08);
+      --font:"Pretendard Variable",Pretendard,-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:#f3f5f8;color:var(--ink);font-family:var(--font);line-height:1.72;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+    button,input,select,textarea{font-family:inherit}
+    a{color:var(--navy);text-underline-offset:3px}
+    .page{max-width:980px;margin:auto;padding:24px 18px 70px}
+    header{padding:34px 28px;background:linear-gradient(135deg,#15273f,#2f4f7a);color:#fff;border-radius:18px;box-shadow:var(--shadow)}
+    header h1{margin:0 0 8px;font-size:clamp(1.7rem,4vw,2.5rem);line-height:1.25;font-weight:800;letter-spacing:-.025em}
+    header p{margin:5px 0;color:#e8eef7}
+    .source-note{margin-top:18px;padding:11px 14px;border:1px solid rgba(255,255,255,.32);border-radius:10px;background:rgba(255,255,255,.09);font-size:.92rem}
+    nav{position:sticky;top:0;z-index:3;margin:18px 0;padding:11px;background:rgba(243,245,248,.95);backdrop-filter:blur(9px);border:1px solid var(--line);border-radius:12px;display:flex;gap:8px;overflow-x:auto}
+    nav a{white-space:nowrap;text-decoration:none;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:.9rem;color:var(--ink)}
+    nav a:hover{border-color:var(--navy);color:var(--navy)}
+    .toolbar{display:flex;gap:8px;justify-content:flex-end;margin:10px 0 22px;flex-wrap:wrap}
+    button{border:1px solid var(--line);background:#fff;color:var(--ink);border-radius:8px;padding:8px 12px;cursor:pointer}
+    button:hover{border-color:var(--navy);color:var(--navy)}
+    section{scroll-margin-top:88px;margin:30px 0}
+    h2{margin:0 0 13px;padding-left:12px;border-left:5px solid var(--navy);font-size:1.45rem;font-weight:700;letter-spacing:-.02em}
+    h3{margin:20px 0 8px;font-size:1.12rem;font-weight:700}
+    .overview,.card,details{background:var(--paper);border:1px solid var(--line);border-radius:13px;box-shadow:var(--shadow)}
+    .overview{padding:22px}
+    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .fact{padding:13px;background:#f5f7fa;border-radius:9px}
+    .fact strong{display:block;color:var(--navy);font-size:.84rem;margin-bottom:3px}
+    .theme{margin-top:15px;padding:16px 18px;border-left:4px solid var(--gold);background:var(--gold-soft);border-radius:8px;font-weight:700}
+    details{margin:11px 0;overflow:hidden}
+    summary{cursor:pointer;list-style:none;padding:16px 52px 16px 18px;font-weight:700;position:relative;background:#fafbfd}
+    summary::-webkit-details-marker{display:none}
+    summary::after{content:"＋";position:absolute;right:18px;top:13px;color:var(--navy);font-size:1.25rem}
+    details[open] summary{border-bottom:1px solid var(--line);background:var(--navy-soft)}
+    details[open] summary::after{content:"−"}
+    .content{padding:18px}
+    .answer,.evidence,.reflect,.research,.video-box{margin:11px 0;padding:14px 16px;border-radius:9px}
+    .answer{background:var(--navy-soft);border-left:4px solid var(--navy)}
+    .evidence{background:var(--gold-soft);border-left:4px solid var(--gold)}
+    .reflect{background:var(--indigo-soft);border-left:4px solid var(--indigo)}
+    .research{background:var(--teal-soft);border-left:4px solid var(--teal)}
+    .video-box{background:#eef2f7;border-left:4px solid var(--navy)}
+    .label{display:block;font-size:.82rem;font-weight:800;letter-spacing:.02em;margin-bottom:5px}
+    .answer .label{color:var(--navy)} .evidence .label{color:var(--gold)} .reflect .label{color:var(--indigo)} .research .label{color:var(--teal)}
+    ul,ol{padding-left:23px} li{margin:6px 0}
+    blockquote{margin:8px 0;padding:12px 15px;background:#fff;border:1px solid #c9d6e4;border-radius:8px;font-weight:600}
+    .time{display:inline-block;margin-right:7px;padding:3px 8px;border-radius:999px;background:#e6ebf1;color:#4c5a6b;font-size:.76rem;vertical-align:2px}
+    .scripture{color:var(--muted);font-size:.92rem}
+    .study-title{padding:22px;background:linear-gradient(135deg,#eceff6,#fff);border:1px solid #d3dbe8;border-radius:13px}
+    .checklist{columns:2;column-gap:30px}
+    .footer{margin-top:42px;padding:20px;text-align:center;color:var(--muted);font-size:.88rem;border-top:1px solid var(--line)}
+    @media(max-width:680px){.page{padding:12px 10px 50px}header{padding:25px 19px;border-radius:12px}.grid{grid-template-columns:1fr}.checklist{columns:1}summary{padding-left:14px}.content{padding:14px}nav{margin-inline:-2px}}
+    @media print{body{background:#fff}.page{max-width:none;padding:0}header{box-shadow:none;color:#000;background:#fff;border:1px solid #aaa}.source-note,nav,.toolbar{display:none}details{box-shadow:none;break-inside:avoid}details:not([open])>.content{display:block}summary::after{display:none}.overview,.card{box-shadow:none}}
+  </style>
+</head>
+<body>
+<div class="page">
+  <header>
+    <h1>7월 20-26일 생활과 봉사 집회 연구 노트</h1>
+    <p><strong>성경 범위:</strong> 예레미야 18-19장</p>
+    <p>발표용 답은 짧게, 근거는 정확하게, 묵상은 깊이 있게</p>
+    <div class="source-note">이 문서는 사용자가 지정한 <a href="https://wol.jw.org/ko/wol/d/r8/lp-ko/202026243" style="color:#fff">이번 주 WOL 프로그램</a>과 그 안에 연결된 연구자료(「통」 “바알”·“도공”, 「파25.08」, 「읽가」 5·20과, 「랑제」 4·9과, 「웹성대」 기사 44, 「용하」)만을 바탕으로 정리한 개인 연구용 노트입니다. ‘발표용 답’은 그대로 읽기보다 자신의 말로 표현하는 것이 좋습니다.</div>
+  </header>
+
+  <nav aria-label="빠른 이동">
+    <a href="#overview">한눈에 보기</a><a href="#treasures">성경에 담긴 보물</a><a href="#ministry">야외 봉사</a><a href="#living">그리스도인 생활</a><a href="#video">영상</a><a href="#study">회중 성서 연구</a><a href="#review">마지막 복습</a>
+  </nav>
+  <div class="toolbar"><button onclick="document.querySelectorAll('details').forEach(x=>x.open=true)">모두 펼치기</button><button onclick="document.querySelectorAll('details').forEach(x=>x.open=false)">모두 접기</button><button onclick="window.print()">인쇄</button></div>
+
+  <section id="overview">
+    <h2>이번 주 한눈에 보기</h2>
+    <div class="overview">
+      <div class="grid">
+        <div class="fact"><strong>성경 범위</strong>예레미야 18-19장</div>
+        <div class="fact"><strong>주요 표상</strong>도공, 부드러운 진흙, 깨진 항아리</div>
+        <div class="fact"><strong>연결 영상</strong>「저는 삶의 방향을 돌이켰어요」 (5:09)</div>
+        <div class="fact"><strong>회중 성서 연구</strong>「용기 있게 하느님과 함께 걸으십시오」 중앙장로회의 편지와 소개말</div>
+      </div>
+      <div class="theme">이번 주 핵심: 잘못했더라도 가망이 없는 것이 아닙니다. 여호와께서는 돌아오려는 사람을 다시 빚으시며, 죄와의 싸움에서 이길 힘과 용기를 주십니다.</div>
+    </div>
+  </section>
+
+  <section id="treasures">
+    <h2>성경에 담긴 보물</h2>
+
+    <details open>
+      <summary><span class="time">10분</span>1. 잘못을 했어도 가망이 없는 것이 아닙니다</summary>
+      <div class="content">
+        <ul>
+          <li>여호와께서는 깊이 뿌리박힌 악행을 저지르던 유다 백성에게도 돌아서라고 권고하셨습니다.—렘 18:11.</li>
+          <li>백성은 “아무리 그래도 소용없다!”고 말했지만, 여호와께서는 그들이 변화할 수 있다고 확신하셨습니다.—렘 18:12.</li>
+          <li>사람이나 나라가 악한 길에서 돌아서면 여호와께서는 자비를 나타내시므로, 우리도 죄와 맞서 싸워 이길 수 있습니다.—렘 18:7, 8.</li>
+        </ul>
+        <div class="research"><span class="label">연구자료 묵상 · 「통」 “바알” 4번</span>유다의 악행이 왜 “깊이 뿌리박힌” 것이었는지 이 자료가 알려 줍니다. 바알 숭배는 가나안 정착 초기부터 수백 년에 걸쳐 스며들었고, 산당만이 아니라 민가의 지붕 위에서까지 행해질 정도로 일상화되어 있었습니다(렘 32:29 관련). 심지어 자녀 희생까지 포함되어 있었는데, 이는 예레미야 19장의 힌놈 골짜기 심판 선언과 직접 연결됩니다(렘 19:5). 아사·여호아스·히스기야·요시야 같은 왕들이 거듭 개혁했지만 항구적이지 못했습니다.<br><br><strong>묵상할 점:</strong> ① 죄는 습관과 문화 속에 뿌리내리면 한두 번의 부분적 개혁으로는 뽑히지 않습니다. 내 삶에도 ‘지붕 위 숭배’처럼 일상 깊숙이 들어와 당연해진 타협은 없는지 살펴봅니다. ② 그토록 오염된 백성에게조차 여호와께서 먼저 “돌아서라”고 호소하신 사실은, 그분이 처벌보다 회복을 원하시는 분임을 보여 줍니다.</div>
+        <div class="research"><span class="label">연구자료 묵상 · 「파25.08」 23면 11항</span>불완전하기 때문에 마음속에서 ‘너는 잘못된 욕망에 굴복할 수밖에 없어’라는 소리가 들리는 것 같을 때가 있습니다. 그러나 이 기사는 그 소리에 귀 기울이지 말라고 알려 줍니다. 로마서 6:12에 따르면 우리는 죄가 우리에 대해 계속 “왕으로 다스리지” 못하게 할 수 있으며, 여호와께서는 우리가 할 수 없는 일을 요구하지 않으십니다.<br><br><strong>묵상할 점:</strong> 유다 백성의 “소용없다”는 말은 오늘날의 무력감·절망감과 같은 소리입니다. 그런 감정이 들게 만드는 것이 바로 사탄이 원하는 바라는 점을 기억하면, 그 생각 자체를 물리칠 이유가 분명해집니다. 여호와께서는 큰 무리 전체가 충절을 지킬 것이라고 예언하실 만큼 우리를 확신하십니다(계 7:9, 14 관련).</div>
+        <div class="reflect"><span class="label">개인 적용</span>반복되는 약점 때문에 “나는 절대 변하지 못한다”고 단정하지 않습니다. 여호와께서는 현재의 잘못뿐 아니라 내가 어떤 사람으로 변화할 수 있는지도 보십니다.</div>
+      </div>
+    </details>
+
+    <details open>
+      <summary><span class="time">10분</span>2. 영적 보물 찾기—여호와께서 위대한 도공이신 이유</summary>
+      <div class="content">
+        <p><strong>질문:</strong> 예레미야 18:6; 19:10, 11에 따르면 여호와께서 위대한 도공이신 이유는 무엇입니까? <span class="scripture">(「통」 “도공” 9항)</span></p>
+        <div class="answer"><span class="label">발표용 답</span><blockquote>도공이 진흙에 대해 온전한 권한을 갖고 있듯이, 여호와께서는 개인과 나라를 자신의 목적에 따라 다루실 주권과 능력을 갖고 계십니다. 부드러운 진흙처럼 교정에 반응하면 다시 빚어 주시지만, 굳어져 회개하지 않으면 깨진 항아리처럼 되돌릴 수 없는 심판을 피할 수 없습니다.</blockquote></div>
+        <div class="evidence"><span class="label">근거와 이해 · 「통」 “도공” 9항</span>진흙에 대한 도공의 권한은 개인과 나라에 대한 여호와의 주권을 예시합니다(사 29:16; 64:8). 진흙이 자기를 빚는 도공에게 도전하는 것이 생각할 수 없는 일이듯, 사람은 하느님과 다툴 입장에 있지 않습니다(사 45:9). 그리고 옹기그릇이 깨질 수 있듯이, 여호와께서는 악행에 대해 파멸적인 심판을 내리실 수 있습니다(렘 19:1-11).</div>
+        <div class="research"><span class="label">연구자료 묵상 · 「통」 “도공”</span>도공의 실제 작업 과정도 묵상 거리를 줍니다. 도공은 먼저 진흙을 씻어 이물질을 제거하고, 밟아서 부드럽게 만들고, 손으로 반죽한 뒤에야 물레에 올렸습니다. 그 후에도 말리고, 매끄럽게 다듬고, 불에 굽는 여러 단계가 이어졌습니다.<br><br><strong>묵상할 점:</strong> ① 여호와께서 우리를 빚으시는 일도 일회성 사건이 아니라 단계적이고 장기적인 과정입니다. 교정·훈련·시험이라는 각 단계에 협조할 때 ‘유용한 그릇’이 됩니다. ② 같은 진흙으로 귀하게 쓸 그릇도 천하게 쓸 그릇도 만들 수 있었다는 점(롬 9:21 관련)은, 내가 어떤 그릇이 될지가 여호와의 손안에서 내가 어떻게 반응하는지와 관련 있음을 생각하게 합니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>이번 주 성경 읽기에서 발견할 수 있는 영적 보물</summary>
+      <div class="content">
+        <h3>예레미야 18:4—실패가 끝을 의미하지 않는다</h3>
+        <div class="answer"><blockquote>도공이 망가진 그릇을 버리지 않고 다시 빚은 것처럼, 여호와께서도 회개하고 도움을 받아들이는 사람을 포기하지 않으십니다.</blockquote></div>
+        <h3>예레미야 18:6—도공의 손에 계속 머문다</h3>
+        <div class="answer"><blockquote>진흙이 도공의 손에 있을 때 유용한 그릇이 될 수 있듯이, 성경과 회중을 통해 주어지는 여호와의 인도를 계속 받아들여야 영적으로 발전할 수 있습니다.</blockquote></div>
+        <h3>예레미야 18:7, 8—여호와께서는 자비를 나타낼 기회를 찾으신다</h3>
+        <div class="answer"><blockquote>사람들이 악한 길에서 돌아서면 여호와께서는 심판을 거두실 수 있습니다. 그분은 벌줄 이유보다 회개한 사람에게 자비를 나타낼 기회를 찾으십니다.</blockquote></div>
+        <h3>예레미야 18:11—회개에는 행동의 변화가 따른다</h3>
+        <div class="answer"><blockquote>여호와께서는 유다 백성에게 잘못을 인정하는 데서 그치지 말고 악한 길에서 돌아서 행동을 고치라고 하셨습니다. 진정한 회개에는 실제적인 변화가 필요합니다.</blockquote></div>
+        <h3>예레미야 18:12—“가망이 없다”는 생각을 물리친다</h3>
+        <div class="answer"><blockquote>유다 백성은 변화를 포기했지만 여호와께서는 그들이 변화할 수 있다고 보셨습니다. 반복되는 약점이 있더라도 자신을 포기해서는 안 됩니다.</blockquote></div>
+        <h3>예레미야 18:18—반대가 충실하지 않다는 증거는 아니다</h3>
+        <div class="answer"><blockquote>예레미야가 여호와의 말씀을 충실히 전했는데도 사람들은 그를 공격하려 했습니다. 봉사에서 반대를 겪더라도 그것이 우리가 잘못하고 있다는 뜻은 아닙니다.</blockquote></div>
+        <h3>예레미야 19:10, 11—마음이 굳어지기 전에 반응한다</h3>
+        <div class="answer"><blockquote>교정을 계속 거절하면 마음이 굳어질 수 있습니다. 여호와의 조언을 받을 때 부드러운 진흙처럼 신속하게 반응해야 합니다.</blockquote></div>
+        <div class="reflect"><span class="label">묵상 질문</span>18장의 진흙과 19장의 항아리 사이에는 되돌릴 수 없는 차이가 있습니다. 나는 조언을 받을 때 얼마나 빨리 반응하는 편입니까? ‘나중에 고치면 된다’고 미루는 부면은 없습니까?</div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="time">4분</span>3. 성경 낭독—예레미야 19:1-11</summary>
+      <div class="content">
+        <div class="evidence"><span class="label">「읽가」 5과—정확한 낭독</span>이 과의 요점은 자료의 내용을 정확하게 낭독하는 것입니다. 단어를 빠뜨리거나 바꾸거나 없는 단어를 넣지 않고, 단어 하나하나가 아니라 단어군으로 묶어 읽으며, 문장 부호를 지킵니다. 발음이 확실치 않은 단어는 사전이나 출판물 녹음 자료로 미리 확인하고, 고개를 들고 또렷하게—그러나 부자연스러울 만큼 지나치지 않게—말합니다.</div>
+        <div class="reflect"><span class="label">이번 낭독 준비 초점</span>예레미야 19장에는 도벳, 벤-힌놈 골짜기 같은 고유명사가 여러 번 나오므로 발음을 미리 연습해 둡니다. 심판 선언의 진지한 분위기를 살리되, 지나치게 극적으로 표현하기보다 의미 단위에 맞게 정확히 전달하는 데 집중합니다. 가까운 사람에게 낭독을 들려주고 틀리게 읽은 단어를 지적해 달라고 부탁하는 것도 실용적인 방법입니다.</div>
+      </div>
+    </details>
+  </section>
+
+  <section id="ministry">
+    <h2>야외 봉사에 힘쓰십시오</h2>
+
+    <details>
+      <summary><span class="time">4분</span>4. 대화 시작하기—성경 공부 제안</summary>
+      <div class="content">
+        <p>호별 방문에서 성경 공부를 제안하고 실제로 어떻게 하는지 보여 줍니다.</p>
+        <div class="research"><span class="label">연구자료 묵상 · 「랑제」 4과 “겸손” 요점 3</span>이 과는 바울이 아그리파왕 앞에서 존중심 있게 말한 본(사도 26:2, 3)을 다룹니다. 요점 3은 상대방을 존중하라는 것입니다. 우리가 상대방보다 훨씬 더 많이 알고 있다는 인상을 주지 않고, 존중심 있는 태도로 말합니다.<br><br><strong>묵상할 점:</strong> 성경 공부를 제안할 때 ‘가르쳐 주겠다’는 인상보다, 함께 성경에서 답을 찾아보자는 겸손한 태도가 상대의 마음을 엽니다. “겸손하게 남을 자기보다 더 나은 사람으로 여기십시오”(빌 2:3)라는 원칙을 제안 문구와 어조에 어떻게 반영할지 미리 생각해 둡니다.</div>
+        <div class="reflect"><span class="label">준비 초점</span>설명만 길게 하기보다 질문 하나와 성구 하나를 사용해, 공부가 쉽고 부담 없다는 것을 짧게 실연으로 보여 줍니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="time">4분</span>5. 관심이 자라도록 돕기—전도지로 계속 대화하기</summary>
+      <div class="content">
+        <div class="research"><span class="label">연구자료 묵상 · 「랑제」 9과 “감정 이입” 요점 3</span>이 과는 쉬려던 상황에서도 무리를 불쌍히 여겨 가르치신 예수의 본(막 6:30-34)을 다룹니다. 요점 3은 잘 들으라는 것입니다. 상대방이 자신의 생각을 표현할 수 있게 하고, 말을 끊지 않으며, 감정이나 걱정거리나 이의를 별것 아니라는 듯 무시하지 않습니다.<br><br><strong>묵상할 점:</strong> 재방문의 목적은 전도지의 요점을 ‘전달’하는 것이 아니라 그 사람을 ‘돕는’ 것입니다. ‘이 사람은 왜 이 소식을 들을 필요가 있는가, 성서 연구가 이 사람의 삶을 어떻게 나아지게 할 것인가’를 미리 생각해 보면, 대화가 자연스럽게 상대 중심이 됩니다.</div>
+        <ul>
+          <li>지난 대화에서 상대가 관심을 보인 점을 기억하고 언급합니다.</li>
+          <li>전에 전한 전도지의 한 가지 요점에 집중합니다.</li>
+          <li>다음 대화로 이어질 자연스러운 질문을 남깁니다.</li>
+        </ul>
+      </div>
+    </details>
+
+    <details>
+      <summary><span class="time">4분</span>6. 우리의 신앙 설명하기—성경은 자유 의지에 관해 무엇을 알려 줍니까?</summary>
+      <div class="content">
+        <div class="answer"><span class="label">주제의 핵심 답 · 「웹성대」 기사 44</span><blockquote>하느님께서는 자유 의지 곧 스스로 결정하는 능력을 주심으로 우리를 존중해 주십니다. 우리의 일은 하느님이나 운명에 의해 미리 정해져 있지 않습니다. 그분은 순종을 강요하지 않으시고 따뜻하게 호소하시며, 우리가 지혜롭게 선택하기를 바라십니다.</blockquote></div>
+        <div class="evidence"><span class="label">성경 논거</span>
+          <ul style="margin:4px 0">
+            <li>인간은 하느님의 형상대로 창조되어 창조주처럼 자유 의지를 갖고 있습니다.—창 1:26.</li>
+            <li>“생명을 택하라”는 권고 자체가 선택할 능력을 전제합니다. 자유 의지가 없다면 이 권고는 의미가 없을 것입니다.—신명 30:19, 20.</li>
+            <li>하느님은 순종을 강요하지 않으시고 우리의 유익을 위해 호소하십니다.—사 48:18.</li>
+            <li>성공과 실패는 운명이 아니라 노력과 관련이 있습니다.—전 9:10; 잠 21:5.</li>
+            <li>하느님은 전능하시지만 모든 것을 통제하지는 않으시며, 자유 의지를 오용하는 사람들에 대해 지금은 자제를 나타내십니다. 하지만 무한정 참지는 않으실 것입니다.—사 42:14; 시 37:10, 11.</li>
+          </ul>
+        </div>
+        <div class="research"><span class="label">연구자료 묵상 · 「읽가」 20과 “효과적인 결론”</span>연설 과제이므로 결론 기술도 함께 준비합니다. 결론은 주제를 다른 표현으로 다시 언급하고, 무엇을 해야 하는지와 그 타당한 이유를 알려 주어 동기를 부여하며, 새로운 요점 없이 간결해야 합니다. 서둘러 끝내거나 음량만 낮추며 끝내지 않습니다.<br><br><strong>묵상할 점:</strong> 이 주제의 자연스러운 결론은 ‘자유 의지는 마음을 다해 하느님을 사랑할 수 있게 하는 선물’(마 22:37)이라는 점입니다. 듣는 사람이 ‘그렇다면 나는 이 선물을 어떻게 사용할 것인가’를 생각하게 하는 한 문장으로 마무리하면 효과적입니다.</div>
+        <div class="reflect"><span class="label">묵상 질문</span>여호와께서는 이번 주 성경 범위에서도 유다 백성에게 선택권을 주셨습니다(렘 18:8, 11). 자유 의지에 대한 이 가르침이 도공의 예와 어떻게 연결됩니까? 진흙과 달리 우리는 도공의 손에 머물지를 스스로 선택할 수 있다는 점을 묵상해 봅니다.</div>
+      </div>
+    </details>
+  </section>
+
+  <section id="living">
+    <h2>그리스도인 생활</h2>
+    <details open>
+      <summary><span class="time">15분</span>7. 영적으로 회복하는 방법</summary>
+      <div class="content">
+        <p><strong>질문:</strong> 영적 활동을 어떻게 점진적으로 다시 시작할 수 있습니까?</p>
+        <div class="answer"><span class="label">발표용 답</span><blockquote>모든 활동을 한꺼번에 다시 시작해야 한다는 부담을 가질 필요가 없습니다. 먼저 기도로 여호와의 도움을 구하고, 매일 조금씩이라도 영적 양식을 섭취하며, 가능하면 속히 집회에 참석해 격려와 힘을 얻을 수 있습니다.</blockquote></div>
+        <ol>
+          <li><strong>기도로 도움을 구한다.</strong> 염려를 여호와께 솔직히 맡깁니다.—벧전 5:7.</li>
+          <li><strong>매일 조금씩 영적 양식을 섭취한다.</strong> 성경 몇 구절, 짧은 기사나 동영상, 낭독 듣기부터 시작해도 됩니다. 음식을 먹으면 힘이 나듯 영적 양식은 영적 힘을 줍니다.—시 1:2, 3.</li>
+          <li><strong>가능하면 속히 집회에 참석한다.</strong> 모든 문제를 해결한 뒤가 아니라, 회복에 필요한 격려를 받으러 참석합니다.—히 10:24, 25.</li>
+        </ol>
+        <div class="research"><span class="label">성구 묵상 · 이사야 40:28, 29</span>여호와께서는 “피곤해지지도 지치지도 않으시는” 분이며, 피곤한 자에게 힘을 주시는 분으로 묘사됩니다.<br><br><strong>묵상할 점:</strong> 영적으로 지친 사람에게 필요한 힘의 근원은 자기 의지력이 아니라 결코 지치지 않으시는 여호와이십니다. 회복이 ‘내가 얼마나 강한가’가 아니라 ‘내가 힘의 근원께 얼마나 가까이 가는가’의 문제라는 점은 큰 위로가 됩니다. 이 점은 1번 강연의 교훈—“소용없다”는 생각은 여호와의 생각이 아니라는 점—과도 연결됩니다.</div>
+      </div>
+    </details>
+  </section>
+
+  <section id="video">
+    <h2>연결 영상</h2>
+    <div class="study-title">
+      <h3 style="margin-top:0">「저는 삶의 방향을 돌이켰어요」 <span class="time">5:09</span></h3>
+      <p><a href="https://www.jw.org/finder?wtlocale=KO&amp;lank=pub-jwb_201808_5_VIDEO">JW.ORG에서 영상 열기</a></p>
+    </div>
+    <details open>
+      <summary>영상의 흐름과 주요 교훈</summary>
+      <div class="content">
+        <div class="video-box"><span class="label">영상의 흐름</span>증인 가정에서 자랐지만 부도덕한 길을 택해 약 15년간 여호와를 떠나 있던 자매의 실화입니다. 마약 중독 상태에서 “좋은 엄마가 되고 싶다”는 마음으로 여러 해 만에 기도를 드렸고, 바로 다음 날 문을 두드리는 소리가 들렸습니다. 열심히 연구하며 생활 방식과 교우 관계를 점진적으로 바꾸고 중독도 극복했지만, 동거 문제가 마지막 장애물로 남아 있었습니다. 관계를 정리하기로 결심한 지 이 주 만에 임신 사실을 알게 되어 큰 충격과 수치심에 낙태까지 생각했지만, 증인이던 이모 부부가 비난 대신 베델 방문을 제안했고 한 장로가 사도행전 3:19을 보여 주며 “왜 잘못 없는 아이가 내가 지은 죄의 대가를 치러야 하는가”라는 관점을 제시했습니다. 아이에게 여호와를 가르치라는 제안 덕분에 괴로운 문제가 잘 해낼 수 있는 일로 바뀌었고, 자매는 미침례 전도인이 된 뒤 2010년에 침례를 받고 건강한 딸을 낳았습니다.</div>
+        <ul>
+          <li>여호와께서는 자신에게서 멀어진 사람도 포기하지 않으십니다. 여러 해 만의 기도에 바로 다음 날 응답이 왔습니다.</li>
+          <li>변화는 한 번에가 아니라 점진적으로 이루어졌습니다—연구, 생활 방식, 교우 관계, 중독 극복의 순서로.</li>
+          <li>“나는 여전히 쓸모 없는 사람”이라는 자기 판단이 가장 큰 장애물이 될 수 있습니다.</li>
+          <li>비난하지 않고 실제적인 도움을 준 친족과 장로의 태도가 결정적이었습니다.</li>
+          <li>과거의 죄가 또 다른 죄(낙태)의 이유가 될 수 없습니다.—사도 3:19.</li>
+          <li>괴로운 문제를 ‘잘 해낼 수 있는 일’로 다시 보게 도와주는 것이 참된 격려입니다.</li>
+        </ul>
+      </div>
+    </details>
+    <details>
+      <summary><span class="time">스크립트</span>영상 대사 전문 (기본 접힘)</summary>
+      <div class="content">
+        <blockquote style="font-weight:500">‘돌이키십시오. 그러면 새 힘을 얻는 때가 여호와로부터 올 것입니다.’ 이 말씀으로 제 삶이 바뀌었고, 어린 딸도 목숨을 건졌습니다.</blockquote>
+
+        <p>전 증인 가정에서 자랐어요. 하지만 저는 부도덕하고 나쁜 길을 선택했고 여호와께서 싫어하시는 건 거의 다 했어요.</p>
+
+        <p>15년쯤 후에, 경제적으로는 문제가 없었지만 제 인생이 실패했다는 걸 깨닫게 됐습니다. 마약에 중독돼 있었는데 그래도 아이를 잘 키워 보려고 했어요.</p>
+
+        <p>정말 더는 이렇게 살고 싶지 않았죠. 좋은 엄마가 되고 싶었습니다. 그래서 여러 해 만에 처음으로 여호와께 기도를 드렸어요.</p>
+
+        <p>바로 다음 날 우리 집 문을 두드리는 소리가 들렸어요.</p>
+
+        <p>전 아주 열심히 연구를 하기 시작했죠. 지난 15년을 따라잡아야 했으니까요.</p>
+
+        <p>도움을 많이 받았어요. 점진적으로 생활 방식을 바꾸면서, 어울리던 사람들도 새로운 친구들로 바꾸고, 마약 중독도 극복했죠. 나 자신이 쓸모 없다는 감정에서 서서히 벗어나기 시작했어요.</p>
+
+        <p>그 어떤 변화도 하기가 쉽진 않았지만, 하고 나니 깨끗해진 기분이 들고 행복했어요. 여호와를 기쁘시게 했단 걸 아니까요.</p>
+
+        <p>그때 저는 배우는 내용을 다른 사람에게 알려 주고 싶은 열망이 가득했지만, 공개 봉사에 참여할 자격이 없었어요. 여전히 남자친구와 동거를 하고 있었거든요. 그 사람은 제가 변화하는 걸 이해하지 못했죠.</p>
+
+        <p>전 삶의 방향을 돌이키기로 결심했어요. 여호와를 온전히 섬기지 못하게 하는 이 마지막 장애물을 극복하겠다고요.</p>
+
+        <p>이 주가 지났는데, 임신했단 걸 알게 됐어요.</p>
+
+        <p>엄청난 충격이었죠. 절 도와주던 그 모든 사람들이 어떻게 생각할지, 또 여호와께선 이 일을 어떻게 느끼실지 눈앞이 캄캄했어요.</p>
+
+        <p>너무 부끄러웠어요. 실은 그런 일이 일어나게 두신 여호와를 원망했죠.</p>
+
+        <p>너무 혼란스러웠어요. 처음 생각 같아서는 낙태를 해 버리고 싶었습니다. 마음속에선 그게 잘못이란 걸 알았지만요.</p>
+
+        <p>이런 생각이 들었죠. ‘전에도 늘 그랬지만 내가 여전히 쓸모 없는 사람인 걸 다들 알게 되겠구나.’</p>
+
+        <p>그 순간, 그냥 다 포기하고 싶었습니다. 여호와의 증인이신 이모와 이모부께 제 상황을 말씀드렸죠.</p>
+
+        <p>두 분은 저를 전혀 비난하지 않으시고 뜻밖의 제안을 하셨어요. 베델에 한번 오라고 초대해 주신 거예요.</p>
+
+        <p>두 분은 아주 친절한 장로 형제를 소개해 주셨고, 전 그분께 제 상황을 말씀드렸죠. 형제가 보여 주신 따뜻한 사랑에 정말 놀랐어요.</p>
+
+        <p>사도행전 3:19을 보여 주셨죠. “그러므로 회개하고 돌이켜 여러분의 죄가 지워지게 하십시오. 그러면 새 힘을 얻는 때가 여호와로부터 올 것입니다.”</p>
+
+        <p>과거에 죄를 지었는데 또 다시 죄를 지을 이유가 뭐냐고 하셨죠. 왜 잘못 없는 아이가 제가 지은 죄의 대가를 치뤄야 하냐고요.</p>
+
+        <p>형제는 아이에게 여호와에 대해 가르쳐, 그분을 알고 그분과 우정을 쌓도록 키우라고 제안해 주셨어요.</p>
+
+        <p>슬프고 괴롭기만 했던 문제를 제가 멋지게 해낼 수 있는 일로 보게 해 주셔서 정말 감사했어요.</p>
+
+        <p>이제 새로운 계획이 생겼죠. 여호와를 기쁘시게 하기 위해, 필요한 모든 일을 해서 삶의 방향을 돌이키기로 결심했어요.</p>
+
+        <p>마침내 미침례 전도인이 될 자격을 얻었고, 그 후 2010년에 침례를 받았습니다. 그리고 건강한 딸아이를 낳았죠.</p>
+
+        <p>전 이미 여호와께 헌신했어요. 목표 두 가지는 침례 받는 거랑 파이오니아 하는 거예요.</p>
+
+        <p>생명까지 빼앗을 수 있는 여러 덫을 피하고 여호와를 사랑하도록 딸 아이를 잘 키우겠단 결심은 지금도 변함 없습니다.</p>
+
+        <div class="research"><span class="label">스크립트에서 짚어 볼 점</span>① <strong>기도와 응답 사이가 하루였습니다.</strong> 렘 18:7, 8의 원리—돌아서면 여호와께서 자비를 나타내신다—가 실제 삶에서 어떻게 나타나는지 보여 주는 대목입니다.<br>② <strong>“쓸모 없다”는 자기 판단이 반복해서 등장합니다.</strong> 이는 렘 18:12의 “아무리 그래도 소용없다!”와 같은 소리이며, 「파25.08」이 말한 무력감·절망감과 정확히 겹칩니다.<br>③ <strong>장로의 접근 방식이 도공의 원리를 보여 줍니다.</strong> 자매를 이미 깨진 항아리로 보지 않고 아직 빚을 수 있는 진흙으로 대했습니다. 과거를 캐묻는 대신 앞으로 할 수 있는 일을 제시했습니다.<br>④ <strong>변화의 순서가 7번 파트와 같습니다.</strong> 기도 → 영적 양식(열심한 연구) → 회중과의 교제 → 점진적 생활 변화.</div>
+      </div>
+    </details>
+
+    <details open>
+      <summary>질문: 이 동영상에서 어떤 교훈을 배웠습니까?</summary>
+      <div class="content">
+        <div class="answer"><span class="label">종합 발표용 답</span><blockquote>여호와께서는 오랫동안 자신에게서 멀어진 사람도 포기하지 않으신다는 점을 배웠습니다. 이 자매는 15년 만에 드린 기도에 바로 다음 날 응답을 받았습니다. 또한 “나는 여전히 쓸모 없는 사람”이라는 생각이 회복을 막는 가장 큰 장애물이 될 수 있다는 점, 그리고 비난하지 않고 실제적인 도움과 새로운 관점을 제시해 준 형제자매들의 태도가 결정적인 힘이 되었다는 점이 인상적이었습니다.</blockquote></div>
+        <div class="reflect"><span class="label">짧은 대안</span>“과거의 잘못이 또 다른 잘못의 이유가 될 수 없으며, 회개하고 돌이키면 여호와로부터 새 힘을 얻는 때가 온다는 점을 배웠습니다.—사도 3:19.”</div>
+        <div class="reflect"><span class="label">개인 묵상</span>이번 주 성경 범위와 연결해 봅니다. 장로 형제는 자매를 이미 깨진 항아리로 보지 않고 아직 빚을 수 있는 진흙으로 대했습니다. 내 주변에 영적으로 약해진 사람이 있다면, 나는 그를 어느 쪽으로 보고 있습니까? 여호와께서 보시는 대로 보고 있습니까?</div>
+      </div>
+    </details>
+  </section>
+
+  <section id="study">
+    <h2>8. 회중 성서 연구</h2>
+    <div class="study-title">
+      <p class="time">30분</p>
+      <h3>「용기 있게 하느님과 함께 걸으십시오」</h3>
+      <p><a href="https://wol.jw.org/ko/wol/d/r8/lp-ko/1102025970">중앙장로회의 편지</a> · <a href="https://wol.jw.org/ko/wol/d/r8/lp-ko/1102025971">소개말—“당신도 용기를 기를 수 있습니다!”</a></p>
+    </div>
+
+    <details open>
+      <summary>중앙장로회의 편지—핵심 내용</summary>
+      <div class="content">
+        <p>예수께서 서머나 회중에게 하신 “곧 겪게 될 고난을 두려워하지 마라”(계 2:10)라는 말씀은 “주의 날”에 사는 우리에게도 큰 의미가 있습니다. 대처하기 어려운 위급한 때에 반대와 박해를 겪을 수 있지만, 성격이 수줍음이 많든 담대하든 어떤 행로를 선택할지는 우리에게 달려 있으며, 누구나 용기를 내어 여호와의 편에 설 수 있습니다.</p>
+        <ul>
+          <li><strong>변화에 적응하는 용기:</strong> 요나단은 여호와께서 다윗을 다음 왕으로 선택하신 결정을 마음을 다해 지지했습니다.</li>
+          <li><strong>의로운 원칙을 고수하는 용기:</strong> 하나냐, 미사엘, 아사랴는 믿음을 타협하느니 차라리 불타는 가마에서 죽으려 했습니다.</li>
+          <li><strong>담대하게 진리를 알리는 용기:</strong> 타르수스의 사울은 함께 박해할 것으로 기대했던 바로 그 사람들에게 예수에 관한 진리를 전했습니다.</li>
+        </ul>
+        <div class="research"><span class="label">연구자료 묵상 · 편지의 연구 방법 제안</span>편지는 단순히 이야기를 읽는 데서 그치지 말고, 기도하면서 성경 기록을 연구하고, 현재의 상황과 문제나 나중에 겪을 수 있는 어려움에 대해 생각해 보며, 여호와께서 어떻게 도와주실 수 있는지 검토하라고 권합니다.<br><br><strong>묵상할 점:</strong> 편지가 제시한 세 종류의 용기 중 지금 나에게 가장 필요한 것은 무엇입니까? 변화에 적응하는 용기(조직의 조정, 임명의 변화), 원칙을 고수하는 용기(직장·학교에서의 압력), 담대하게 알리는 용기(비공식 증거)—각각에 해당하는 나의 실제 상황을 하나씩 떠올려 봅니다.</div>
+        <div class="reflect"><span class="label">핵심 적용</span>용기는 타고난 성격의 문제가 아니라 여호와를 신뢰하고 옳은 일을 선택하는 것입니다. 수줍음이 많은 사람도 성경의 본을 연구하고 기도하면 용기를 기를 수 있습니다.—시 27:14.</div>
+      </div>
+    </details>
+
+    <details open>
+      <summary>1-3항—“일어나 갑시다”가 매우 용기 있는 말이었던 이유</summary>
+      <div class="content">
+        <div class="answer"><span class="label">발표용 답</span><blockquote>예수께서는 달빛이 비치는 늦은 밤 겟세마네 동산에서, 무장한 폭도들이 다가오고 있고 위험과 고난과 죽음이 자신을 기다린다는 것을 아셨습니다. 천사들을 불러 피하실 수도 있었지만, 아버지와 제자들을 사랑하셨기 때문에 시련을 피하지 않고 “일어나 갑시다”라고 말씀하셨습니다.</blockquote></div>
+        <div class="reflect"><span class="label">묵상할 점</span>예수의 용기의 동기는 두려움이 없어서가 아니라 사랑이었습니다. 사랑이 클수록 용기도 커집니다. 내 용기가 부족하게 느껴진다면, 먼저 여호와와 사람들에 대한 사랑을 키우는 것이 해결책일 수 있습니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>4-5항—예수께서 나타내신 용기와 우리에게 필요한 이유</summary>
+      <div class="content">
+        <div class="answer"><span class="label">발표용 답</span><blockquote>예수께서 나타내신 용기는 위험을 가볍게 여기거나 무모하게 뛰어드는 것이 아니라 내적인 특성이었습니다. 아무리 힘들고 두려운 상황에서도 물러나지 않고 하느님께서 보시기에 옳은 일을 할 힘을 주는 특성입니다. 문제가 많고 위험한 시대에 사는 참그리스도인에게는 이전 어느 때보다 그러한 용기가 더 필요합니다.</blockquote></div>
+        <div class="evidence"><span class="label">정의 구분</span>진정한 용기가 아닌 것: 위험을 가볍게 여김, 불필요한 위험 감수, 강함을 과시하려는 거칠고 폭력적인 행동(시 11:5 관련). 진정한 용기: 두려워도 옳은 일을 하게 하는 내적인 힘.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>6항—용기가 부족할 때 예수의 말씀이 주는 위로</summary>
+      <div class="content">
+        <div class="answer"><span class="label">발표용 답</span><blockquote>예수는 합리적인 분이시므로 우리가 할 수 있는 것 이상을 기대하지 않으십니다. 겟세마네에서 사도들이 깨어 있지 못하고 잠들었을 때에도 “영은 간절하지만 육신이 약합니다”라고 친절하게 말씀하시며 그들의 약함을 이해해 주셨습니다. 그분은 우리의 약함도 이해해 주십니다.</blockquote></div>
+        <div class="reflect"><span class="label">묵상할 점</span>예수께서는 실패한 사도들을 꾸짖는 대신 그들의 상태를 이해하는 말씀을 하셨습니다. 나는 용기를 내지 못한 자신이나 다른 사람을 어떤 눈으로 봅니까? 시 103:14—여호와께서는 우리가 흙먼지라는 것을 기억하십니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>7-8항—예수께서 제자들에게 표현하신 확신</summary>
+      <div class="content">
+        <div class="answer"><span class="label">발표용 답</span><blockquote>예수께서는 “용기를 내십시오! 내가 세상을 이겼습니다”라고 말씀하시며 제자들도 자신처럼 용기를 나타낼 수 있다고 믿어 주셨고, 제자들은 실제로 그렇게 했습니다. 지금도 우리의 용기 있는 왕 예수께서는 우리에게 같은 말씀을 하고 계시며 우리를 믿어 주십니다.</blockquote></div>
+        <div class="evidence"><span class="label">예수께서 “용기를 내십시오”라고 말씀하신 사람들</span>죄를 용서받은 마비된 사람(마 9:2), 고통스러운 병을 고침받은 여자(마 9:22), 폭풍 속에서 겁에 질린 제자들(마 14:27), 죽을 뻔한 위기를 겪은 사도 바울(사도 23:11). 하늘로 올라가신 뒤에도 이 말씀을 계속하셨다는 점이 인상적입니다.</div>
+        <div class="reflect"><span class="label">묵상할 점</span>이 목록의 공통점은 모두 약하고 두렵고 지친 상태의 사람들이라는 것입니다. 예수의 확신은 강한 사람에게만 주어지는 것이 아닙니다. 지금 내 상태가 어떠하든 그 확신은 나에게도 해당됩니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>9항—성경은 어떻게 우리에게 격려를 줍니까?</summary>
+      <div class="content">
+        <div class="answer"><span class="label">발표용 답</span><blockquote>성경에는 나이와 배경이 다양한 실존 인물들, 곧 엘리야처럼 “우리와 같은 감정을 가진” 사람들이 여호와의 도움으로 용기를 나타낸 기록이 가득합니다. 그들도 불완전하고 약점과 한계가 있었지만 장애물을 이겨 냈으므로, 그들의 본은 우리도 용기를 낼 수 있다는 확신을 줍니다.</blockquote></div>
+        <div class="reflect"><span class="label">묵상할 점</span>야고보 5:17이 엘리야를 “우리와 같은 감정을 가진” 사람으로 묘사하는 것은 의도적입니다. 성경 인물을 ‘영웅’으로만 보면 격려가 아니라 거리감을 느끼게 됩니다. 이 책을 연구할 때 각 인물의 약함과 두려움에 먼저 주목하면 그들의 용기가 나의 가능성으로 다가옵니다.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>10-11항—이 책의 유익과 활용 방법</summary>
+      <div class="content">
+        <div class="answer"><span class="label">발표용 답</span><blockquote>이어지는 54개 장을 통해 우리처럼 불완전한 사람들이 용기를 내도록 여호와께서 어떻게 도와주셨는지 배울 수 있습니다. 각 이야기를 읽은 다음 그 인물에 대해 더 깊이 연구 조사하고, “결코 너를 떠나지 않겠다”는 여호와의 약속을 하루도 빠짐없이 기억한다면, 확신에 차서 “여호와가 나를 돕는 분이시니 내가 두려워하지 않겠다”라고 말할 수 있을 것입니다.—히 13:5, 6.</blockquote></div>
+        <div class="research"><span class="label">연구자료 묵상 · “개인 연구와 가족 숭배에서 이 책을 활용하는 방법” 네모</span>
+          <div class="checklist"><ul>
+            <li>이야기를 읽는다.</li>
+            <li>성경 기록을 살펴본다.</li>
+            <li>토의할 질문을 기도하며 깊이 생각한다.</li>
+            <li>삽화 속 인물들이 어떻게 용기를 나타냈는지 살펴본다.</li>
+            <li>‘더 깊이 알아보기’의 참조 자료를 조사한다.</li>
+            <li>‘교훈점 적용하기’로 적용과 다른 사람 돕기를 생각한다.</li>
+            <li>‘시야를 넓혀 생각해 보기’로 여호와의 목적과 우리의 미래를 묵상한다.</li>
+            <li>‘더 찾아보기’의 기사와 동영상을 확인한다.</li>
+          </ul></div>
+          <strong>묵상할 점:</strong> 여덟 가지 특징은 읽기→조사→묵상→적용의 순서로 되어 있습니다. 가족 숭배에서 이 순서를 그대로 따르면 준비가 수월해집니다. jw.org에서 해당 성경 인물에 관한 기사와 동영상을 추가로 검색해 보는 것도 권장됩니다.
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <section id="review">
+    <h2>마지막 복습</h2>
+    <div class="overview">
+      <h3>여호와에 대해 배운 점</h3>
+      <p>여호와께서는 위대한 도공으로서 회개하고 돌아오려는 사람을 다시 빚으시며, 두려운 상황에서 옳은 일을 하도록 필요한 힘과 용기를 주십니다.</p>
+      <h3>이번 주에 실천할 한 가지</h3>
+      <p>교정이나 격려를 받을 때 부드러운 진흙처럼 신속히 반응하고, 영적으로 약해진 사람을 과거로 판단하지 않고 따뜻하게 대합니다.</p>
+      <h3>기억할 세 문장</h3>
+      <div class="theme">“가망이 없다”는 생각은 여호와의 생각이 아닙니다.</div>
+      <div class="theme" style="margin-top:9px">죄가 나에 대해 왕으로 다스리지 못하게 할 수 있습니다.—롬 6:12.</div>
+      <div class="theme" style="margin-top:9px">진정한 용기는 두려움이 없는 것이 아니라, 두려워도 여호와를 신뢰하며 옳은 일을 하는 것입니다.</div>
+    </div>
+  </section>
+
+  <div class="footer">개인 집회 준비용 · 출처 범위: WOL 및 JW.ORG의 이번 주 프로그램 연결 자료 (「통」 “바알”·“도공” · 「파25.08」 연구 기사 35 · 「읽가」 5·20과 · 「랑제」 4·9과 · 「웹성대」 기사 44 · 「용하」 편지·소개말)</div>
+</div>
+</body>
+</html>

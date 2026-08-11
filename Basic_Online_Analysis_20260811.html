@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>윤선생 베이직 — 실적 추이 및 온라인 마케팅 영향 분석</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--navy:#1F3864;--navy2:#2E4E8F;--acc:#C0392B;--grn:#1E7A46;--amb:#B8860B;
+ --ink:#1A1D24;--mut:#5C6470;--line:#DEE3ED;--bg:#F6F8FC;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Malgun Gothic','맑은 고딕','Apple SD Gothic Neo',sans-serif;
+ color:var(--ink);background:var(--bg);line-height:1.6;-webkit-font-smoothing:antialiased;font-size:14.5px}
+.wrap{max-width:1140px;margin:0 auto;padding:0 24px 80px}
+header{background:linear-gradient(135deg,#1F3864,#16294a);color:#fff;padding:52px 0 40px;margin-bottom:32px}
+header .wrap{padding-bottom:0}
+.eyebrow{font-size:12.5px;letter-spacing:.18em;color:#9FB3D9;font-weight:700;margin-bottom:10px}
+h1{font-size:32px;font-weight:800;letter-spacing:-.02em;line-height:1.25}
+.sub{color:#B9C8E5;margin-top:10px;font-size:15.5px}
+.metaline{display:flex;flex-wrap:wrap;gap:24px;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.16)}
+.metaline div{font-size:12.5px;color:#9FB3D9}
+.metaline b{display:block;color:#fff;font-size:14.5px;font-weight:700;margin-top:3px}
+section{margin-bottom:42px}
+h2{font-size:23px;font-weight:800;color:var(--navy);margin-bottom:4px;padding-bottom:11px;
+ border-bottom:3px solid var(--navy);display:flex;align-items:baseline;gap:11px}
+h2 .no{font-size:13px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:3px 9px}
+h3{font-size:17.5px;font-weight:750;color:var(--navy2);margin:28px 0 10px;padding-left:11px;border-left:4px solid var(--navy2)}
+h4{font-size:14.8px;font-weight:750;margin:18px 0 7px}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:22px;margin-bottom:16px}
+/* keyword list */
+ul.kw{list-style:none;margin:10px 0}
+ul.kw li{position:relative;padding-left:17px;margin-bottom:7px;font-size:14.3px}
+ul.kw li::before{content:'';position:absolute;left:2px;top:9px;width:6px;height:6px;border-radius:50%;background:var(--navy2)}
+ul.kw li.r::before{background:var(--acc)} ul.kw li.g::before{background:var(--grn)} ul.kw li.a::before{background:var(--amb)}
+ul.kw ul{list-style:none;margin:6px 0 0 4px}
+ul.kw ul li{padding-left:15px;font-size:13.6px;color:#414A58;margin-bottom:4px}
+ul.kw ul li::before{width:5px;height:5px;background:#A9B4C6;top:8px}
+.tag{display:inline-block;font-size:11.5px;font-weight:700;padding:1.5px 7px;border-radius:4px;margin-right:6px;vertical-align:1px}
+.t-r{background:#FBE6E3;color:#C0392B} .t-g{background:#E4F3EA;color:#1E7A46}
+.t-a{background:#FBF2DC;color:#8A6508} .t-n{background:#E3EDFB;color:#1F3864}
+/* kpi */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(178px,1fr));gap:12px;margin:18px 0}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:11px;padding:16px 18px;border-top:4px solid var(--navy)}
+.kpi.bad{border-top-color:var(--acc)}.kpi.good{border-top-color:var(--grn)}.kpi.warn{border-top-color:var(--amb)}
+.kpi .lab{font-size:12px;color:var(--mut);font-weight:650}
+.kpi .val{font-size:25px;font-weight:800;letter-spacing:-.02em;margin:5px 0 2px;color:var(--navy)}
+.kpi.bad .val{color:var(--acc)}.kpi.good .val{color:var(--grn)}.kpi.warn .val{color:var(--amb)}
+.kpi .note{font-size:12px;color:var(--mut);line-height:1.45}
+/* callout */
+.co{border-left:5px solid var(--navy);background:#EEF2FA;border-radius:0 10px 10px 0;padding:17px 21px;margin:16px 0}
+.co.bad{border-left-color:var(--acc);background:#FCEFED}
+.co.good{border-left-color:var(--grn);background:#EDF7F1}
+.co.warn{border-left-color:var(--amb);background:#FDF7E8}
+.co .t{font-weight:800;color:var(--navy);margin-bottom:7px;font-size:15.5px}
+.co.bad .t{color:var(--acc)}.co.good .t{color:var(--grn)}.co.warn .t{color:#8A6508}
+.co ul.kw{margin:6px 0 0}
+/* table */
+.tw{overflow-x:auto;margin:14px 0;border-radius:10px;border:1px solid var(--line);background:#fff}
+table{width:100%;border-collapse:collapse;font-size:13px;white-space:nowrap}
+th{background:var(--navy);color:#fff;font-weight:700;padding:9px 11px;text-align:right;font-size:12px;position:sticky;top:0}
+th:first-child{text-align:left}
+td{padding:7px 11px;text-align:right;border-top:1px solid var(--line)}
+td:first-child{text-align:left;font-weight:650}
+tbody tr:nth-child(even){background:#FAFBFD}
+tbody tr.tot{background:#E7EDF8;font-weight:800}
+tbody tr.hi{background:#FDF3F1}
+tbody tr.hg{background:#EDF7F1}
+.r{color:var(--acc);font-weight:700}.g{color:var(--grn);font-weight:700}.a{color:var(--amb);font-weight:700}
+.dim{color:var(--mut);font-weight:400}
+.cap{font-size:12.2px;color:var(--mut);padding:9px 4px;font-style:italic}
+/* chart */
+.cb{background:#fff;border:1px solid var(--line);border-radius:12px;padding:18px 20px 12px;margin:16px 0}
+.cb .ct{font-weight:750;color:var(--navy);font-size:15px}
+.cb .cs{font-size:12.6px;color:var(--mut);margin:3px 0 12px}
+.cvw{position:relative;height:300px}.cvw.tall{height:360px}.cvw.sm{height:230px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:860px){.grid2{grid-template-columns:1fr}}
+/* glossary */
+.gl{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:9px}
+.gl div{background:#fff;border:1px solid var(--line);border-radius:8px;padding:10px 13px;font-size:13px}
+.gl b{color:var(--navy);font-weight:800}
+.gl span{color:var(--mut);display:block;font-size:12.2px;margin-top:2px}
+/* action cards */
+.acts{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:14px;margin:16px 0}
+.act{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px;position:relative}
+.act::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;border-radius:12px 12px 0 0;background:var(--navy)}
+.act.p1::before{background:var(--acc)}.act.p2::before{background:var(--amb)}.act.p3::before{background:var(--grn)}
+.act .n{font-size:11.5px;font-weight:800;letter-spacing:.09em;color:var(--mut)}
+.act h4{margin:6px 0 9px;font-size:16px;color:var(--navy)}
+.act .imp{margin-top:11px;padding-top:10px;border-top:1px dashed var(--line);font-size:12.6px;color:var(--mut)}
+.act .imp b{color:var(--acc)}
+/* 상단 네비 */
+nav.toc{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(8px);
+ border-bottom:1px solid var(--line);margin-bottom:28px}
+nav.toc .inner{max-width:1140px;margin:0 auto;padding:0 24px;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
+nav.toc .inner::-webkit-scrollbar{display:none}
+nav.toc a{flex:none;padding:12px 13px;font-size:12.8px;font-weight:650;color:var(--mut);text-decoration:none;
+ border-bottom:2.5px solid transparent;white-space:nowrap;transition:.15s}
+nav.toc a:hover{color:var(--navy);background:#F3F6FB}
+nav.toc a.on{color:var(--navy);border-bottom-color:var(--navy)}
+nav.toc a i{font-style:normal;font-weight:800;color:#A9B4C6;margin-right:5px;font-size:11.5px}
+nav.toc a.on i{color:var(--navy2)}
+section{scroll-margin-top:56px}
+/* 표 그룹 구분 */
+tbody tr.gsep td{background:#EDF1F8;font-size:11.5px;font-weight:800;color:var(--navy);
+ padding:5px 11px;letter-spacing:.04em;text-align:left}
+/* 접이식 용어 */
+details.gbox{background:#fff;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+details.gbox>summary{list-style:none;cursor:pointer;padding:15px 20px;font-size:19px;font-weight:800;
+ color:var(--navy);display:flex;align-items:center;gap:10px;user-select:none;transition:background .15s}
+details.gbox>summary::-webkit-details-marker{display:none}
+details.gbox>summary::after{content:'▾';margin-left:auto;font-size:15px;color:var(--mut);transition:transform .2s}
+details.gbox[open]>summary::after{transform:rotate(180deg)}
+details.gbox>summary:hover{background:#F3F6FB}
+details.gbox>summary .no{font-size:12.5px;font-weight:700;color:#fff;background:var(--navy);border-radius:5px;padding:3px 8px}
+details.gbox>summary .hint{font-size:12.5px;font-weight:500;color:var(--mut)}
+details.gbox[open]>summary{border-bottom:1px solid var(--line)}
+.gwrap{padding:18px 20px 20px}
+/* 비교 시점 배지 */
+.period{display:flex;flex-wrap:wrap;align-items:center;gap:9px;margin:14px 0 18px}
+.period.sm{margin:10px 0 14px}
+.pb{font-size:12.7px;font-weight:600;padding:6px 13px;border-radius:20px;border:1px solid var(--line);background:#fff;color:var(--mut)}
+.pb b{color:var(--ink);font-weight:800;margin-left:3px}
+.pb-a{border-color:#B9C8E5;background:#EEF2FA} .pb-a b{color:var(--navy)}
+.pb-b{border-color:#E4C9C4;background:#FCEFED} .pb-b b{color:var(--acc)}
+.pb-c{border-color:#C3DDCD;background:#EDF7F1} .pb-c b{color:var(--grn)}
+.pvs{font-size:12px;font-weight:800;color:var(--mut)}
+.th2{font-weight:400;font-size:10.5px;opacity:.85}
+/* 카드뉴스 */
+.news{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:13px;margin:16px 0}
+.nc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:17px 19px;border-left:5px solid var(--navy)}
+.nc.n-r{border-left-color:var(--acc)} .nc.n-g{border-left-color:var(--grn)} .nc.n-a{border-left-color:var(--amb)}
+.nh{display:flex;align-items:center;gap:9px;margin-bottom:9px}
+.nn{font-size:11px;font-weight:800;color:#fff;background:var(--navy);border-radius:4px;padding:2px 7px;letter-spacing:.04em}
+.n-r .nn{background:var(--acc)} .n-g .nn{background:var(--grn)} .n-a .nn{background:var(--amb)}
+.nd{font-size:12px;font-weight:700;color:var(--mut);letter-spacing:.02em}
+.nt{font-size:15.3px;font-weight:800;color:var(--ink);line-height:1.4;margin-bottom:8px}
+.nb{font-size:13.4px;color:#333A45;line-height:1.55;padding:8px 11px;background:#F6F8FC;border-radius:7px}
+.nb b{color:var(--navy);font-weight:800}
+.n-r .nb b{color:var(--acc)} .n-g .nb b{color:var(--grn)} .n-a .nb b{color:#8A6508}
+.nf{font-size:12.3px;color:var(--mut);margin-top:8px;line-height:1.5}
+.foot{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:12.3px;color:var(--mut)}
+.foot b{color:var(--ink)}
+@media(max-width:720px){h1{font-size:25px}.wrap{padding:0 15px 60px}.cvw{height:250px}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div class="eyebrow">YOONS BASIC · PERFORMANCE &amp; MARKETING IMPACT</div>
+<h1>월별 실적 추이 및 온라인 마케팅 영향 분석</h1>
+<div class="sub">회원수 · 신규수 성장을 위한 종합 진단 (2024.04 ~ 2026.07, 28개월)</div>
+<div class="metaline">
+<div>실적 데이터<b>28개월 · 18개 센터</b></div>
+<div>광고 데이터<b>27개월 · 3억 7,378만원</b></div>
+<div>운영 대행사<b>NHNAD → 더오름랩 → TW</b></div>
+<div>회원 변화<b>3,569 → 2,993명</b></div>
+<div>작성일<b>2026. 08. 11.</b></div>
+</div></div></header>
+<nav class="toc"><div class="inner">
+<a href="#s1"><i>01</i>전년 대비</a>
+<a href="#s2"><i>02</i>월별 추이</a>
+<a href="#s3"><i>03</i>마케팅 영향</a>
+<a href="#s4"><i>04</i>매체별</a>
+<a href="#s5"><i>05</i>계절 구조</a>
+<a href="#s6"><i>06</i>회원 기반</a>
+<a href="#s7"><i>07</i>성장 방향</a>
+<a href="#s8"><i>08</i>원자료</a>
+<a href="#s0"><i>00</i>용어</a>
+</div></nav>
+<div class="wrap">
+<!-- 00 용어 (접이식) -->
+<section id="s0">
+  <details class="gbox">
+    <summary><span class="no">00</span>용어 정의 <span class="hint">— 클릭하여 펼치기 (약어 16종 + 고유지표 4종)</span></summary>
+    <div class="gwrap">
+      <div class="gl">
+        <div><b>CAC</b> — Customer Acquisition Cost<span>고객획득비용 · 신규회원 1명당 실제 광고비</span></div>
+        <div><b>CPL</b> — Cost Per Lead<span>리드획득비용 · 소스 1건당 광고비</span></div>
+        <div><b>CPA</b> — Cost Per Acquisition<span>전환당비용 · 광고매체가 집계한 전환 기준</span></div>
+        <div><b>CVR</b> — Conversion Rate<span>전환율 · 클릭 대비 전환 비율</span></div>
+        <div><b>CTR</b> — Click Through Rate<span>클릭률 · 노출 대비 클릭 비율</span></div>
+        <div><b>CPC</b> — Cost Per Click<span>클릭당비용</span></div>
+        <div><b>ARPU</b> — Average Revenue Per User<span>회원 1인당 월평균 매출</span></div>
+        <div><b>LTV</b> — Lifetime Value<span>고객생애가치 · 회원 1명의 누적 기여매출</span></div>
+        <div><b>ROAS</b> — Return On Ad Spend<span>광고수익률 · 매출 ÷ 광고비</span></div>
+        <div><b>SA</b> — Search Ad<span>검색광고 · 네이버 파워링크 등</span></div>
+        <div><b>BSA</b> — Brand Search Ad<span>브랜드검색광고 · 브랜드명 검색 시 상단 노출</span></div>
+        <div><b>DA</b> — Display Ad<span>디스플레이광고 · 배너형 노출광고</span></div>
+        <div><b>GFA</b> — GLAD For Advertiser<span>네이버 성과형 디스플레이광고 플랫폼</span></div>
+        <div><b>GA4</b> — Google Analytics 4<span>웹 행동·전환 측정 도구</span></div>
+        <div><b>PMAX</b> — Performance Max<span>구글 통합 자동입찰 캠페인</span></div>
+        
+      </div>
+      <div class="card" style="margin-top:13px">
+        <h4 style="margin-top:0">본 보고서 고유 지표</h4>
+        <ul class="kw">
+          <li><b>소스</b> = 상담·체험 신청 리드. 유형 4종 — 온라인폼(PC·모바일) / 센터직접등록 / 본사소스</li>
+          <li><b>순수신규</b> = 신규 − 소개(추천). 광고·소스에 기인한 신규회원만 분리</li>
+          <li><b>순수 가입율</b> = 순수신규 ÷ 소스. 리드가 실제 회원이 되는 비율</li>
+          <li><b>실질 CAC</b> = 광고비 ÷ 순수신규. GA4 전환이 아닌 <b>실제 등록 기준</b></li>
+        </ul>
+      </div>
+    </div>
+  </details>
+</section>
+
+<!-- 01 전년 대비 -->
+<section id="s1">
+  <h2><span class="no">01</span>전년 대비 주요 실적 변화</h2>
+  <div class="period">
+    <span class="pb pb-a">비교 대상 &nbsp;최근 12개월 <b>2025.08 ~ 2026.07</b></span>
+    <span class="pvs">vs</span>
+    <span class="pb pb-b">직전 12개월 <b>2024.08 ~ 2025.07</b></span>
+  </div>
+
+  <div class="tw">
+  <table>
+    <thead><tr>
+      <th>지표</th><th>직전 12개월<br><span class="th2">2024.08~2025.07</span></th>
+      <th>최근 12개월<br><span class="th2">2025.08~2026.07</span></th><th>증감</th><th>증감률</th><th>방향</th>
+    </tr></thead>
+    <tbody>
+      <tr class="gsep"><td colspan="6">■ 투입</td></tr>
+      <tr class="hi"><td>광고비</td><td>1억 3,829만원</td><td class="r">2억 1,744만원</td><td class="r">+7,915만원</td><td class="r">+57.2%</td><td class="r">투입 확대</td></tr>
+      <tr><td>소스 (리드)</td><td>3,960건</td><td>4,752건</td><td>+792건</td><td class="g">+20.0%</td><td class="dim">리드는 증가</td></tr>
+      <tr class="gsep"><td colspan="6">■ 산출</td></tr>
+      <tr class="hi"><td><b>신규 회원</b></td><td>2,411명</td><td class="r">2,027명</td><td class="r">−384명</td><td class="r">−15.9%</td><td class="r">결과는 감소</td></tr>
+      <tr class="hi"><td>순수신규 <span class="dim">(소개 제외)</span></td><td>2,408명</td><td class="r">1,809명</td><td class="r">−599명</td><td class="r">−24.9%</td><td class="r">실질 감소</td></tr>
+      <tr class="gsep"><td colspan="6">■ 효율</td></tr>
+      <tr class="hi"><td><b>가입율</b> (신규÷소스)</td><td class="g">0.609</td><td class="r">0.427</td><td class="r">−0.182p</td><td class="r">−29.9%</td><td class="r">전환율 하락</td></tr>
+      <tr class="hi"><td>순수 가입율</td><td class="g">0.608</td><td class="r">0.381</td><td class="r">−0.227p</td><td class="r">−37.4%</td><td class="r">전환율 하락</td></tr>
+      <tr class="hi"><td><b>실질 CAC</b></td><td class="g">57,431원</td><td class="r">120,199원</td><td class="r">+62,768원</td><td class="r">+109.3%</td><td class="r">2배</td></tr>
+      <tr><td>CPL (소스 1건당)</td><td>34,923원</td><td class="a">45,758원</td><td class="a">+10,835원</td><td class="a">+31.0%</td><td class="a">리드도 비싸짐</td></tr>
+      <tr class="gsep"><td colspan="6">■ 결과</td></tr>
+      <tr class="hg"><td>중단</td><td>2,586명</td><td class="g">2,422명</td><td class="g">−164명</td><td class="g">−6.3%</td><td class="g">이탈은 개선</td></tr>
+      <tr class="hi"><td>순증감 (신규−중단)</td><td class="a">−175명</td><td class="r">−395명</td><td class="r">−220명</td><td class="r">2.3배 확대</td><td class="r">감소 가속</td></tr>
+      <tr><td>기말 회원수</td><td>3,191명</td><td class="r">2,993명</td><td class="r">−198명</td><td class="r">−6.2%</td><td class="r">3천명선 하회</td></tr>
+      <tr><td>월평균 매출</td><td>2억 8,673만원</td><td class="a">2억 7,195만원</td><td class="a">−1,479만원</td><td class="a">−5.2%</td><td class="a">완만한 하락</td></tr>
+      <tr class="hg"><td>ARPU <span class="dim">(회원 1인당 월평균 매출)</span></td><td>86,622원</td><td class="g">89,022원</td><td class="g">+2,400원</td><td class="g">+2.8%</td><td class="g">단가 상승</td></tr>
+      <tr class="hg"><td>소개(추천) 유입</td><td>3명</td><td class="g">218명</td><td class="g">+215명</td><td class="g">신규 채널</td><td class="g">무료 획득</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">전 항목 동일 12개월 구간 비교. 광고비는 VAT·수수료 포함 기준(NHNAD 구간은 1.1배 보정).</div>
+  </div>
+
+  <div class="co bad">
+    <div class="t">전년 대비 요약 — 광고비 1.6배 · 리드 1.2배 · 신규회원 0.84배</div>
+    <ul class="kw">
+      <li class="r"><span class="tag t-r">투입</span>광고비 <b>+57.2%</b> · 소스 <b>+20.0%</b> — 투입과 리드는 계획대로 확대</li>
+      <li class="r"><span class="tag t-r">산출</span>신규 <b>−15.9%</b> · 순수신규 <b>−24.9%</b> — 리드가 회원으로 이어지지 않음</li>
+      <li class="a"><span class="tag t-a">이탈</span>중단 <b>−6.3%</b> 개선 — <b>회원 감소의 원인은 이탈이 아니라 신규 부족</b></li>
+    </ul>
+  </div>
+
+  <h3>최근 1년 주목할 실적 변화 — 8개 포인트</h3>
+  <div class="period sm">
+    <span class="pb pb-a">관찰 구간 <b>2025.08 ~ 2026.07</b></span>
+  </div>
+
+  <div class="news">
+    <div class="nc n-r">
+      <div class="nh"><span class="nn">01</span><span class="nd">2025.12</span></div>
+      <div class="nt">가입율 최저 · 중단 최다가 같은 달에 발생</div>
+      <div class="nb"><b>가입율 0.300</b> (28개월 최저) · <b>중단 280명</b> (28개월 최다) · 순증 <b>−140명</b> (28개월 최저)</div>
+      <div class="nf">소스 466건 — 28개월 평균(345건)의 1.35배 · 그럼에도 신규는 140명</div>
+    </div>
+    <div class="nc n-r">
+      <div class="nh"><span class="nn">02</span><span class="nd">2026.03</span></div>
+      <div class="nt">광고비 최대 투입 · 신규는 전년 동월 대비 −28%</div>
+      <div class="nb"><b>광고비 4,761만원</b> (28개월 최다) · <b>소스 785건</b> (28개월 최다) · 신규 <b>258명</b></div>
+      <div class="nf">2025.03 대비 광고비 2.2배 · 신규 −28% · 신규 1명당 6.1만 → 22.1만원</div>
+    </div>
+    <div class="nc n-r">
+      <div class="nh"><span class="nn">03</span><span class="nd">2026.01</span></div>
+      <div class="nt">디스플레이(DA) 월간 최대 투입 · 성과 미확인</div>
+      <div class="nb">네이버 GFA 등 <b>1,687만원</b> · 월 광고비의 <b>49.4%</b></div>
+      <div class="nf">27개월 전체 DA 7,647만원 중 22%가 이 한 달에 집중</div>
+    </div>
+    <div class="nc n-g">
+      <div class="nh"><span class="nn">04</span><span class="nd">2025.12 ~</span></div>
+      <div class="nt">소개(추천) 유입 첫 등장 — 광고비 0원</div>
+      <div class="nb">직전 12개월 <b>3명</b> → 최근 12개월 <b>218명</b> · 현재 신규의 <b>12~19%</b></div>
+      <div class="nf">발생 경로 미파악 상태 · 현재 가장 저렴한 획득 채널</div>
+    </div>
+    <div class="nc n-a">
+      <div class="nh"><span class="nn">05</span><span class="nd">2026.04</span></div>
+      <div class="nt">검색광고(SA) 27개월 만에 유의미 재개</div>
+      <div class="nb"><b>273만원</b> 집행 — 직전 12개월(2025.04~2026.03) 월평균 <b>5.1만원</b> 대비 <b>54배</b></div>
+      <div class="nf">단위 효율 검증 기회였으나 2026.06 11만원으로 재축소</div>
+    </div>
+    <div class="nc n-r">
+      <div class="nh"><span class="nn">06</span><span class="nd">2026.07</span></div>
+      <div class="nt">회원 3,000명선 하회</div>
+      <div class="nb"><b>2,993명</b> — 2025.03 정점 3,483명 대비 <b>−490명 (−14.1%)</b></div>
+      <div class="nf">16개월간 월평균 −30.6명 감소</div>
+    </div>
+    <div class="nc n-g">
+      <div class="nh"><span class="nn">07</span><span class="nd">2026.05</span></div>
+      <div class="nt">중단율 개선 — 최근 1년 최저 구간 진입</div>
+      <div class="nb">중단율 <b>0.046</b> · 중단 <b>138명</b> — 28개월 중 2번째로 낮음</div>
+      <div class="nf">이탈 방어는 작동 중 · 문제는 신규 유입 단독</div>
+    </div>
+    <div class="nc n-r">
+      <div class="nh"><span class="nn">08</span><span class="nd">2026.03</span></div>
+      <div class="nt">온라인폼 유입 비중 28개월 최고치</div>
+      <div class="nb">소스 785건 중 온라인폼 <b>348건 (44.3%)</b> · 2024.04 39.2% 대비 +5.1p</div>
+      <div class="nf">같은 달 가입율은 0.329로 하위 2번째 — 유입 경로 구성과 전환율이 반대로 움직임</div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 대시보드 -->
+<section id="s2">
+  <h2><span class="no">02</span>월별 실적 추이 — 종합 대시보드</h2>
+  <div class="period">
+    <span class="pb pb-a">전체 구간 <b>2024.04 ~ 2026.07 (28개월)</b></span>
+    <span class="pb pb-c">광고 데이터 <b>2024.05 ~ 2026.07 (27개월)</b></span>
+  </div>
+
+  <div class="kpis">
+    <div class="kpi bad"><div class="lab">회원수 (Members)</div><div class="val">2,993명</div><div class="note">2026.07 기준<br>2024.04(3,569명) 대비 −576명 (−16.1%)</div></div>
+    <div class="kpi bad"><div class="lab">월 매출 (Revenue)</div><div class="val">2.69억</div><div class="note">2026.07 기준<br>2024.04(3.08억) 대비 −12.6%</div></div>
+    <div class="kpi warn"><div class="lab">월평균 순증감 (Net)</div><div class="val">−26.8명</div><div class="note">2024.04~2026.07 평균<br>누적 −750명 · 순증 달 5개월</div></div>
+    <div class="kpi good"><div class="lab">ARPU <span style="font-weight:400">회원 1인당 월평균 매출</span></div><div class="val">89,863원</div><div class="note">2026.07 기준<br>2024.04(86,207원) 대비 +4.2%</div></div>
+  </div>
+
+  <div class="cb">
+    <div class="ct">① 회원수 추이 (Members)</div>
+    <div class="cs">2024.04 3,569명 → 2025.03 정점 3,483명 → 2026.07 2,993명. 신학기(1~3월) 반등 후 4~12월 하락이 반복되는 톱니 구조.</div>
+    <div class="cvw"><canvas id="k1"></canvas></div>
+  </div>
+
+  <div class="cb">
+    <div class="ct">② 신규 · 중단 · 순증감 (New / Churn / Net)</div>
+    <div class="cs">2024.04~2026.07 중 신규가 중단을 넘어선 달은 5개월 — 2025.01·02·03, 2026.01·03. 전부 신학기.</div>
+    <div class="cvw tall"><canvas id="k2"></canvas></div>
+  </div>
+
+  <div class="grid2">
+    <div class="cb">
+      <div class="ct">③ 매출 추이 (Revenue &amp; ARPU)</div>
+      <div class="cs">2024.04~2026.07 · 매출 −12.6% vs 회원 −16.1% — ARPU 상승이 매출 하락을 일부 방어.</div>
+      <div class="cvw sm"><canvas id="k3"></canvas></div>
+    </div>
+    <div class="cb">
+      <div class="ct">④ 소스(리드) 추이 &amp; 가입율</div>
+      <div class="cs">2024.04~2026.07 · 소스는 우상향, 가입율은 우하향. 두 지표의 격차가 벌어지는 구간이 검토 대상.</div>
+      <div class="cvw sm"><canvas id="k4"></canvas></div>
+    </div>
+  </div>
+
+  <div class="co bad">
+    <div class="t">대시보드 요약 — 3줄</div>
+    <ul class="kw">
+      <li class="r"><span class="tag t-r">구조</span>리드는 증가, 회원은 감소 → <b>전환 단계에서 손실</b> <span class="dim">(2024.04~2026.07)</span></li>
+      <li class="r"><span class="tag t-r">시점</span><b>2025년 4월</b> 기점 가입율 계단식 하락 — 2025.03 0.677 → 2025.04 0.440, 이후 미회복</li>
+      <li class="a"><span class="tag t-a">방어</span>ARPU 상승 · 중단 감소 → <b>기존 회원 기반은 오히려 안정화 중</b> <span class="dim">(최근 12개월)</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 03 마케팅 영향 -->
+<section id="s3">
+  <h2><span class="no">03</span>온라인 마케팅이 실적에 미치는 영향</h2>
+  <h3>어디까지 작동하고, 어디서 끊기는가</h3>
+  <div class="period sm"><span class="pb pb-a">분석 구간 <b>2024.05 ~ 2026.07 (27개월)</b></span></div>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>연결 고리</th><th>상관계수 r</th><th>판정</th><th>해석</th></tr></thead>
+    <tbody>
+      <tr class="hg"><td>광고비 → 소스 (리드)</td><td class="g">+0.946</td><td class="g">강함</td><td class="dim">돈 = 리드. 당월 즉시 반영, 시차 없음</td></tr>
+      <tr class="hg"><td>광고비 → 온라인폼 유입</td><td class="g">+0.939</td><td class="g">강함</td><td class="dim">웹 폼 제출은 광고비에 정비례</td></tr>
+      <tr class="hi"><td>광고비 → <b>순수신규</b></td><td class="a">+0.456</td><td class="a">약함</td><td class="dim"><b>여기서 연결이 끊김</b></td></tr>
+      <tr class="hi"><td>광고비 → <b>순수 가입율</b></td><td class="r">−0.568</td><td class="r">역방향</td><td class="dim">쓸수록 리드 품질 하락</td></tr>
+      <tr class="hi"><td>온라인폼 비중 → 가입율</td><td class="r">−0.754</td><td class="r">역방향</td><td class="dim">온라인 유입 늘수록 전환율 하락</td></tr>
+      <tr><td>광고비 → 매출</td><td class="dim">−0.393</td><td class="dim">무관</td><td class="dim">광고 증액이 매출로 연결 안 됨</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">n=27개월 (2024.05~2026.07). 시차를 적용해도 결론 동일 — 광고비→순수신규 r은 당월 +0.456 · 1개월 후 +0.168 · 2개월 후 −0.123으로, 시차를 둘수록 낮아짐.</div>
+  </div>
+
+  <div class="cb">
+    <div class="ct">⑤ 광고비 · 소스 · 순수신규 — 3중 추이</div>
+    <div class="cs">2024.05~2026.07 · 2025.12 이후 광고비와 소스는 급등, 순수신규만 제자리. 세 선이 벌어지는 구간이 손실 구간.</div>
+    <div class="cvw tall"><canvas id="k5"></canvas></div>
+  </div>
+
+  <div class="co bad">
+    <div class="t">핵심 진단 — 리드 확보는 되고 있으나 회원 전환으로 이어지지 않음</div>
+    <ul class="kw">
+      <li class="r"><span class="tag t-r">원인 1</span><b>온라인폼 유입 비중 확대</b> — 소스 대비 30.2%(2024.05~2025.03) → 39.0%(2025.04~2026.03) → <b>39.8%</b>(2026.04~07)</li>
+      <li class="r"><span class="tag t-r">원인 2</span><b>디스플레이(DA) 본격 도입</b> — 2025.10 이후 상시 집행 · 집행액과 순수가입율 상관 <b>r=−0.694</b> (전 매체 중 최저)</li>
+      <li class="r"><span class="tag t-r">원인 3</span><b>측정 지표 불일치</b> — 대행사 KPI는 GA4 전환, 사업 KPI는 등록 회원 · 두 지표를 연결하는 데이터 없음</li>
+      <li class="g"><span class="tag t-g">반증</span>센터 영업력 요인으로 보기 어려움 — <b>18개 센터 중 17곳에서 동시 하락</b> (평균 −0.132p) · 규모·지역 무관 · 하락 시점 2025.04로 일치</li>
+    </ul>
+  </div>
+</section>
+<!-- 04 매체별 -->
+<section id="s4">
+  <h2><span class="no">04</span>매체별 광고비 집행과 실적 관계</h2>
+  <div class="period"><span class="pb pb-a">집계 구간 <b>2024.05 ~ 2026.07 (27개월 누적)</b></span></div>
+
+  <h3>매체별 집행 규모</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>매체</th><th>27개월 집행액</th><th>비중</th><th>월평균</th><th>집행 기간</th></tr></thead>
+    <tbody>
+      <tr class="hi"><td>메타 (Meta / Facebook·Instagram)</td><td class="r">2억 3,100만원</td><td class="r">61.8%</td><td>856만원</td><td class="dim">27개월 전 기간</td></tr>
+      <tr class="hi"><td>디스플레이 (DA · 네이버 GFA 등)</td><td class="r">7,647만원</td><td class="r">20.5%</td><td>283만원<br><span class="dim" style="font-size:10.5px">집행월 기준 695만원</span></td><td class="dim">11개월 (2025.01 · 2025.10~2026.07)</td></tr>
+      <tr class="hg"><td>브랜드검색 (BSA)</td><td>4,123만원</td><td>11.0%</td><td>153만원</td><td class="dim">27개월 전 기간 · 고정 집행</td></tr>
+      <tr><td>기타 (당근·토스·카카오·구글)</td><td>1,944만원</td><td>5.2%</td><td>72만원</td><td class="dim">산발적</td></tr>
+      <tr><td>검색광고 (SA · 파워링크)</td><td class="a">564만원</td><td class="a">1.5%</td><td>21만원</td><td class="dim">27개월 전 기간 · 소액</td></tr>
+      <tr class="tot"><td>합계</td><td>3억 7,378만원</td><td>100%</td><td>1,384만원</td><td>—</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">대행사 리포트에 기재된 집행액 원값. VAT·수수료 포함 기준(NHNAD 구간은 VAT 별도 표기이므로 1.1배 보정).</div>
+  </div>
+
+  <div class="cb">
+    <div class="ct">⑥ 매체 구성비 추이</div>
+    <div class="cs">2024.05~2026.07 월별 집행 비중 · 디스플레이(DA)는 2025.10부터 상시 집행으로 전환.</div>
+    <div class="cvw"><canvas id="k7"></canvas></div>
+  </div>
+
+  <h3>시기별 매체 구성 변화</h3>
+  <div class="tw">
+  <table>
+    <thead><tr><th>구간</th><th>브랜드검색</th><th>검색광고</th><th>메타</th><th>디스플레이</th><th>기타</th></tr></thead>
+    <tbody>
+      <tr><td>2024.05~2025.03 <span class="dim">(11개월)</span></td><td>14.2%</td><td>0.6%</td><td class="r">74.0%</td><td>3.4%</td><td>7.8%</td></tr>
+      <tr><td>2025.04~2026.03 <span class="dim">(12개월)</span></td><td class="a">8.5%</td><td class="a">0.3%</td><td class="r">61.3%</td><td class="r">25.0%</td><td>4.8%</td></tr>
+      <tr><td>2026.04~2026.07 <span class="dim">(4개월)</span></td><td class="g">15.5%</td><td class="g">10.5%</td><td>31.4%</td><td class="r">42.6%</td><td>0.0%</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">메타 편중이 완화된 대신 디스플레이 비중이 3.4% → 42.6%로 확대. 검색광고는 2026.04부터 처음 두 자릿수 비중 진입.</div>
+  </div>
+
+  <h3>매체별 집행액과 실적의 상관</h3>
+  <div class="period sm"><span class="pb pb-a">분석 구간 <b>2024.05 ~ 2026.07 (n=27개월)</b></span></div>
+  <div class="tw">
+  <table>
+    <thead><tr><th>매체</th><th>→ 소스</th><th>→ 순수신규</th><th>→ 순수가입율</th><th>관찰 내용</th></tr></thead>
+    <tbody>
+      <tr><td>메타 (Meta)</td><td class="g">+0.857</td><td class="g">+0.633</td><td class="a">−0.317</td><td class="dim">소스·신규 모두 동반 상승</td></tr>
+      <tr class="hi"><td>디스플레이 (DA)</td><td class="g">+0.731</td><td class="r">+0.086</td><td class="r">−0.694</td><td class="r">소스만 상승 · 신규는 무반응</td></tr>
+      <tr><td>기타</td><td>+0.518</td><td>+0.331</td><td class="dim">−0.111</td><td class="dim">소액 분산</td></tr>
+      <tr><td>브랜드검색 (BSA)</td><td>+0.253</td><td class="dim">−0.020</td><td class="dim">−0.511</td><td class="dim">월 153만원 고정 집행 · 변동이 없어 상관 해석이 어려운 상태</td></tr>
+      <tr><td>검색광고 (SA)</td><td class="dim">−0.047</td><td class="dim">−0.151</td><td class="dim">−0.191</td><td class="dim">집행액 과소 · 유의미한 신호 미확인</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">상관계수는 27개월 월별 데이터로 직접 산출. 상관관계이며 인과관계를 의미하지는 않음.</div>
+  </div>
+
+  <h3>디스플레이(DA) 집행 여부에 따른 실적 비교</h3>
+  <div class="period sm">
+    <span class="pb pb-c">DA 미집행 <b>16개월</b></span><span class="pvs">vs</span><span class="pb pb-b">DA 집행 <b>11개월</b></span>
+  </div>
+  <div class="tw">
+  <table>
+    <thead><tr><th>구분</th><th>해당 월수</th><th>월평균 광고비</th><th>순수 가입율</th><th>실질 CAC</th></tr></thead>
+    <tbody>
+      <tr class="hg"><td>DA 미집행 월</td><td>16개월</td><td>1,010만원</td><td class="g">0.603</td><td class="g">55,954원</td></tr>
+      <tr class="hi"><td>DA 집행 월</td><td>11개월</td><td class="r">1,928만원</td><td class="r">0.383</td><td class="r">121,217원</td></tr>
+      <tr class="tot"><td>차이</td><td>—</td><td>1.9배</td><td>−0.220p</td><td>2.2배</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">DA 집행 월 = 2025.01, 2025.10~2026.07(11개월). 두 구간은 광고비 규모·계절 구성이 달라 <b>DA 단독 효과로 보기는 어려움</b>. 다만 DA 집행 구간에서 가입율과 CAC가 함께 낮아진 것은 사실.</div>
+  </div>
+
+  <div class="co bad">
+    <div class="t">매체 배분 — 확인된 사실</div>
+    <ul class="kw">
+      <li class="r"><span class="tag t-r">집중</span>메타 + 디스플레이 = 27개월 예산의 <b>82.3%</b> (3억 747만원)</li>
+      <li class="r"><span class="tag t-r">상관</span>디스플레이는 소스와 <b>+0.731</b>, 순수신규와 <b>+0.086</b> — <b>리드 증가가 회원 증가로 이어지지 않음</b></li>
+      <li class="a"><span class="tag t-a">과소</span>검색광고(SA)는 27개월 총 <b>564만원(1.5%)</b> — 유의미한 확대 집행 이력 없어 <b>효율 판단이 어려운 상태</b></li>
+      <li class="a"><span class="tag t-a">고정</span>브랜드검색(BSA)은 월 153만원 고정 — <b>증감 테스트가 없어 탄력성 미확인</b></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 05 계절 구조 -->
+<section id="s5">
+  <h2><span class="no">05</span>계절 구조 — 성과가 결정되는 시점</h2>
+  <div class="period"><span class="pb pb-a">집계 구간 <b>2024.04 ~ 2026.07</b></span><span class="pb pb-c">동일 월끼리 2~3개년 평균</span></div>
+
+  <div class="grid2">
+    <div class="cb">
+      <div class="ct">⑦ 월별 평균 순증감 (연도 통합)</div>
+      <div class="cs">2024.04~2026.07 동일 월 평균 · 1~3월에만 순증하며, 12월이 연중 최저(−102명).</div>
+      <div class="cvw sm"><canvas id="k8"></canvas></div>
+    </div>
+    <div class="cb">
+      <div class="ct">⑧ 월별 평균 소스 · 신규 · 가입율</div>
+      <div class="cs">2024.04~2026.07 동일 월 평균 · 소스는 3월 최대(658건), 가입율은 9월 최고(0.69).</div>
+      <div class="cvw sm"><canvas id="k9"></canvas></div>
+    </div>
+  </div>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>구분</th><th>해당 월수</th><th>월평균 소스</th><th>월평균 신규</th><th>월평균 중단</th><th>월평균 순증감</th></tr></thead>
+    <tbody>
+      <tr class="hg"><td>성수기 (1~3월)</td><td>6</td><td class="g">570.8건</td><td class="g">281.2명</td><td>246.2명</td><td class="g">+35.0명</td></tr>
+      <tr class="hi"><td>비수기 (4~12월)</td><td>22</td><td>283.9건</td><td>152.7명</td><td>196.4명</td><td class="r">−43.6명</td></tr>
+      <tr class="tot"><td>격차</td><td>—</td><td>2.0배</td><td>1.8배</td><td>1.25배</td><td>+78.6명</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">1~3월은 2개년(2025·2026) 평균, 4~7월은 3개년 평균, 8~12월은 2개년 평균. 관측 연수가 적어 개별 월 수치는 변동 가능.</div>
+  </div>
+
+  <div class="co warn">
+    <div class="t">계절 구조 — 확인된 사실</div>
+    <ul class="kw">
+      <li class="a"><span class="tag t-a">집중</span>순증한 달 <b>5개월 / 28개월</b> — 2025.01·02·03, 2026.01·03 <b>전부 1~3월</b></li>
+      <li class="a"><span class="tag t-a">유의</span>12월 월평균 중단 <b>266.5명</b> (연중 최다) · 순증 <b>−102명</b> (연중 최저)</li>
+      <li class="g"><span class="tag t-g">기회</span>9월 월평균 가입율 <b>0.69</b> (연중 최고) · 소스 <b>223.5건</b> (연중 최저)</li>
+      <li class="a"><span class="tag t-a">배분</span>광고비는 계절과 무관하게 집행 — 광고비와 가입율의 월별 정렬이 이루어지지 않음</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 06 회원 기반 -->
+<section id="s6">
+  <h2><span class="no">06</span>회원 기반의 질적 변화</h2>
+  <div class="period"><span class="pb pb-a">기준 시점 <b>2026.07</b></span><span class="pvs">vs</span><span class="pb pb-b">비교 시점 <b>2024.04</b></span></div>
+
+  <div class="kpis">
+    <div class="kpi good"><div class="lab">ARPU <span style="font-weight:400">회원 1인당 월평균 매출</span></div><div class="val">86,207 → 89,863원</div><div class="note">2024.04 → 2026.07 · +4.2%</div></div>
+    <div class="kpi good"><div class="lab">상위 상품 비중 (109·149)</div><div class="val">23.5% → 30.6%</div><div class="note">2024.04 → 2026.07 · 회원 구성 기준</div></div>
+    <div class="kpi warn"><div class="lab">연간 순증감 속도</div><div class="val">−41 → −19명/월</div><div class="note">2024년(9개월) → 2026년(7개월)<br>감소폭 둔화</div></div>
+    <div class="kpi bad"><div class="lab">교사당 회원수</div><div class="val">11.9 → 6.5명</div><div class="note">2024.04 → 2026.07 · −45.3%<br>교사 +160명 vs 회원 −576명</div></div>
+  </div>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>상품 구성 (회원 수)</th><th>2024.04</th><th>2025.03</th><th>2026.03</th><th>2026.07</th><th>구성비 변화<br><span class="th2">2024.04 → 2026.07</span></th></tr></thead>
+    <tbody>
+      <tr><td>69 상품 <span class="dim">(최저가)</span></td><td>161</td><td>63</td><td>22</td><td class="r">14</td><td class="r">4.5% → 0.5%</td></tr>
+      <tr><td>79 상품 <span class="dim">(주력)</span></td><td>2,502</td><td>2,438</td><td>2,073</td><td>2,049</td><td class="dim">70.1% → 68.5%</td></tr>
+      <tr><td>99 상품</td><td>68</td><td>31</td><td>15</td><td class="r">14</td><td class="r">1.9% → 0.5%</td></tr>
+      <tr class="hg"><td>109 상품 <span class="dim">(상위)</span></td><td>673</td><td>756</td><td>758</td><td class="g">745</td><td class="g">18.9% → 24.9%</td></tr>
+      <tr class="hg"><td>149 상품 <span class="dim">(최상위)</span></td><td>165</td><td>195</td><td>187</td><td class="g">171</td><td class="g">4.6% → 5.7%</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">저가 상품(69·99) 회원이 사실상 소멸하고 상위 상품(109·149) 비중이 상승 — 매출 하락(−12.6%)이 회원 하락(−16.1%)보다 완만한 이유.</div>
+  </div>
+
+  <div class="co good">
+    <div class="t">회원 기반 — 남아 있는 회원의 질은 개선 중</div>
+    <ul class="kw">
+      <li class="g">저가 상품(69·99) 회원 소멸 · 상위 상품(109·149) 비중 상승 → <b>회원 −16.1%에도 매출 −12.6%</b>로 방어</li>
+      <li class="g">이탈 지표 개선 — 중단 <b>−6.3%</b> · 순증감 속도 <b>−41 → −19명/월</b></li>
+      <li class="g">소개(추천) 유입 <b>2025.12</b>부터 발생 · <b>광고비 0원</b>으로 2026.04~07 신규의 8.6~18.5% 기여</li>
+    </ul>
+  </div>
+</section>
+<!-- 07 성장 방향 -->
+<section id="s7">
+  <h2><span class="no">07</span>회원수·신규수 성장 방향</h2>
+  <div class="period"><span class="pb pb-a">현재 기준 <b>2026.07</b></span><span class="pb pb-c">최고 실적 구간 <b>2024.05~2025.03</b></span></div>
+  <p style="color:var(--mut);margin:6px 0 4px">회원수 = <b>기초회원 + 신규 − 중단</b>. 아래 항목은 <b>측정된 사실</b>과 그로부터 도출되는 실행안만 기재. 효과 예측치는 검증이 어려워 제외.</p>
+
+  <div class="tw">
+  <table>
+    <thead><tr><th>레버</th><th>측정된 현재 상태</th><th>비교 기준</th><th>필요 투자</th><th>난이도</th></tr></thead>
+    <tbody>
+      <tr class="hg"><td>L1. 가입율 회복 <span class="dim">(전환)</span></td><td class="r">순수가입율 0.403 <span class="dim">(2026.04~07)</span></td><td class="g">0.651 <span class="dim">(2024.05~2025.03)</span></td><td class="g">증액 0원 (재배분)</td><td class="a">중</td></tr>
+      <tr class="hg"><td>L2. 매체 재배분 <span class="dim">(효율)</span></td><td class="r">DA·기타 25.7% <span class="dim">(27개월 누적)</span></td><td class="dim">DA 미집행 월 CAC 55,954원</td><td class="g">증액 0원 (재배분)</td><td class="g">낮음</td></tr>
+      <tr><td>L3. 중단 방어 <span class="dim">(리텐션)</span></td><td class="a">월평균 207명 <span class="dim">(28개월)</span></td><td class="dim">12월 266.5명 · 5월 138명</td><td class="a">리텐션 예산 신설</td><td class="a">중</td></tr>
+      <tr><td>L4. 추천 채널 <span class="dim">(소개)</span></td><td class="a">월 14~25명 <span class="dim">(2026.04~07)</span></td><td class="dim">직전 12개월 총 3명</td><td class="g">인센티브 소액</td><td class="g">낮음</td></tr>
+      <tr><td>L5. 계절 재배분 <span class="dim">(타이밍)</span></td><td class="a">광고비-계절 정렬 미실시</td><td class="dim">1~3월 순증 +35.0명/월</td><td class="g">증액 0원 (재배분)</td><td class="g">낮음</td></tr>
+      <tr><td>L6. 교사 생산성 <span class="dim">(수용력)</span></td><td class="r">교사당 6.5명 <span class="dim">(2026.07)</span></td><td class="dim">11.9명 (2024.04)</td><td class="r">조직 개편</td><td class="r">높음</td></tr>
+    </tbody>
+  </table>
+  <div class="cap">‘비교 기준’은 동일 데이터 내에서 실제 관측된 최고 수준. 목표치가 아니라 <b>과거에 도달했던 값</b>.</div>
+  </div>
+
+  <h3>우선순위 1 — 예산 증액 없이 실행 가능 (0~1개월)</h3>
+  <div class="acts">
+    <div class="act p1">
+      <div class="n">LEVER 01 · 전환</div>
+      <h4>KPI를 GA4 전환 → 등록 회원으로 교체</h4>
+      <ul class="kw">
+        <li>현행 : 대행사 평가 = GA4 전환수 · CPA</li>
+        <li>변경 : 대행사 평가 = <b>실등록 회원수 · 실질 CAC</b></li>
+        <li>연결 : 소스 ID ↔ 회원 등록 DB 매핑</li>
+        <li>보고 : 매체별 <b>소스 → 등록</b> 전환율 월 단위 공유</li>
+      </ul>
+      <div class="imp">근거 — 광고비→소스 r=+0.946 vs 광고비→순수신규 r=+0.456 <span class="dim">(2024.05~2026.07, n=27)</span></div>
+    </div>
+    <div class="act p1">
+      <div class="n">LEVER 02 · 효율</div>
+      <h4>디스플레이(DA) 집행 중단 후 재배분</h4>
+      <ul class="kw">
+        <li>대상 : 네이버 GFA · dg 디스플레이 · 토스 · 카카오 비즈보드</li>
+        <li>규모 : 27개월 <b>7,647만원</b> · 2026.04~07 기준 월 <b>444만원</b></li>
+        <li>이전처 : 브랜드검색(BSA) 증액 테스트 + 검색광고(SA) 확대</li>
+        <li>측정 : 중단 후 3개월간 소스·순수신규 변화 관찰</li>
+      </ul>
+      <div class="imp">근거 — DA 집행액↔순수가입율 r=−0.694 (전 매체 최저) · DA 미집행 16개월 CAC 55,954원 vs 집행 11개월 121,217원</div>
+    </div>
+    <div class="act p1">
+      <div class="n">LEVER 05 · 타이밍</div>
+      <h4>예산을 계절 곡선에 맞춰 재배치</h4>
+      <ul class="kw">
+        <li>증액 : 1~3월 <span class="dim">(월평균 순증 +35.0명)</span> · 9월 <span class="dim">(가입율 0.69 최고)</span></li>
+        <li>감액 : 5~6월 <span class="dim">(월평균 순증 −57.3 / −34.0명)</span></li>
+        <li>신설 : 12월 리텐션 전환 <span class="dim">(중단 266.5명 · 연중 최다)</span></li>
+        <li>원칙 : 연간 총액 동일 · 배분만 변경</li>
+      </ul>
+      <div class="imp">근거 — 9월 소스 223.5건(연중 최저) · 가입율 0.69(연중 최고) <span class="dim">(2024.04~2026.07 동일 월 평균)</span></div>
+    </div>
+  </div>
+
+  <h3>우선순위 2 — 신규 투자 필요 (1~3개월)</h3>
+  <div class="acts">
+    <div class="act p2">
+      <div class="n">LEVER 04 · 추천</div>
+      <h4>소개(추천) 채널 공식 프로그램화</h4>
+      <ul class="kw">
+        <li>현황 : <b>2025.12</b> 최초 발생 · 최근 12개월 <b>218명</b> · <b>광고비 0원</b></li>
+        <li>비중 : 2026.04~07 신규의 <b>8.6% ~ 18.5%</b></li>
+        <li>비교 : 광고 실질 CAC <b>87,242원</b> <span class="dim">(2026.04~07)</span></li>
+        <li>선행 : 발생 경로 파악 <span class="dim">(현재 미확인)</span></li>
+      </ul>
+      <div class="imp">근거 — 직전 12개월 3명 → 최근 12개월 218명 <span class="dim">(2024.08~2025.07 → 2025.08~2026.07)</span></div>
+    </div>
+    <div class="act p2">
+      <div class="n">LEVER 03 · 리텐션</div>
+      <h4>중단 방어를 마케팅 과제로 편입</h4>
+      <ul class="kw">
+        <li>규모 : 월평균 <b>207명</b> · 28개월 누적 <b>5,797명</b></li>
+        <li>집중 : 12월 <b>266.5명</b> · 2월 <b>260.5명</b> <span class="dim">(동일 월 평균)</span></li>
+        <li>편차 : 최다 280명(2025.12) vs 최소 138명(2026.05)</li>
+        <li>현황 : 리텐션 목적 예산 <b>0원</b> — 전액 신규 획득에 집행</li>
+      </ul>
+      <div class="imp">근거 — 최근 12개월 중단 −6.3% 개선에도 순증감은 −395명 <span class="dim">(2025.08~2026.07)</span></div>
+    </div>
+    <div class="act p2">
+      <div class="n">LEVER 01-b · 리드 품질</div>
+      <h4>온라인 폼 유입의 의사 검증 강화</h4>
+      <ul class="kw">
+        <li>현황 : 온라인폼 비중 <b>30.2% → 39.0% → 39.8%</b> <span class="dim">(3개 구간)</span></li>
+        <li>상관 : 온라인폼 비중 ↔ 순수가입율 <b>r=−0.754</b></li>
+        <li>실행 : 폼에 학년·희망 시작시기 등 의사확인 항목 추가</li>
+        <li>측정 : 소재별 <b>등록 전환율</b> 분리 집계 후 A/B 비교</li>
+      </ul>
+      <div class="imp">근거 — 광고비↔온라인폼 r=+0.939 · 광고비↔순수가입율 r=−0.568 <span class="dim">(n=27)</span></div>
+    </div>
+  </div>
+
+  <h3>우선순위 3 — 구조 과제 (3~6개월)</h3>
+  <div class="acts">
+    <div class="act p3">
+      <div class="n">구조 과제 01</div>
+      <h4>본사소스 채널 구성 파악</h4>
+      <ul class="kw">
+        <li>규모 : 전체 소스의 <b>43.7~48.3%</b> <span class="dim">(구간별)</span> · 최근 12개월 <b>2,116건</b></li>
+        <li>추이 : 직전 12개월 1,773건 → 최근 12개월 2,116건 <b>(+19.3%)</b></li>
+        <li>과제 : 세부 구성 미확인 <span class="dim">(콜센터·제휴·오프라인·검색 미분해)</span></li>
+        <li>실행 : 구성 분해 → 경로별 등록 전환율 산출</li>
+      </ul>
+      <div class="imp">가장 큰 소스 채널의 내부 구성을 알 수 없어 예산 판단 근거가 부족함 — 최우선 데이터 과제</div>
+    </div>
+    <div class="act p3">
+      <div class="n">구조 과제 02</div>
+      <h4>브랜드검색(BSA) 증분성 검증</h4>
+      <ul class="kw">
+        <li>현황 : 27개월간 월 <b>153만원 고정</b> — 증감 이력 미확인</li>
+        <li>과제 : 변동이 없어 <b>효과 측정이 어려운 상태</b></li>
+        <li>방법 : 2주 홀드아웃 또는 지역 단위 Geo-lift 테스트</li>
+        <li>질문 : 광고 없이도 발생했을 등록 비율은?</li>
+      </ul>
+      <div class="imp">브랜드검색은 이미 브랜드를 검색한 사용자 대상 — 증분 기여 미검증 상태</div>
+    </div>
+    <div class="act p3">
+      <div class="n">구조 과제 03</div>
+      <h4>유입 경로별 유지기간(코호트) 산출</h4>
+      <ul class="kw">
+        <li>현재 : ARPU <b>89,863원/월</b> · 실질 CAC <b>87,242원</b> <span class="dim">(2026.04~07)</span></li>
+        <li>산술 : CAC ≈ ARPU 약 1개월치 <span class="dim">(유지기간 미반영 단순 비교)</span></li>
+        <li>필요 : 경로별 평균 유지기간 데이터 <span class="dim">(현재 미확보)</span></li>
+        <li>목표 : 경로별 CAC 상한 설정 후 입찰 반영</li>
+      </ul>
+      <div class="imp">유지기간을 모르면 CAC의 적정 수준을 판단하기 어려움 — 현재 모든 경로에 동일 기준 적용</div>
+    </div>
+  </div>
+
+  <div class="co warn">
+    <div class="t">모든 레버의 선행 조건 — 소스 ID ↔ 회원 등록 DB 연결</div>
+    <ul class="kw">
+      <li class="a">현재 매체별 <b>실등록 전환율을 산출할 방법이 마련되지 않음</b> — 대행사 리포트는 GA4 전환까지만 제공</li>
+      <li class="a">연결 전에는 개선 효과의 <b>사후 검증이 어려우며</b>, 본 보고서의 매체 판단도 상관관계 수준에 머무름</li>
+      <li class="a">연결 이후 재산출 대상 — 매체별 실질 CAC · 소재별 등록 전환율 · 경로별 유지기간</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 08 실적자료 -->
+<section id="s8">
+  <h2><span class="no">08</span>월별 실적 원자료</h2>
+  <div class="period"><span class="pb pb-a">실적 <b>2024.04 ~ 2026.07 (28개월)</b></span><span class="pb pb-c">광고 <b>2024.05 ~ 2026.07 (27개월)</b></span></div>
+  <div class="tw" style="max-height:640px;overflow-y:auto">
+  <table id="raw">
+    <thead><tr>
+      <th>년월</th><th>회원</th><th>신규</th><th>소개</th><th>중단</th><th>순증감</th>
+      <th>소스</th><th>온라인폼</th><th>센터직접</th><th>본사소스</th>
+      <th>가입율</th><th>순수신규</th><th>순수가입율</th>
+      <th>광고비</th><th>CPL</th><th>실질CAC</th>
+      <th>매출</th><th>ARPU</th><th>교사</th><th>운영사</th>
+    </tr></thead>
+    <tbody id="rawb"></tbody>
+  </table>
+  </div>
+  <div class="cap">
+    CPL = Cost Per Lead (소스 1건당 광고비) · 실질 CAC = 광고비 ÷ 순수신규 · 순수신규 = 신규 − 소개 · ARPU = 매출 ÷ 회원<br>
+    2024.04은 광고 데이터 미확보 · 2026.08은 부분월(11일치)로 전 분석에서 제외 · 전 수치는 원자료 값 또는 그 사칙연산
+  </div>
+</section>
+
+<div class="foot">
+  <p><b>분석 범위 및 한계</b></p>
+  <ul class="kw" style="margin-top:8px">
+    <li>대상 — 윤선생 베이직 브랜드 단일 · 18개 센터 · 실적 28개월 / 광고 27개월</li>
+    <li>수치 기준 — 본 보고서의 모든 수치는 <b>원자료 값 또는 그 사칙연산·상관계수</b>. 추정 모형으로 산출한 값은 제외</li>
+    <li>광고비 기준 — NHNAD는 VAT(부가가치세) 별도 표기이므로 1.1배 보정 · 더오름랩·TW는 VAT·수수료 포함. 실제 수수료율이 다르면 구간 간 CAC 비교에 오차 발생 가능</li>
+    <li>소개(추천) — 신규에 포함된 수치이므로 광고 성과 산정에서는 차감</li>
+    <li>귀속 — 소스 → 신규를 동월 귀속. 실제 등록 시차 존재 시 월별 가입율에 노이즈</li>
+    <li>상관계수 — 상관관계이며 인과관계를 의미하지 않음. 매체 간 집행액이 동반 변동하여 개별 매체 효과를 분리하기 어려움</li>
+    <li>측정 — 대행사 3사의 GA4 계측 기준 상이 · 본 보고서 결론은 GA4가 아닌 <b>실제 회원 실적 데이터</b> 기준</li>
+  </ul>
+  <p style="margin-top:14px"><b>수록에서 제외한 항목</b> — 아래는 정의가 확인되지 않았거나 검증이 어려워 본 보고서에서 제외했습니다.</p>
+  <ul class="kw" style="margin-top:6px">
+    <li><b>장기회원</b> — 원자료에 정의 미기재 · 28개월 연속 단조증가(감소 0회) · 센터 시트는 20개 센터 전부 동일값(전체 수치 복사) 기재. 정의 확인 후 재검토 필요</li>
+    <li><b>한달회원</b> — 정의 미기재. 조기이탈 지표로 사용 가능하나 산정 기준 확인 필요</li>
+    <li><b>매체별 기여도 추정</b> — 매체 간 집행액 상관이 높아 개별 매체의 신규 기여를 분리 추정할 경우 신뢰도가 낮음. 집행액·상관계수 등 <b>직접 측정값만</b> 수록</li>
+    <li><b>손실·효과 예측치</b> — ‘가입율이 유지됐다면’ 등 가정에 기반한 추정치는 검증이 어려워 제외</li>
+  </ul>
+  <p style="margin-top:14px"><b>추가 확보 시 분석 가능</b> — 리드 단위 원자료(유입일·매체·소재·등록 여부) · 본사소스 세부 구성 · 유입 경로별 유지기간 · 리드 응대 로그 · 대행 수수료율</p>
+  <p style="margin-top:14px"><b>검산</b> — 본 보고서에 수록된 수치는 원자료로부터 모두 재계산하여 대조 검증했습니다(2026.08.11 기준). 대조 항목 <b>219건 전수 일치</b> (불일치 0건).</p>
+  <p style="margin-top:12px">데이터 출처 — NHNAD 캠페인 보고서 10건 · 더오름랩 월간보고서 12건 · TW 주간/마감리포트 4건 · 베이직 실적(전체·센터별)</p>
+</div>
+</div>
+<script>
+const D={"rows": [{"ym": "202404", "mem": 3569, "new": 184, "ref": 29, "stop": 220, "src": 311, "rev": 307674000.0, "rate": 0.592, "online": 122, "center": 50, "hq": 139, "tea": 300, "net": -36, "arpu": 86207, "agency": null, "spend": null, "pure": null, "prate": null, "cac": null, "cps": null}, {"ym": "202405", "mem": 3471, "new": 118, "ref": 2, "stop": 208, "src": 199, "rev": 301904000.0, "rate": 0.593, "online": 50, "center": 50, "hq": 99, "tea": 304, "net": -90, "arpu": 86979, "agency": "NHNAD", "spend": 5422014.4, "pure": 116, "prate": 0.583, "cac": 46742, "cps": 27246, "브랜드검색": 1500400.0000000002, "검색광고": 32235.500000000004, "메타": 3889378.9000000004, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202406", "mem": 3410, "new": 129, "ref": 0, "stop": 175, "src": 192, "rev": 294691000.0, "rate": 0.672, "online": 38, "center": 62, "hq": 92, "tea": 307, "net": -46, "arpu": 86420, "agency": "NHNAD", "spend": 6204352.0, "pure": 129, "prate": 0.672, "cac": 48096, "cps": 32314, "브랜드검색": 1236400.0, "검색광고": 25696.000000000004, "메타": 4942256.0, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202407", "mem": 3369, "new": 178, "ref": 1, "stop": 186, "src": 256, "rev": 291844000.0, "rate": 0.695, "online": 62, "center": 58, "hq": 136, "tea": 312, "net": -8, "arpu": 86626, "agency": "NHNAD", "spend": 6422191.600000001, "pure": 177, "prate": 0.691, "cac": 36284, "cps": 25087, "브랜드검색": 1364000.0, "검색광고": 65259.700000000004, "메타": 4992931.9, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202408", "mem": 3372, "new": 176, "ref": 0, "stop": 212, "src": 249, "rev": 291179000.0, "rate": 0.707, "online": 73, "center": 61, "hq": 115, "tea": 322, "net": -36, "arpu": 86352, "agency": "NHNAD", "spend": 6420428.300000001, "pure": 176, "prate": 0.707, "cac": 36480, "cps": 25785, "브랜드검색": 1364000.0, "검색광고": 52030.00000000001, "메타": 5004398.300000001, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202409", "mem": 3323, "new": 153, "ref": 0, "stop": 209, "src": 200, "rev": 283899000.0, "rate": 0.765, "online": 41, "center": 43, "hq": 116, "tea": 325, "net": -56, "arpu": 85435, "agency": "NHNAD", "spend": 6480262.800000001, "pure": 153, "prate": 0.765, "cac": 42355, "cps": 32401, "브랜드검색": 1426333.7000000002, "검색광고": 47971.00000000001, "메타": 5005958.100000001, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202410", "mem": 3289, "new": 139, "ref": 1, "stop": 168, "src": 211, "rev": 287217000.0, "rate": 0.659, "online": 52, "center": 51, "hq": 108, "tea": 332, "net": -29, "arpu": 87327, "agency": "NHNAD", "spend": 6021660.7, "pure": 138, "prate": 0.654, "cac": 43635, "cps": 28539, "브랜드검색": 1477666.3, "검색광고": 66484.0, "메타": 3480544.1, "디스플레이": 0.0, "기타": 996966.3}, {"ym": "202411", "mem": 3280, "new": 175, "ref": 0, "stop": 182, "src": 277, "rev": 282918000.0, "rate": 0.632, "online": 84, "center": 67, "hq": 126, "tea": 339, "net": -7, "arpu": 86255, "agency": "NHNAD", "spend": 5912846.5, "pure": 175, "prate": 0.632, "cac": 33788, "cps": 21346, "브랜드검색": 1430000.0, "검색광고": 46992.00000000001, "메타": 3436613.4000000004, "디스플레이": 0.0, "기타": 999241.1000000001}, {"ym": "202412", "mem": 3251, "new": 189, "ref": 0, "stop": 253, "src": 310, "rev": 279427000.0, "rate": 0.61, "online": 97, "center": 66, "hq": 147, "tea": 343, "net": -64, "arpu": 85951, "agency": "NHNAD", "spend": 12799655.000000002, "pure": 189, "prate": 0.61, "cac": 67723, "cps": 41289, "브랜드검색": 1591333.7000000002, "검색광고": 67947.0, "메타": 7574345.9, "디스플레이": 0.0, "기타": 3566028.4000000004}, {"ym": "202501", "mem": 3274, "new": 268, "ref": 0, "stop": 211, "src": 387, "rev": 278371000.0, "rate": 0.693, "online": 108, "center": 121, "hq": 158, "tea": 347, "net": 57, "arpu": 85025, "agency": "NHNAD", "spend": 13863100.900000002, "pure": 268, "prate": 0.693, "cac": 51728, "cps": 35822, "브랜드검색": 1591333.7000000002, "검색광고": 89430.0, "메타": 5094246.300000001, "디스플레이": 3839880.0000000005, "기타": 3248210.9000000004}, {"ym": "202502", "mem": 3373, "new": 325, "ref": 0, "stop": 269, "src": 573, "rev": 285890000.0, "rate": 0.567, "online": 221, "center": 130, "hq": 222, "tea": 353, "net": 56, "arpu": 84758, "agency": "NHNAD", "spend": 21456433.900000002, "pure": 325, "prate": 0.567, "cac": 66020, "cps": 37446, "브랜드검색": 1437333.7000000002, "검색광고": 89188.0, "메타": 19929912.200000003, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202503", "mem": 3483, "new": 360, "ref": 2, "stop": 259, "src": 532, "rev": 294614000.0, "rate": 0.677, "online": 196, "center": 105, "hq": 231, "tea": 362, "net": 101, "arpu": 84586, "agency": "NHNAD", "spend": 21845762.400000002, "pure": 358, "prate": 0.673, "cac": 61022, "cps": 41063, "브랜드검색": 1591333.7000000002, "검색광고": 74580.0, "메타": 20179848.700000003, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202504", "mem": 3362, "new": 136, "ref": 0, "stop": 234, "src": 309, "rev": 297857000.0, "rate": 0.44, "online": 132, "center": 41, "hq": 136, "tea": 366, "net": -98, "arpu": 88595, "agency": "더오름랩", "spend": 11184052.647058822, "pure": 136, "prate": 0.44, "cac": 82236, "cps": 36194, "브랜드검색": 1540000.0000000005, "검색광고": 43527.0, "메타": 9600525.647058822, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202505", "mem": 3285, "new": 147, "ref": 0, "stop": 212, "src": 263, "rev": 290861000.0, "rate": 0.559, "online": 96, "center": 43, "hq": 124, "tea": 371, "net": -65, "arpu": 88542, "agency": "더오름랩", "spend": 11392945.450980397, "pure": 147, "prate": 0.559, "cac": 77503, "cps": 43319, "브랜드검색": 1591333.3333333337, "검색광고": 19448.0, "메타": 9782164.117647063, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202506", "mem": 3239, "new": 164, "ref": 0, "stop": 193, "src": 308, "rev": 284488000.0, "rate": 0.532, "online": 121, "center": 54, "hq": 133, "tea": 373, "net": -29, "arpu": 87832, "agency": "더오름랩", "spend": 11696944.470588235, "pure": 164, "prate": 0.532, "cac": 71323, "cps": 37977, "브랜드검색": 1540000.0000000005, "검색광고": 17688.0, "메타": 10139256.470588235, "디스플레이": 0.0, "기타": 0.0}, {"ym": "202507", "mem": 3191, "new": 179, "ref": 0, "stop": 184, "src": 341, "rev": 284081000.0, "rate": 0.525, "online": 119, "center": 65, "hq": 157, "tea": 383, "net": -5, "arpu": 89026, "agency": "더오름랩", "spend": 9219225.509803921, "pure": 179, "prate": 0.525, "cac": 51504, "cps": 27036, "브랜드검색": 1591333.3333333337, "검색광고": 19151.0, "메타": 7125497.176470588, "디스플레이": 0.0, "기타": 483244.0}, {"ym": "202508", "mem": 3197, "new": 179, "ref": 1, "stop": 222, "src": 327, "rev": 280516000.0, "rate": 0.547, "online": 133, "center": 64, "hq": 130, "tea": 388, "net": -43, "arpu": 87744, "agency": "더오름랩", "spend": 8403930.745098041, "pure": 178, "prate": 0.544, "cac": 47213, "cps": 25700, "브랜드검색": 1591333.3333333337, "검색광고": 23078.0, "메타": 6041989.411764707, "디스플레이": 0.0, "기타": 747530.0}, {"ym": "202509", "mem": 3153, "new": 150, "ref": 1, "stop": 202, "src": 247, "rev": 282738000.0, "rate": 0.607, "online": 88, "center": 49, "hq": 110, "tea": 393, "net": -52, "arpu": 89673, "agency": "더오름랩", "spend": 10769386.823529415, "pure": 149, "prate": 0.603, "cac": 72278, "cps": 43601, "브랜드검색": 1540000.0000000005, "검색광고": 26642.0, "메타": 7917222.823529414, "디스플레이": 0.0, "기타": 1285522.0}, {"ym": "202510", "mem": 3078, "new": 124, "ref": 0, "stop": 140, "src": 252, "rev": 271213000.0, "rate": 0.492, "online": 94, "center": 46, "hq": 112, "tea": 402, "net": -16, "arpu": 88113, "agency": "더오름랩", "spend": 10356879.274509804, "pure": 124, "prate": 0.492, "cac": 83523, "cps": 41099, "브랜드검색": 1591333.3333333337, "검색광고": 13090.0, "메타": 8151958.941176471, "디스플레이": 600497.0, "기타": 0.0}, {"ym": "202511", "mem": 3067, "new": 148, "ref": 2, "stop": 161, "src": 340, "rev": 269350000.0, "rate": 0.435, "online": 111, "center": 68, "hq": 161, "tea": 407, "net": -13, "arpu": 87822, "agency": "더오름랩", "spend": 15540250.529411763, "pure": 146, "prate": 0.429, "cac": 106440, "cps": 45707, "브랜드검색": 1540000.0000000005, "검색광고": 46981.0, "메타": 12683081.529411763, "디스플레이": 1270188.0, "기타": 0.0}, {"ym": "202512", "mem": 3010, "new": 140, "ref": 28, "stop": 280, "src": 466, "rev": 271697000.0, "rate": 0.3, "online": 170, "center": 75, "hq": 221, "tea": 413, "net": -140, "arpu": 90265, "agency": "더오름랩", "spend": 16754791.098039217, "pure": 112, "prate": 0.24, "cac": 149596, "cps": 35954, "브랜드검색": 1591333.3333333337, "검색광고": 50633.0, "메타": 8566235.764705883, "디스플레이": 6546589.0, "기타": 0.0}, {"ym": "202601", "mem": 3049, "new": 285, "ref": 50, "stop": 244, "src": 604, "rev": 273510000.0, "rate": 0.472, "online": 219, "center": 146, "hq": 239, "tea": 423, "net": 41, "arpu": 89705, "agency": "더오름랩", "spend": 34166930.80392157, "pure": 235, "prate": 0.389, "cac": 145391, "cps": 56568, "브랜드검색": 1591333.3333333337, "검색광고": 123750.0, "메타": 12989752.470588239, "디스플레이": 16871562.0, "기타": 2590533.0}, {"ym": "202602", "mem": 3012, "new": 191, "ref": 19, "stop": 252, "src": 544, "rev": 267604000.0, "rate": 0.351, "online": 237, "center": 69, "hq": 238, "tea": 430, "net": -61, "arpu": 88846, "agency": "더오름랩", "spend": 32132076.627450988, "pure": 172, "prate": 0.316, "cac": 186814, "cps": 59066, "브랜드검색": 1437333.3333333335, "검색광고": 113608.0, "메타": 14783759.294117652, "디스플레이": 14693372.0, "기타": 1104004.0}, {"ym": "202603", "mem": 3055, "new": 258, "ref": 43, "stop": 242, "src": 785, "rev": 270806500.0, "rate": 0.329, "online": 348, "center": 105, "hq": 332, "tea": 440, "net": 16, "arpu": 88644, "agency": "더오름랩", "spend": 47614415.09803922, "pure": 215, "prate": 0.274, "cac": 221462, "cps": 60655, "브랜드검색": 1591333.3333333337, "검색광고": 109896.0, "메타": 26596005.764705885, "디스플레이": 14899684.0, "기타": 4417496.0}, {"ym": "202604", "mem": 3027, "new": 162, "ref": 14, "stop": 199, "src": 331, "rev": 269593500.0, "rate": 0.489, "online": 127, "center": 35, "hq": 169, "tea": 446, "net": -37, "arpu": 89063, "agency": "TW", "spend": 11268185.0, "pure": 148, "prate": 0.447, "cac": 76136, "cps": 34043, "브랜드검색": 1539990.0, "검색광고": 2737428.0, "메타": 2995796.0, "디스플레이": 3994971.0, "기타": 0.0}, {"ym": "202605", "mem": 3001, "new": 121, "ref": 18, "stop": 138, "src": 241, "rev": 265785000.0, "rate": 0.502, "online": 92, "center": 30, "hq": 119, "tea": 449, "net": -17, "arpu": 88565, "agency": "TW", "spend": 8715498.0, "pure": 103, "prate": 0.427, "cac": 84616, "cps": 36164, "브랜드검색": 1561990.0, "검색광고": 1354225.0, "메타": 2495460.0, "디스플레이": 3303823.0, "기타": 0.0}, {"ym": "202606", "mem": 3016, "new": 134, "ref": 17, "stop": 161, "src": 301, "rev": 271585000.0, "rate": 0.445, "online": 120, "center": 35, "hq": 146, "tea": 458, "net": -27, "arpu": 90048, "agency": "TW", "spend": 10794058.0, "pure": 117, "prate": 0.389, "cac": 92257, "cps": 35861, "브랜드검색": 1565652.0, "검색광고": 112636.0, "메타": 3808654.0, "디스플레이": 5307116.0, "기타": 0.0}, {"ym": "202607", "mem": 2993, "new": 135, "ref": 25, "stop": 181, "src": 314, "rev": 268961000.0, "rate": 0.43, "online": 133, "center": 42, "hq": 139, "tea": 460, "net": -46, "arpu": 89863, "agency": "TW", "spend": 10924060.648, "pure": 110, "prate": 0.35, "cac": 99310, "cps": 34790, "브랜드검색": 1814985.648, "검색광고": 170264.0, "메타": 3796566.0, "디스플레이": 5142245.0, "기타": 0.0}], "season": [{"m": 1, "src": 495.5, "new": 276.5, "stop": 227.5, "rate": 0.6, "net": 49.0}, {"m": 2, "src": 558.5, "new": 258.0, "stop": 260.5, "rate": 0.5, "net": -2.5}, {"m": 3, "src": 658.5, "new": 309.0, "stop": 250.5, "rate": 0.5, "net": 58.5}, {"m": 4, "src": 317.0, "new": 160.7, "stop": 217.7, "rate": 0.5, "net": -57.0}, {"m": 5, "src": 234.3, "new": 128.7, "stop": 186.0, "rate": 0.6, "net": -57.3}, {"m": 6, "src": 267.0, "new": 142.3, "stop": 176.3, "rate": 0.5, "net": -34.0}, {"m": 7, "src": 303.7, "new": 164.0, "stop": 183.7, "rate": 0.5, "net": -19.7}, {"m": 8, "src": 288.0, "new": 177.5, "stop": 217.0, "rate": 0.6, "net": -39.5}, {"m": 9, "src": 223.5, "new": 151.5, "stop": 205.5, "rate": 0.7, "net": -54.0}, {"m": 10, "src": 231.5, "new": 131.5, "stop": 154.0, "rate": 0.6, "net": -22.5}, {"m": 11, "src": 308.5, "new": 161.5, "stop": 171.5, "rate": 0.5, "net": -10.0}, {"m": 12, "src": 388.0, "new": 164.5, "stop": 266.5, "rate": 0.5, "net": -102.0}]};</script>
+<script>
+const R=D.rows, S=D.season;
+const AC={'NHNAD':'#2E4E8F','더오름랩':'#C0392B','TW':'#1E7A46'};
+const L=R.map(r=>r.ym.slice(2,4)+'.'+r.ym.slice(4));
+const RS=R.filter(r=>r.spend!==null), LS=RS.map(r=>r.ym.slice(2,4)+'.'+r.ym.slice(4));
+Chart.defaults.font.family="-apple-system,'Malgun Gothic',sans-serif";
+Chart.defaults.font.size=11; Chart.defaults.color='#5C6470';
+const XT={grid:{display:false},ticks:{maxRotation:60,minRotation:60,autoSkip:false,font:{size:9}}};
+const LG=(sz)=>({position:'top',labels:{boxWidth:11,boxHeight:11,padding:11,font:{size:sz||11.5}}});
+const won=v=>Math.round(v).toLocaleString('ko-KR');
+
+// k1 회원수
+new Chart(document.getElementById('k1'),{type:'line',data:{labels:L,datasets:[
+ {label:'회원수 (명)',data:R.map(r=>r.mem),borderColor:'#1F3864',backgroundColor:'rgba(31,56,100,.1)',
+  borderWidth:2.8,fill:true,tension:.32,pointRadius:2.5,pointHoverRadius:6}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:LG()},
+ scales:{x:XT,y:{min:2850,max:3650,grid:{color:'#EDF0F6'},title:{display:true,text:'회원수 (명)'}}}}});
+
+// k2 신규/중단/순증
+new Chart(document.getElementById('k2'),{type:'bar',data:{labels:L,datasets:[
+ {type:'bar',label:'신규 (명)',data:R.map(r=>r.new),backgroundColor:'#1E7A46B3',borderRadius:2,yAxisID:'y'},
+ {type:'bar',label:'중단 (명)',data:R.map(r=>-r.stop),backgroundColor:'#C0392BB3',borderRadius:2,yAxisID:'y'},
+ {type:'line',label:'순증감 (명)',data:R.map(r=>r.net),borderColor:'#1A1D24',borderWidth:2.4,tension:.3,
+  pointRadius:2.5,yAxisID:'y'}
+]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:LG(),tooltip:{callbacks:{label:c=>c.dataset.label+': '+Math.abs(c.parsed.y)+'명'}}},
+ scales:{x:XT,y:{min:-320,max:400,grid:{color:'#EDF0F6'},title:{display:true,text:'명'}}}}});
+
+// k3 매출 + ARPU
+new Chart(document.getElementById('k3'),{type:'bar',data:{labels:L,datasets:[
+ {type:'bar',label:'월 매출 (백만원)',data:R.map(r=>r.rev/1e6),backgroundColor:'#2E4E8F80',borderRadius:2,yAxisID:'y'},
+ {type:'line',label:'ARPU (원)',data:R.map(r=>r.arpu),borderColor:'#B8860B',borderWidth:2.4,tension:.3,pointRadius:0,yAxisID:'y2'}
+]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:LG(11)},scales:{x:XT,
+  y:{min:230,max:320,grid:{color:'#EDF0F6'},title:{display:true,text:'매출 (백만원)'}},
+  y2:{position:'right',min:80000,max:95000,grid:{display:false},title:{display:true,text:'ARPU (원)'}}}}});
+
+// k4 소스 + 가입율
+new Chart(document.getElementById('k4'),{type:'bar',data:{labels:L,datasets:[
+ {type:'bar',label:'소스 (건)',data:R.map(r=>r.src),backgroundColor:'#7B93C480',borderRadius:2,yAxisID:'y'},
+ {type:'line',label:'가입율',data:R.map(r=>r.rate),borderColor:'#C0392B',borderWidth:2.4,tension:.3,pointRadius:0,yAxisID:'y2'}
+]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:LG(11)},scales:{x:XT,
+  y:{beginAtZero:true,max:850,grid:{color:'#EDF0F6'},title:{display:true,text:'소스 (건)'}},
+  y2:{position:'right',min:0.2,max:.85,grid:{display:false},title:{display:true,text:'가입율'}}}}});
+
+// k5 광고비/소스/순수신규
+new Chart(document.getElementById('k5'),{type:'bar',data:{labels:LS,datasets:[
+ {type:'bar',label:'광고비 (백만원)',data:RS.map(r=>r.spend/1e6),yAxisID:'y',borderRadius:2,
+  backgroundColor:RS.map(r=>AC[r.agency]+'55'),borderColor:RS.map(r=>AC[r.agency]),borderWidth:1.3},
+ {type:'line',label:'소스 (건)',data:RS.map(r=>r.src),yAxisID:'y2',borderColor:'#B8860B',borderWidth:2.4,tension:.3,pointRadius:2},
+ {type:'line',label:'순수신규 (명)',data:RS.map(r=>r.pure),yAxisID:'y2',borderColor:'#1A1D24',borderWidth:2.8,tension:.3,pointRadius:2.5}
+]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:LG(),tooltip:{callbacks:{afterBody:c=>'운영사: '+RS[c[0].dataIndex].agency}}},
+ scales:{x:XT,y:{beginAtZero:true,max:52,grid:{color:'#EDF0F6'},title:{display:true,text:'광고비 (백만원)'}},
+  y2:{position:'right',beginAtZero:true,max:850,grid:{display:false},title:{display:true,text:'소스 / 순수신규'}}}}});
+
+// k7 매체 구성비
+const CATS=[['브랜드검색','#1E7A46'],['검색광고','#5DA271'],['메타','#B8860B'],['디스플레이','#C0392B'],['기타','#8A94A6']];
+new Chart(document.getElementById('k7'),{type:'bar',data:{labels:LS,datasets:CATS.map(([c,col])=>(
+ {label:c,data:RS.map(r=>r[c]/r.spend*100),backgroundColor:col,stack:'m'}))},
+ options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:LG(10.5),tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(1)+'%'}}},
+ scales:{x:{...XT,stacked:true},y:{stacked:true,max:100,grid:{color:'#EDF0F6'},title:{display:true,text:'구성비 (%)'}}}}});
+
+// k8 계절 순증감
+new Chart(document.getElementById('k8'),{type:'bar',data:{labels:S.map(s=>s.m+'월'),datasets:[
+ {label:'월평균 순증감 (명)',data:S.map(s=>s.net),borderRadius:3,
+  backgroundColor:S.map(s=>s.net>0?'#1E7A46':'#C0392B')}
+]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},
+ tooltip:{callbacks:{label:c=>'순증감 '+c.parsed.y.toFixed(1)+'명'}}},
+ scales:{x:{grid:{display:false}},y:{grid:{color:'#EDF0F6'},title:{display:true,text:'명'}}}}});
+
+// k9 계절 소스/신규/가입율
+new Chart(document.getElementById('k9'),{type:'bar',data:{labels:S.map(s=>s.m+'월'),datasets:[
+ {type:'bar',label:'소스 (건)',data:S.map(s=>s.src),backgroundColor:'#7B93C4AA',borderRadius:3,yAxisID:'y'},
+ {type:'bar',label:'신규 (명)',data:S.map(s=>s.new),backgroundColor:'#1E7A46AA',borderRadius:3,yAxisID:'y'},
+ {type:'line',label:'가입율',data:S.map(s=>s.rate),borderColor:'#C0392B',borderWidth:2.4,tension:.3,pointRadius:3,yAxisID:'y2'}
+]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+ plugins:{legend:LG(11)},scales:{x:{grid:{display:false}},
+  y:{beginAtZero:true,grid:{color:'#EDF0F6'},title:{display:true,text:'건 / 명'}},
+  y2:{position:'right',min:.3,max:.8,grid:{display:false},title:{display:true,text:'가입율'}}}}});
+
+// 원자료 테이블
+const tb=document.getElementById('rawb');
+const f=(v,s)=>v===null||v===undefined?'<span class="dim">—</span>':won(v)+(s||'');
+tb.innerHTML=R.map(r=>{
+  const hi=r.net>0?' class="hg"':(r.net<-80?' class="hi"':'');
+  return `<tr${hi}><td>${r.ym.slice(0,4)}.${r.ym.slice(4)}</td><td>${won(r.mem)}</td><td>${won(r.new)}</td>
+  <td>${r.ref?won(r.ref):'<span class="dim">0</span>'}</td><td>${won(r.stop)}</td>
+  <td class="${r.net>0?'g':'r'}">${r.net>0?'+':''}${won(r.net)}</td>
+  <td>${won(r.src)}</td><td>${won(r.online)}</td><td>${won(r.center)}</td><td>${won(r.hq)}</td>
+  <td>${r.rate.toFixed(3)}</td><td>${f(r.pure)}</td>
+  <td class="${r.prate!==null&&r.prate<.45?'r':''}">${r.prate!==null?r.prate.toFixed(3):'<span class="dim">—</span>'}</td>
+  <td>${r.spend!==null?won(r.spend/1e4)+'만':'<span class="dim">—</span>'}</td>
+  <td>${f(r.cps)}</td>
+  <td class="${r.cac&&r.cac>110000?'r':(r.cac&&r.cac<60000?'g':'')}">${f(r.cac)}</td>
+  <td>${(r.rev/1e6).toFixed(1)}백만</td><td>${won(r.arpu)}</td><td>${won(r.tea)}</td>
+  <td><span class="dim">${r.agency||'—'}</span></td></tr>`;
+}).join('');
+
+// 상단 네비 스크롤 하이라이트
+(function(){
+  const links=[...document.querySelectorAll('nav.toc a')];
+  const secs=links.map(a=>document.getElementById(a.getAttribute('href').slice(1))).filter(Boolean);
+  if(!secs.length) return;
+  const set=id=>links.forEach(a=>a.classList.toggle('on',a.getAttribute('href')==='#'+id));
+  const io=new IntersectionObserver(es=>{
+    const vis=es.filter(e=>e.isIntersecting).sort((a,b)=>a.boundingClientRect.top-b.boundingClientRect.top);
+    if(vis.length) set(vis[0].target.id);
+  },{rootMargin:'-56px 0px -70% 0px',threshold:0});
+  secs.forEach(x=>io.observe(x));
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>26년 8월 통합 세미나 소감서 분석 보고</title>
+<style>
+  :root{
+    --navy-950:#0a1628;
+    --navy-900:#0f1f38;
+    --navy-800:#152a4a;
+    --navy-700:#1c3660;
+    --navy-600:#28457c;
+    --navy-500:#3a5c9c;
+    --gold:#c9a45c;
+    --paper:#f5f6f8;
+    --card:#ffffff;
+    --ink:#1a2233;
+    --ink-soft:#5b6478;
+    --line:#e2e5ec;
+    --good:#2f7a5c;
+    --warn:#b3552c;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',-apple-system,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.65;
+  }
+  .wrap{max-width:960px;margin:0 auto;padding:0 24px 80px;}
+
+  .hero{
+    background:linear-gradient(160deg,var(--navy-950) 0%,var(--navy-800) 60%,var(--navy-700) 100%);
+    color:#fff;
+    padding:64px 24px 48px;
+    margin-bottom:40px;
+  }
+  .hero-inner{max-width:960px;margin:0 auto;}
+  .hero-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    gap:24px;
+  }
+  .hero-logo{flex-shrink:0;}
+  .hero-logo img{display:block;height:36px;width:auto;}
+  .eyebrow{
+    display:inline-block;
+    font-size:12.5px;
+    letter-spacing:.14em;
+    color:var(--gold);
+    border:1px solid rgba(201,164,92,.45);
+    padding:5px 12px;
+    border-radius:999px;
+    margin-bottom:20px;
+  }
+  h1.title{
+    font-size:32px;
+    line-height:1.35;
+    margin:0 0 14px;
+    font-weight:800;
+    letter-spacing:-.01em;
+  }
+  .hero p.lead{
+    color:#c7d0e0;
+    font-size:15.5px;
+    max-width:640px;
+    margin:0 0 26px;
+  }
+  .meta-bar{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 28px;
+    border-top:1px solid rgba(255,255,255,.14);
+    padding-top:20px;
+    font-size:13px;
+    color:#a9b4c7;
+  }
+  .meta-bar b{color:#fff;font-weight:700;}
+
+  section{margin-bottom:56px;}
+  .sec-head{
+    display:flex;
+    align-items:baseline;
+    gap:12px;
+    margin-bottom:22px;
+    padding-bottom:14px;
+    border-bottom:2px solid var(--navy-900);
+  }
+  .sec-num{
+    font-size:13px;
+    font-weight:800;
+    color:#fff;
+    background:var(--navy-900);
+    padding:4px 10px;
+    border-radius:5px;
+    letter-spacing:.04em;
+    white-space:nowrap;
+  }
+  .sec-head h2{
+    font-size:21px;
+    margin:0;
+    font-weight:800;
+    color:var(--navy-950);
+  }
+  .sec-desc{color:var(--ink-soft);font-size:14px;margin:-10px 0 24px;}
+
+  /* session tag */
+  .session-head{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:32px 0 14px;
+  }
+  .session-head:first-of-type{margin-top:4px;}
+  .stag{
+    font-size:11.5px;
+    font-weight:800;
+    letter-spacing:.05em;
+    padding:4px 10px;
+    border-radius:5px;
+    white-space:nowrap;
+  }
+  .stag.a{background:var(--navy-700);color:#fff;}
+  .stag.b{background:#e8ebf2;color:var(--navy-800);border:1px solid #ccd3e0;}
+  .session-head h3{margin:0;font-size:16px;font-weight:800;color:var(--navy-950);}
+  .session-head .n{font-size:13px;color:var(--ink-soft);margin-left:auto;font-variant-numeric:tabular-nums;}
+
+  .stat-grid{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
+    margin-bottom:26px;
+  }
+  .stat-card{
+    background:var(--card);
+    border:1px solid var(--line);
+    border-top:3px solid var(--navy-700);
+    border-radius:10px;
+    padding:20px 18px;
+  }
+  .stat-card .num{
+    font-size:28px;
+    font-weight:800;
+    color:var(--navy-900);
+    letter-spacing:-.01em;
+  }
+  .stat-card .label{font-size:13px;color:var(--ink-soft);margin-top:2px;}
+  .stat-card .sub{font-size:11.5px;color:#8b94a8;margin-top:6px;}
+
+  .callout-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .callout{border-radius:10px;padding:18px 20px;font-size:14px;}
+  .callout.conclude{background:var(--navy-950);color:#dfe5f0;}
+  .callout.conclude .cal-label{color:var(--gold);}
+  .callout.watch{background:#fff;border:1px solid #e7d3bd;}
+  .callout.watch .cal-label{color:var(--warn);}
+  .cal-label{font-size:12px;font-weight:800;letter-spacing:.05em;margin-bottom:8px;display:block;}
+
+  /* program box */
+  .prog-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:8px;}
+  .prog{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
+  .prog .ph{font-size:14px;font-weight:800;color:var(--navy-950);margin-bottom:4px;}
+  .prog .pt{font-size:12px;color:var(--ink-soft);margin-bottom:12px;}
+  .prog ol{margin:0;padding-left:18px;font-size:13.3px;}
+  .prog ol > li{margin-bottom:9px;font-weight:700;color:var(--navy-800);}
+  .prog ol > li:last-child{margin-bottom:0;}
+  .prog ul{margin:4px 0 0;padding-left:16px;font-weight:400;color:var(--ink);}
+  .prog ul li{margin-bottom:2px;font-size:12.7px;}
+
+  .dist{margin-bottom:8px;}
+  .dist-row{
+    display:grid;
+    grid-template-columns:96px 1fr 108px;
+    align-items:center;
+    gap:12px;
+    margin-bottom:9px;
+    font-size:14px;
+  }
+  .dist-row .bar-track{background:#e7e9ef;border-radius:6px;height:20px;overflow:hidden;}
+  .dist-row .bar-fill{height:100%;background:linear-gradient(90deg,var(--navy-700),var(--navy-500));border-radius:6px;}
+  .dist-row.zero .bar-fill{background:#d7dae2;}
+  .dist-row .count{text-align:right;color:var(--ink-soft);font-variant-numeric:tabular-nums;}
+
+  .twocol{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:22px;}
+  .box{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;}
+  .box h3{font-size:14.5px;margin:0 0 10px;font-weight:800;}
+  .box.strength h3{color:var(--good);}
+  .box.risk h3{color:var(--warn);}
+  .box ul{margin:0;padding-left:18px;font-size:13.8px;color:var(--ink);}
+  .box li{margin-bottom:6px;}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:20px;background:#fff;border-radius:10px;overflow:hidden;border:1px solid var(--line);}
+  thead th{background:var(--navy-900);color:#fff;font-weight:700;text-align:center;padding:10px 8px;font-size:12.8px;}
+  tbody td{padding:10px 8px;text-align:center;border-top:1px solid var(--line);}
+  tbody tr:nth-child(even){background:#f7f8fb;}
+  tbody td:first-child{text-align:left;font-weight:700;color:var(--navy-900);}
+  tbody tr.sum-row{background:var(--navy-950);}
+  tbody tr.sum-row td{color:#fff;font-weight:700;border-top:2px solid var(--navy-700);}
+  tbody tr.sum-row td:first-child{color:#fff;}
+  .table-note{font-size:12.5px;color:var(--ink-soft);margin-top:8px;}
+
+  .theme-list{margin-top:6px;}
+  .theme-row{margin-bottom:14px;}
+  .theme-top{display:flex;justify-content:space-between;font-size:14px;margin-bottom:5px;gap:12px;}
+  .theme-top .tname{font-weight:700;color:var(--navy-950);}
+  .theme-top .tcount{color:var(--ink-soft);font-variant-numeric:tabular-nums;white-space:nowrap;}
+  .theme-track{background:#e7e9ef;border-radius:5px;height:10px;overflow:hidden;}
+  .theme-fill{height:100%;background:var(--navy-600);}
+  .theme-fill.alt{background:var(--navy-500);}
+
+  .interp{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin-top:22px;}
+  .interp h3{font-size:14.5px;margin:0 0 8px;color:var(--navy-900);font-weight:800;}
+  .interp h3:not(:first-child){margin-top:16px;}
+  .interp p{margin:0 0 12px;font-size:13.8px;}
+  .interp p:last-child{margin-bottom:0;}
+
+  .quotes{margin-top:16px;display:flex;flex-direction:column;gap:10px;}
+  .quote{
+    background:var(--navy-950);
+    color:#e7ecf5;
+    border-left:3px solid var(--gold);
+    border-radius:0 8px 8px 0;
+    padding:12px 18px;
+    font-size:13.8px;
+    font-style:italic;
+  }
+  .quote .who{
+    display:block;
+    font-style:normal;
+    font-size:11.5px;
+    color:#8f9cb4;
+    margin-top:6px;
+    letter-spacing:.02em;
+  }
+
+  .big-quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+  .big-quote{
+    background:linear-gradient(160deg,var(--navy-900),var(--navy-700));
+    color:#fff;
+    border-radius:12px;
+    padding:26px 22px;
+    min-height:160px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+  .big-quote .mark{font-size:32px;color:var(--gold);font-weight:800;line-height:1;margin-bottom:10px;}
+  .big-quote .txt{font-size:14.5px;line-height:1.55;font-weight:500;}
+  .big-quote .tag{font-size:11.5px;color:#a9b4c7;margin-top:14px;letter-spacing:.03em;}
+
+  .final{background:var(--navy-950);color:#dfe5f0;border-radius:12px;padding:28px 26px;}
+  .final p{margin:0 0 14px;font-size:14.3px;}
+  .final p:last-child{margin-bottom:0;}
+  .final .k{color:var(--gold);font-weight:700;}
+
+  details{background:#fff;border:1px solid var(--line);border-radius:10px;margin-bottom:12px;overflow:hidden;}
+  summary{
+    cursor:pointer;padding:16px 20px;font-weight:700;color:var(--navy-950);
+    font-size:14.5px;list-style:none;display:flex;justify-content:space-between;align-items:center;gap:12px;
+  }
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:'+';font-size:18px;color:var(--navy-600);font-weight:400;}
+  details[open] summary::after{content:'–';}
+  details[open] summary{border-bottom:1px solid var(--line);}
+  .appendix-list{padding:6px 20px 16px;max-height:420px;overflow-y:auto;}
+  .appendix-list ol{margin:0;padding-left:22px;}
+  .appendix-list li{font-size:13px;color:var(--ink);padding:6px 0;border-bottom:1px dashed var(--line);}
+  .appendix-list li:last-child{border-bottom:none;}
+  .appendix-note{font-size:12px;color:var(--ink-soft);padding:0 20px 14px;}
+
+  footer{text-align:center;color:#9aa3b5;font-size:12px;padding:30px 0 10px;}
+
+  @media(max-width:720px){
+    .stat-grid{grid-template-columns:1fr 1fr;}
+    .callout-grid{grid-template-columns:1fr;}
+    .twocol{grid-template-columns:1fr;}
+    .prog-grid{grid-template-columns:1fr;}
+    .big-quotes{grid-template-columns:1fr;}
+    h1.title{font-size:24px;}
+    table{font-size:11.5px;}
+    tbody td, thead th{padding:8px 4px;}
+    .hero-top{flex-direction:column;}
+    .hero-logo{order:-1;margin-bottom:12px;}
+    .hero-logo img{height:28px;}
+    .session-head .n{margin-left:0;width:100%;}
+    .session-head{flex-wrap:wrap;}
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-top">
+      <div>
+        <span class="eyebrow">SURVEY ANALYSIS REPORT</span>
+        <h1 class="title">26년 8월 통합 세미나<br>소감서 분석 보고</h1>
+      </div>
+      <div class="hero-logo">
+        <img src="data:image/png;base64,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" alt="윤선생 YES 로고">
+      </div>
+    </div>
+    <p class="lead">제11회 학력평가 운영 안내와 AI 상담 어시스턴트를 주제로 진행된 2회차 세미나(8/26 영어교실, 8/25 학원/우영)의 만족도와 주관식 의견을 세션별로 구분해 분석했습니다.</p>
+    <div class="meta-bar">
+      <span>세미나 일자 &nbsp;<b>2026.08.25 · 08.26</b></span>
+      <span>총 응답 &nbsp;<b>204건</b></span>
+      <span>세션 구성 &nbsp;<b>영어교실 69 · 학원/우영 135</b></span>
+      <span>만족도 척도 &nbsp;<b>5점 척도</b></span>
+      <span>주관식 분석 &nbsp;<b>다중 키워드 분류</b></span>
+    </div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- 1. 핵심 요약 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>핵심 요약</h2></div>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="num">204건</div>
+        <div class="label">전체 응답 수</div>
+        <div class="sub">8/26 영어교실 69 · 8/25 학원/우영 135</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">97.5%</div>
+        <div class="label">긍정 응답률</div>
+        <div class="sub">매우 만족 + 만족</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">61.3%</div>
+        <div class="label">매우 만족 비중</div>
+        <div class="sub">125건 / 204건</div>
+      </div>
+      <div class="stat-card">
+        <div class="num">4.59 / 5</div>
+        <div class="label">평균 만족도</div>
+        <div class="sub">매우만족=5 ~ 매우불만족=1</div>
+      </div>
+    </div>
+
+    <div class="callout-grid">
+      <div class="callout conclude">
+        <span class="cal-label">결론</span>
+        두 세션 모두 긍정 응답률 97% 이상, 매우 만족 비중 57~70%로 매우 높은 반응을 얻었습니다. 특히 새롭게 공개된 <b>"AI 상담 어시스턴트"</b>가 두 세션 공통으로 가장 강한 반응을 이끌어냈으며, "학력평가 후 학부모 상담이 부담이었는데 해결됐다"는 실무 부담 해소형 피드백이 반복적으로 확인됩니다.
+      </div>
+      <div class="callout watch">
+        <span class="cal-label">주의해서 볼 지점</span>
+        두 세션 공통으로 <b>교재 개발·활용법</b>이 향후 주제 1순위로 요청되고 있으며, 특히 중등·중고등 대비 교재와 문법 교재 난이도 재배치 요구가 구체적으로 제기되었습니다.
+      </div>
+    </div>
+
+    <div class="prog-grid" style="margin-top:22px">
+      <div class="prog">
+        <div class="ph">8/26 세션 · 영어교실</div>
+        <div class="pt">Part 3까지 구성 (패턴업 교재 리뷰 포함)</div>
+        <ol>
+          <li>Part 1. 제11회 학력평가 운영 안내
+            <ul><li>주요 업데이트 사항</li><li>새롭게 선보이는 "AI 상담 어시스턴트" 대공개!</li></ul>
+          </li>
+          <li>Part 2. 학력평가 활용법
+            <ul><li>사전 안내부터 응시, 결과 분석, 상담까지 평가 활용 프로세스</li></ul>
+          </li>
+          <li>Part 3. 패턴업 교재 리뷰 및 AI 관리 툴 소개
+            <ul><li>퍼펙트 케어에 활용하기 좋은 '패턴업(Pattern Up)' 교재 리뷰</li><li>패턴업 AI 관리 툴 소개</li></ul>
+          </li>
+        </ol>
+      </div>
+      <div class="prog">
+        <div class="ph">8/25 세션 · 학원/우영</div>
+        <div class="pt">IGSE아카데미 · 우리집앞영어교실 · 영어숲 · 지역가맹본부장</div>
+        <ol>
+          <li>Part 1. 제11회 학력평가 운영 안내
+            <ul><li>주요 업데이트 사항</li><li>새롭게 선보이는 "AI 상담 어시스턴트" 대공개!</li></ul>
+          </li>
+          <li>Part 2. 성장하는 학원의 학력평가 활용법
+            <ul><li>사전 안내부터 응시, 결과 분석, 상담까지 평가 활용 노하우</li></ul>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. 만족도 결과 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>만족도 결과</h2></div>
+    <p class="sec-desc">세션별 만족도 분포와 소속 BM별 경향입니다.</p>
+
+    <div class="session-head">
+      <span class="stag a">8/26</span>
+      <h3>영어교실 세션</h3>
+      <span class="n">응답 69건 · 평균 4.67 / 5</span>
+    </div>
+    <div class="dist">
+      <div class="dist-row"><span>매우 만족</span><div class="bar-track"><div class="bar-fill" style="width:69.6%"></div></div><span class="count"><b>48건</b> 69.6%</span></div>
+      <div class="dist-row"><span>만족</span><div class="bar-track"><div class="bar-fill" style="width:27.5%"></div></div><span class="count"><b>19건</b> 27.5%</span></div>
+      <div class="dist-row"><span>보통</span><div class="bar-track"><div class="bar-fill" style="width:2.9%"></div></div><span class="count"><b>2건</b> 2.9%</span></div>
+      <div class="dist-row zero"><span>불만족</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="count">0건 0.0%</span></div>
+      <div class="dist-row zero"><span>매우 불만족</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="count">0건 0.0%</span></div>
+    </div>
+
+    <div class="session-head">
+      <span class="stag b">8/25</span>
+      <h3>학원/우영 세션 (IGSE아카데미 · 우리집앞영어교실 · 영어숲 · 지역가맹본부장)</h3>
+      <span class="n">응답 135건 · 평균 4.55 / 5</span>
+    </div>
+    <div class="dist">
+      <div class="dist-row"><span>매우 만족</span><div class="bar-track"><div class="bar-fill" style="width:57.0%"></div></div><span class="count"><b>77건</b> 57.0%</span></div>
+      <div class="dist-row"><span>만족</span><div class="bar-track"><div class="bar-fill" style="width:40.7%"></div></div><span class="count"><b>55건</b> 40.7%</span></div>
+      <div class="dist-row"><span>보통</span><div class="bar-track"><div class="bar-fill" style="width:2.2%"></div></div><span class="count"><b>3건</b> 2.2%</span></div>
+      <div class="dist-row zero"><span>불만족</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="count">0건 0.0%</span></div>
+      <div class="dist-row zero"><span>매우 불만족</span><div class="bar-track"><div class="bar-fill" style="width:0%"></div></div><span class="count">0건 0.0%</span></div>
+    </div>
+
+    <div class="twocol">
+      <div class="box strength">
+        <h3>강점</h3>
+        <ul>
+          <li>두 세션 모두 불만족·매우 불만족 응답이 0건으로, 세미나 내용 구성에 대한 거부감이 전혀 없습니다.</li>
+          <li>영어교실 세션은 매우 만족 비중이 69.6%로, Part 3(패턴업 교재 리뷰) 추가 구성이 만족도를 끌어올린 것으로 보입니다.</li>
+          <li>"상담 부담이 줄었다", "초보 원장에게 도움된다" 등 실무 난이도를 낮춘 효과가 구체적으로 언급됩니다.</li>
+        </ul>
+      </div>
+      <div class="box risk">
+        <h3>리스크</h3>
+        <ul>
+          <li>일부 응답자는 이미 학력평가 안내문을 발송한 뒤 세미나를 접해, 안내 시점이 늦었다는 지적이 있습니다.</li>
+          <li>만족도는 매우 높으나 실제 AI 상담 어시스턴트 활용률로 이어지는지는 별도 추적이 필요합니다.</li>
+        </ul>
+      </div>
+    </div>
+
+    <table>
+      <thead>
+        <tr><th>소속 BM</th><th>세션</th><th>응답</th><th>매우 만족</th><th>만족</th><th>보통</th><th>불만족</th><th>매우 불만족</th><th>긍정률</th><th>매우 만족률</th><th>평균(5점)</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>영어교실</td><td>8/26</td><td>69</td><td>48</td><td>19</td><td>2</td><td>0</td><td>0</td><td>97.1%</td><td>69.6%</td><td>4.67</td></tr>
+        <tr><td>우리집앞영어교실</td><td>8/25</td><td>88</td><td>51</td><td>35</td><td>2</td><td>0</td><td>0</td><td>97.7%</td><td>58.0%</td><td>4.56</td></tr>
+        <tr><td>IGSE아카데미</td><td>8/25</td><td>21</td><td>13</td><td>8</td><td>0</td><td>0</td><td>0</td><td>100.0%</td><td>61.9%</td><td>4.62</td></tr>
+        <tr><td>영어숲</td><td>8/25</td><td>16</td><td>6</td><td>9</td><td>1</td><td>0</td><td>0</td><td>93.8%</td><td>37.5%</td><td>4.31</td></tr>
+        <tr><td>지역가맹본부장</td><td>8/25</td><td>10</td><td>7</td><td>3</td><td>0</td><td>0</td><td>0</td><td>100.0%</td><td>70.0%</td><td>4.70</td></tr>
+        <tr class="sum-row"><td>전체</td><td>—</td><td>204</td><td>125</td><td>74</td><td>5</td><td>0</td><td>0</td><td>97.5%</td><td>61.3%</td><td>4.59</td></tr>
+      </tbody>
+    </table>
+    <p class="table-note">BM 기준 집계입니다. 응답 시각 기준으로는 8/25에 영어교실 소속 5건, 8/26에 타 BM 소속 5건이 접수되었는데, 이는 소속 BM과 실제 참석 세션이 다른 소수 사례로 보입니다. 세션별 분포(69건/135건)는 응답 일자 기준으로 산출했습니다. 영어숲은 표본 16건으로 작아 해석에 유의가 필요합니다.</p>
+  </section>
+
+  <!-- 3. 좋았던 내용 분석 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>좋았던 내용 분석</h2></div>
+    <p class="sec-desc">세미나 소감 문항의 실질 응답은 8/26 세션 67건, 8/25 세션 127건입니다(무응답성 문구 제외, 하나의 응답이 여러 주제에 중복 집계).</p>
+
+    <div class="session-head">
+      <span class="stag a">8/26</span>
+      <h3>영어교실 세션</h3>
+      <span class="n">실질 응답 67건</span>
+    </div>
+    <div class="theme-list">
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">AI 상담 어시스턴트 · AI 관리 툴</span><span class="tcount">29건 43.3%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:43.3%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">학력평가 운영 업데이트 · 결과 분석</span><span class="tcount">25건 37.3%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:37.3%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">패턴업(Pattern Up) 교재 리뷰</span><span class="tcount">18건 26.9%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:26.9%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">학부모 상담 역량 강화</span><span class="tcount">26건 38.8%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:38.8%"></div></div>
+      </div>
+    </div>
+
+    <div class="session-head">
+      <span class="stag b">8/25</span>
+      <h3>학원/우영 세션</h3>
+      <span class="n">실질 응답 127건</span>
+    </div>
+    <div class="theme-list">
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">학력평가 운영 안내 · 리포트 개선</span><span class="tcount">53건 41.7%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:41.7%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">AI 상담 어시스턴트</span><span class="tcount">45건 35.4%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:35.4%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">현장 원장 사례 인터뷰</span><span class="tcount">24건 18.9%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:18.9%"></div></div>
+      </div>
+    </div>
+
+    <div class="interp">
+      <h3>공통: "AI 상담 어시스턴트"가 두 세션의 최대 반응 포인트</h3>
+      <p>두 세션 모두 AI 상담 어시스턴트가 압도적으로 많이 언급되었습니다. 단순한 신기능 소개에 대한 호응이 아니라, <b>"학력평가 후 학부모 상담이 늘 부담이었다"</b>는 기존 페인포인트를 정확히 겨냥했다는 점이 반복적으로 지적됩니다. 특히 카카오톡 전송용으로 바로 복사할 수 있게 설계한 부분이 실무 편의성 측면에서 높은 평가를 받았습니다.</p>
+      <h3>8/26 차별점: 패턴업 교재 리뷰가 만족도를 끌어올림</h3>
+      <p>Part 3이 추가된 영어교실 세션은 매우 만족 비중이 69.6%로 학원/우영 세션(57.0%)보다 12.6%p 높습니다. 패턴업 교재를 "좋은 교재지만 활용도가 낮았다"고 인식하던 응답자들이 AI 관리 툴 제공으로 활용 가능성을 재확인한 것이 주요 요인으로 보입니다.</p>
+      <h3>8/25 차별점: 현장 사례 인터뷰의 높은 설득력</h3>
+      <p>세종 지역 원장의 학력평가 성장 사례가 가장 많이 언급된 개별 콘텐츠였습니다. 실제 현장에서 검증된 활용 경험이 구체적으로 제시되면서, 학력평가를 아직 도입하지 않은 응답자에게도 실행 동기를 제공한 것으로 보입니다.</p>
+    </div>
+
+    <div class="quotes">
+      <div class="quote">학력평가 AI상담 어시스턴트 툴이 생겨서 좀 더 자세하고 구체적인 학습상담이 될 것 같아요<span class="who">8/26 · 영어교실</span></div>
+      <div class="quote">패턴업 교재 저도 정말 좋아하는 교재지만 생각보다 활용도 없어요. 음원도 만들어서 확실하게 학습할 수 있었으면 합니다<span class="who">8/26 · 영어교실</span></div>
+      <div class="quote">학력평가로 AI상담까지 가능토록 해주신 것, 센스있게 카톡전송용까지 해주신 거 정말 감사해요~요즘 워킹맘이 많아서 생각보다 통화는 어렵거든요<span class="who">8/25 · 우리집앞영어교실</span></div>
+      <div class="quote">AI툴을 만들어주셔서 저같은 초보원장이 상담하는데 아주 도움이 많이 될 것 같습니다<span class="who">8/25 · 우리집앞영어교실</span></div>
+    </div>
+  </section>
+
+  <!-- 4. 향후 바라는 점 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>향후 바라는 점</h2></div>
+    <p class="sec-desc">향후 세미나 희망 주제 문항의 실질 응답은 8/26 세션 56건, 8/25 세션 105건입니다.</p>
+
+    <div class="session-head">
+      <span class="stag a">8/26</span>
+      <h3>영어교실 세션</h3>
+      <span class="n">실질 응답 56건</span>
+    </div>
+    <div class="theme-list">
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">교재 개발 · 신간 · 활용법</span><span class="tcount">18건 32.1%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:32.1%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">부진·저학습 회원 관리 노하우</span><span class="tcount">15건 26.8%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:26.8%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">학부모 유형별 상담·대응법</span><span class="tcount">5건 8.9%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:8.9%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">중등·중고등 교재 및 내신 대비</span><span class="tcount">4건 7.1%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:7.1%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">교육정책 변화 · 입시 정보</span><span class="tcount">4건 7.1%</span></div>
+        <div class="theme-track"><div class="theme-fill" style="width:7.1%"></div></div>
+      </div>
+    </div>
+
+    <div class="session-head">
+      <span class="stag b">8/25</span>
+      <h3>학원/우영 세션</h3>
+      <span class="n">실질 응답 105건</span>
+    </div>
+    <div class="theme-list">
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">교재 개발 · 활용법 · 난이도 재배치</span><span class="tcount">40건 38.1%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:38.1%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">상담 · 영업 · 신규 회원 모집</span><span class="tcount">16건 15.2%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:15.2%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">중등·고등 내신 및 입시 대비</span><span class="tcount">14건 13.3%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:13.3%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">현장 원장 사례·경험담 공유</span><span class="tcount">12건 11.4%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:11.4%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">LMS·배본 등 시스템 개선</span><span class="tcount">10건 9.5%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:9.5%"></div></div>
+      </div>
+      <div class="theme-row">
+        <div class="theme-top"><span class="tname">브랜드 홍보 · 마케팅 강화 요청</span><span class="tcount">7건 6.7%</span></div>
+        <div class="theme-track"><div class="theme-fill alt" style="width:6.7%"></div></div>
+      </div>
+    </div>
+
+    <div class="interp">
+      <h3>1순위: 교재 (두 세션 공통, 압도적 1위)</h3>
+      <p>양쪽 모두 교재 관련 요청이 가장 많았으며, 단순 "신간 요청"을 넘어 <b>구체적인 개선안</b>이 다수 제시되었습니다. 문법 교재 단계별 난이도가 역전되어 있다는 지적(A단계가 C단계보다 어려움), 저학년용 pre단계 교재 보강, 단어 학습 음원 QR 제공 방식 개선 등 실무 밀착형 건의가 두드러집니다.</p>
+      <h3>2순위: 부진 회원 관리 노하우 (8/26) / 상담·영업 실전 (8/25)</h3>
+      <p>영어교실 세션에서는 "공부하기 싫어하는 학생", "집중력이 짧은 회원", "침체기 회원"처럼 관리 난이도가 높은 대상에 대한 노하우 요청이 두드러집니다. 학원/우영 세션에서는 2학기 신규 회원 모집과 상담 스킬 등 영업 실전 주제 요청이 상대적으로 많았습니다.</p>
+      <h3>공통 요청: 베테랑 원장의 실제 경험담</h3>
+      <p>두 세션 모두 "원장님들의 후기가 가장 와닿는다"는 반응이 있어, 이번 세미나의 현장 사례 인터뷰 포맷을 계속 유지하는 방향이 유효합니다.</p>
+    </div>
+
+    <div class="quotes">
+      <div class="quote">더디고 공부하기 싫어하는 학생들의 마음을 사로잡을 수 있는 다양한 노하우를 베테랑 원장님들의 경험담으로 배울 수 있으면 좋겠습니다<span class="who">8/26 · 영어교실</span></div>
+      <div class="quote">학부모 유형별 대응 방법 T맘 F맘 P맘 J맘 등등<span class="who">8/26 · 영어교실</span></div>
+      <div class="quote">문법교재 수준 재배치 / A단계 문법교재가 C단계보다 어려워요 / 진짜 1~2학년들이 할 수 있는 A단계 문법 교재 만들어주세요<span class="who">8/25 · 우리집앞영어교실</span></div>
+      <div class="quote">저희 단지에선 윤선생 인지도가 없어도 너무 없고 올드하다는 이미지뿐이에요. 브랜드 이미지 자체를 본사에서 홍보해주시는 게 제일 좋을 것 같습니다<span class="who">8/25 · 우리집앞영어교실</span></div>
+      <div class="quote">학력평가 결과 성적이 떨어진 경우 어떻게 상담했는지 실제 상담한 내용들을 들어보고 싶어요<span class="who">8/25 · 우리집앞영어교실</span></div>
+    </div>
+  </section>
+
+  <!-- 5. 현장 실행 의지 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>현장 실행 의지</h2></div>
+    <p class="sec-desc">세미나 내용을 곧바로 현장에 적용하겠다는 의지가 드러나는 대표 원문입니다.</p>
+
+    <div class="big-quotes">
+      <div class="big-quote">
+        <div>
+          <div class="mark">“</div>
+          <div class="txt">학생수가 좀 많아도 개인별 레포트에 개인별 상담카톡을 무조건 다 보내보려고 합니다! 최고예요 진짜!</div>
+        </div>
+        <div class="tag">8/25 · 우리집앞영어교실</div>
+      </div>
+      <div class="big-quote">
+        <div>
+          <div class="mark">“</div>
+          <div class="txt">전문가다운 상담으로 학생과 학부모님들에게 정확한 진단과 격려를 주고 더욱 신뢰를 얻을 수 있도록 하겠습니다</div>
+        </div>
+        <div class="tag">8/26 · 영어교실</div>
+      </div>
+      <div class="big-quote">
+        <div>
+          <div class="mark">“</div>
+          <div class="txt">학력평가 하지 않고 있었는데, 시작해야겠어요</div>
+        </div>
+        <div class="tag">8/25 · IGSE아카데미 · 태도 전환 사례</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. 최종 의견 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">06</span><h2>최종 의견</h2></div>
+    <div class="final">
+      <p>8월 통합 세미나는 <span class="k">전체 긍정 응답률 97.5%, 평균 만족도 4.59/5</span>로 두 세션 모두 높은 성과를 거뒀습니다. 핵심 동인은 <span class="k">"AI 상담 어시스턴트"</span>로, 학력평가 후 학부모 상담이라는 현장의 오랜 부담을 직접 해소하는 도구로 받아들여졌습니다. 특히 카카오톡 전송용 설계처럼 실무 동선을 고려한 세부 배려가 반복적으로 언급된 점은, 향후 도구 개발 시에도 유지해야 할 원칙입니다.</p>
+      <p>세션별로는 Part 3(패턴업 교재 리뷰)이 추가된 <span class="k">8/26 영어교실 세션의 매우 만족 비중이 69.6%</span>로 학원/우영 세션보다 12.6%p 높았습니다. "신규 도구 소개 + 기존 자산 활용법"을 결합한 구성이 만족도를 높인다는 시사점을 확인할 수 있습니다.</p>
+      <p>후속 과제는 두 가지입니다. 첫째, 향후 주제로는 <span class="k">교재 개발·활용법</span>이 두 세션 공통 1순위이며, 문법 교재 난이도 재배치처럼 구체적인 개선 요청은 별도 검토 채널로 전달할 가치가 있습니다. 둘째, 높은 만족도가 실제 <span class="k">AI 상담 어시스턴트 활용률</span>로 이어지는지 제11회 학력평가 종료 후 별도 추적을 권장합니다.</p>
+    </div>
+  </section>
+
+  <!-- 부록 -->
+  <section>
+    <div class="sec-head"><span class="sec-num">부록</span><h2>주관식 원문 전체 리스트</h2></div>
+    <p class="sec-desc">키워드 기반 다중 분류이며, 하나의 응답이 여러 주제에 중복 집계될 수 있습니다. 무응답성 문구("없음", "." 등)는 목록에서 제외했습니다.</p>
+
+    <details>
+      <summary>[8/26 영어교실] 세미나 소감 원문 (67건)</summary>
+      <div class="appendix-list"><ol><li>패턴업 활용</li><li>상담활용</li><li>AI상담</li><li>발표자들 모두 훌륭 하시구요 특히 AI 도구들에 대해서 감사드립니다.</li><li>pattern 교재</li><li>YSAT 상담 AI라시스턴트 감사합니다^^</li><li>AI 상담 어시스트 좋았어요</li><li>AI상담어시스턴트 너무 필요했어요</li><li>Pattern up~AI학습으로 대처 하겠습니다~</li><li>AI상담 어시스텐트 솰용</li><li>쌤들이 이용할 수 있는 툴을 계속적으로 만들어줘서 감사합니다.</li><li>자료를 pdf파일로 보내주시면 좋을 것 같습니다.</li><li>학력평가 AI상담 어시스턴트와 패턴 업 교재연구 가 많은 도움이 되었습니다</li><li>더욱 더 전문적으로 보일 수 있는 툴들을 마련해 주셔서 너무 좋았습니다!</li><li>패턴업 ai툴스</li><li>AI상담이 너무 마음에들었습니다</li><li>저 인천 상록 아니고 안산 상록입니다~</li><li>패턴업 교재에서도 활용가능한 툴이 생겨서 유용하게 쓰일듯 합니다</li><li>Ai아용수업 감사해요</li><li>이미 ysat안내문을 다 발송한후에 이 방송과 안내문을 받게되어 아쉽네요</li><li>AI 어시스턴트</li><li>학력평가 ai상담 어시스턴트 참고하면 좋을듯 합니다</li><li>퍼펙트 케어관리 설명 감사합니다</li><li>패턴업교재 관리 툴 너무 제공 반갑습니다</li><li>YSAT 결과 AI상담작성</li><li>상담시 유효한 정보였어요 감사합니다^^</li><li>AI활용 sat 시험후..</li><li>학력평가 분석이 아주 좋았습니다</li><li>학력평가활용</li><li>유용한 관리 툴을 준비해주시고 잘 활용할 수 있도록 교육해주셔서 큰 도움이 될 것 같습니다 / 정말 든든해요 / 현장에서 필요할 것들을 미리 예측해서 준비해주시는 본사에 늘 감사드립니다</li><li>AI시대에 맞게 다양한 활용도구들이 생겨 좋습니다.</li><li>AI어시스턴트</li><li>정보의 리마인드 및 공유</li><li>AI를 활용해서 학력평가 상담을 해준다니 반갑네요. 학부모에게 체계적인 상담내용을 보낼수 있을것같아요 / 패턴업교재 저도 정말 좋아하는 교재지만 생각보다 활용도 없어요. 음원도 만들어서 확실하게 학습할수 있었으면 합니다~~</li><li>학력평가시험 ai상담과 패턴 ai speaking 너무 좋고 잘 사용할께요</li><li>또한번 새로워진 학력평가의 운영방안</li><li>학력평가 AI상담 어시스턴트 툴이생겨서 좀더 자세하고 구체적인 학습상담이 될것같아요</li><li>ai상담대화법이 큰 도움이 될것이라 예상됩니다.</li><li>학력평가 달라진 점과 패턴업 교재 활용방안에 대해 준비해주셔서 감사히 잘 사용하겠습니다.</li><li>학력 평가 결과 학부모 상담 대응 방법이 좋았습니다!</li><li>AI를 사용해서 상담과 괸리</li><li>패턴업 새로운 기능 및 활용 방안</li><li>학력평가 상담 AI 상담에 너무도움이 된다</li><li>학력평가 AI상담툴 활용 잘할거같습니다</li><li>학력평가 AI활용ㆍ패텐교재AI룰 활용</li><li>중요 현안 실천사항을 공문,윤스TV,세미나를통해서 강조 전달이 활용도를 높이며 실천력을 높일것으로 생각됩니다. / 짜임새있는 준비 좋았구요</li><li>Perfect Care 음원을 어디서 들을 수 있나요?책의 QR code 로 2분간 들을수 있는것 같던데 초가로 더 보충되었는지요? 윤선생교재를 소개할때 음원을 들어보고 소개, 관리한다면 더 자신있게 소개할 수 있을것 같아요~</li><li>패턴업 교재소개</li><li>평가후 포장 방법 ..AI 를 사용 성적이 하양되어도 어떻게든 아름 답게 희망의 포장지에 담아내는 것 / 본사 교육탐 노력에 매번 탄복합니다 ~~</li><li>학력평가를본후 부모님 상담이 어러웠는데 / AI를 활용해 더욱더 멋진 상담을 하도록 도움주신 본사에 감사합니당 ㆍ / 패텁업교재를 3학년이상 회원들 에게 / 적극적으로 활용해보도록 AI관리툴도 만들어 주셔서 너무 좋았습니다 ❤️🧡💛💚💙💜</li><li>전에 / 퍼펙트케어 패턴업이나 영단어교재 활용시 본교재와 겹치는부분때문에 지루한부분이 있어서 요즘은 본교재위주로 하는데 앞으로는 AI툴이 있어서 잘 활용할수있을것같아요~ / 감사합니다~♡</li><li>패턴up을 활용하면 말하기에 도움이 많이 될거 같다</li><li>학력평가 AI상담 너무 좋아요.감사합니다.</li><li>학력평가에서 변화된 내용이 좋았습니다.</li><li>pattern up 교재소개</li><li>전체적으로 다 좋아습니다~</li><li>1년에 두번 하는 학력평가가 업그레이드 돼서 좋았습니다. 전문가다운 상담으로 학생과 학부모님들에게 정확한 진단과 격려를 주고 더욱 신뢰를 얻을 수 있도록 하겠습니다.효과적인 관ㄹ</li><li>새로운 AI상담 어시스턴트 활용으로 학력평가후 학부모님과 정확하고 깊이있는 상담 기대됩니다 수고하셨습니다~^^</li><li>학력평가결과 대응방안</li><li>새로 도입된 부분에 대한 자세한 설명들이 좋았습니다</li><li>전체적으로 좋았어요</li><li>감사합니다</li><li>학력평가에서 새로워진 AI 상담 어시스턴트와 패턴업 교재에 대한 소개가 좋았다</li><li>상담을 좀더 세분화하게 할 수 있을 것 같습니다. 감사합니다.</li><li>진단평가활용 좋았습니다.</li><li>ai상담 대본만들기 너무 유용할것 같습니다. 인터뷰내용 볼륨이 너무작았어요</li><li>잘 사용하지 않는 교재 교육라 좋았습니다</li></ol></div>
+    </details>
+
+    <details>
+      <summary>[8/26 영어교실] 향후 희망 주제 원문 (56건)</summary>
+      <div class="appendix-list"><ol><li>새교재 만들어주세요</li><li>학부모 상담</li><li>실제로 체험 하니까 좋아요</li><li>항상 수고에 감사드립니다</li><li>수능대비 바뀌는 교육정책</li><li>감사 합니다!!</li><li>매번 만족합니다</li><li>교육 정책의 변화를 끊임없이 업데이트 부탁드립니다</li><li>각종 교육이나 안내사항을 다루면 좋겠습니다.</li><li>리닝교재도 여러 활용 방법이 있었음 좋겠습니다</li><li>헌장에 계시는 다양한 선생님들의 관리 노하우 듣고 싶어요. / 성공 사례 센타 탐방 같은거 해주세요</li><li>최신 교재 다루는게 좋습니다!</li><li>집중력이 짧은 회원들을 관리하는 노하우를 공유해 주시면 좋을 것 같습니다</li><li>힘든회원케어</li><li>교재연구</li><li>감사합니다</li><li>예의 없는 회원과 학부모 다루는 노하우</li><li>학생관리 현장에 필요한 실용적인 내용중심 세미나 원해요</li><li>침체기에있는 회원들 관리방향</li><li>중고등 학생 교재를 더 만들어 주세요</li><li>회화교재 심층있게 만드었으면 좋겠어요</li><li>신간교재가 나왔으면 합니다.</li><li>교재다양하게 활용하는 노하우</li><li>더디고 공부하기 싫어하는 학생들의 마음을 사로잡을 수 있는 다양한 노하우를 베테랑 원장님들의 경험담으로 배울 수 있으면 좋겠습니다</li><li>오늘처럼신간교재들 교사들이 좀더잘활용할수있도록 하는교육 기대합니다~^</li><li>2학기 영업 관련 사항</li><li>교육정보</li><li>본사에서 얼마나 애쓰고 있는지 실감나요 감사합니다</li><li>중등단계의 리딩교재 학습방법</li><li>항상 새로운 교육을 해주셔서 감사합니다</li><li>다양한 교재 활용법</li><li>미취학단계 교재에 대해~~</li><li>중고등 내신 대비</li><li>요새 아이들의 성향분석</li><li>퍼펙트케어 성공 사례</li><li>11회 학력평가 성공과 상담예시</li><li>패턴북 단어신간교재 활용 사례 부탁드립니다 / 좀더 많은 학생들에게 적용하고 싶은데 쉽지잃더라고요</li><li>좋습니다~~~</li><li>수고하셨어요~감사합니다</li><li>교재 씨리즈별로 수업때 게임할 수 있는 방법소개도 궁금해요</li><li>패드학습 지루하지않게 하는법</li><li>학부모 유형별 대응 방법 T맘 F맘 P맘J맘 등 등</li><li>패턴업교재를 방학기간에 어떤 식으로 / 활용할지와 잘 활용하신 쌤들의 노하우도 알려주세요 ㆍ</li><li>세미나때마다 관리가 더욱 편리하고 수얼합니다 / 애써주셔서 감사합니다~♡</li><li>저 학년 문법교재...점점 가르치기가 어렵네요.ㅎㅎ</li><li>중학교 우등생을 위한 교재는 아직 안나올까요?</li><li>gtp 같은 요즘 ai 번역 tool 번역으로 동기부여하는 방법 공유했으면 합니다</li><li>학습이 잘 안되었던 학생의 성공사례</li><li>효과적인 관리 방법을 공유하면 좋겠습니다. / 진도가 늦은 회원, 성취도가 낮은 회원 등등</li><li>퍼펙트 케어 수업 현황 알고 싶습니다~~</li><li>지금처럼 다양한 정보를 다루어 주시면 감사하겠습니다 ( 상담화법,교육정보등)</li><li>교육내용</li><li>5단계에서의 리딩 교재를 좀 더 많이 만들었으면 한다.</li><li>온라인 진단평가시 좀 더 새로운 문제로 업그레이드 필요합니다. 이러한 점을 보완하는 세미나 부탁드립니다.</li><li>감사합니다</li><li>카톡채널</li></ol></div>
+    </details>
+
+    <details>
+      <summary>[8/25 학원/우영] 세미나 소감 원문 (127건)</summary>
+      <div class="appendix-list"><ol><li>상담툴넘좋습니다.레벨테스트로도적용되게해주세요</li><li>AI상담은 이번에 꼭 활용해보고싶다</li><li>AI활용 분석표</li><li>깔끔한 설명 좋습니다</li><li>시험본 이후의 학부모 상담안내에 대한 구체적 예시를 볼수있어서 좋았음</li><li>더 디테일해진 학력평가 리포트로 후속 상담이 편리해질 것 같습니다. 유용하게 활용하겠습니다^^</li><li>학력평가 피드백을 다양하게 활용할 수 있어서 좋았습니다</li><li>사례 말씀하시는 선생님 목소리가 너무 안 들렸습니다.</li><li>AI 상담 어시스턴트 너무 좋아요!!</li><li>AI상담 도입 ㅡ 윤선생 최고입니다</li><li>학력평가의 중요성을 알게 되었습니다</li><li>학력평가 al 상담이 바로 톡과 연계된 부분</li><li>실제사례</li><li>사례.AI 활용</li><li>학력평가</li><li>ai상담어시스턴드를 잘 활용해서 학력평가 후 상담 잘해보겠습니다</li><li>진단평가도 ai상담 코치가 되면 좋겠네요</li><li>AI활용 상담이 좋았습니다.</li><li>ai활용과 학력평가 결과 자동 완성</li><li>상담 AI 너무 필요한 부분이었는데 아이디어를 제공해주셔서 감사합니다.</li><li>상담이 걱정 되었는데 넘 감사드려요~~</li><li>학력평가 하지않고 있었는데, 시작해야겠어요</li><li>리뷰할수있게해주세요</li><li>학력평가 열심히 활용해보겠습니다.</li><li>AI상담어시스턴트 무척 유용할듯합니다</li><li>AI 상담 어시스트</li><li>ai상담 툴만들어 주셔서 감사합니다.유용하게 잘 쓰겠습니다.</li><li>AI상담어시스턴트, 학력평가응시방법</li><li>학력평가 안내부터 추후 상담까지 세세하게 짚어주시고 매뉴얼 제공해주신 점 정말 감사합니다.</li><li>원장님의 구체적인 설명 좋았습니다</li><li>상담 기술</li><li>원장님 동영상이 소리가 작아서 아쉬웠어요. / 학력평가전에 미리 교육해주셔서 너무 좋았어요^-^ AI상담툴도 도움 많이될것같습니다^^</li><li>Ai 연계되어 현장에서 유용할 것 같아요</li><li>좋았어요</li><li>학습평가 정규적인 !!꼭 필요합니다, 감사합니다</li><li>학력평가시행하는데 도움이 많이 되겠습니다.</li><li>정말 필요한 좋은자료 준비해주셔서 감사합니다.</li><li>시험 결과 분석이 / 더 자세하게 되어 부모님들께 상담드리기 / 쉽겠어요 감사합니다</li><li>모든회원치게할지 / 늘 고민입니다 / 친구와점수비교로 이슈가된적도있고 / 점수가계속하향하다 제자리거나 하는 친구도 있어서요 그런사례들에 대한 대처법을 알고 싶어요</li><li>평가후 결과대처방안</li><li>자세히 예시를 들어 말씀해 주신 세종 원장님께 감사합니다</li><li>학습시스템 연구에 힘써 주심에감사드립니다.단 기술에 앞서 교재수업이 알차게 이루어질수 있는 중등교재 부분 연구 부탁드립니다</li><li>학력평가에대한 준비부터-사후관리까지 디테일한 설명 도움이 되었습니다.</li><li>세종시에서 운영하시는 원장님이 말씀할때 소리가 너무 작아 잘 안들려서 아쉬웠습니다.</li><li>학력평가로 AI상담까지 가능토록 해주신 것,센스있게 카톡전송용까지 해주신 거 정말 감사해요~요즈음 워킹맘이 많아서 생각보다 통화는 어렵거든요~학생수가 좀 많아도 개인별 레포트에 개인별 상담카톡을 무조건 다 보내보려고 합니다!최고예요진짜!이렇게까지 해주시는데 안하시는 원장님은 안계시는 게 정상일겁니다ㅡ인터뷰 영상만 소리가 안들려서 아쉬웠지만 자막있어서 들을 만 했어요ㅡ감사합니다</li><li>학력평가가 나날이 좋아지는 것 같아 감사합니다:) / / 제가 원을 운영중인 현장에서만 그런 것일 수도 있지만 학력평가 성적을 안내해드렸을 때 대형학원의 레테 또는 대중적인 지수(렉사일, AR 등…)에 대한 믿음?이 더 크신 것 같다는 생각을 정말 많이 했었거든요…! / / 그래서 정말 성적이 잘 나온 친구의 경우에도 성적이 정말 잘 나왔다고 안내드려도 생각보다 반응이 미지근한 경우가 종종 있었거든요ㅠㅠ(나중에 대형 레테 보시고 무슨 반 나왔다 윤선생 하길 잘했다 이런 이야기 하시는 분들이 좀 있었어요🥹) / / 물론 이전에도 본사에서 안내해주셨던 점수별 지수 표가 있어서 그걸 참고해서 상담을 진행해오긴 했지만 시험 난이도도 바뀌고 하다보니 적용이 쉽지 않아 아쉬움이 좀 있었습니다. / / 근데 이렇게 바로 성적표에서 나온다니 너무 좋네요:) / / 혹시 가능하다면 CEFR 지수도 함께 나온다면 더더욱 좋을 것 같아 해당부분 조심스레 건의드려봅니다!</li><li>이번 세미나 내용중에서 특히 AI 상담 기능이 매우 도움이 되리라 생각합니다. 본사에서 교육현장에 대한 이해가 점점 높어지는 느낌이라 매우 기쁩니다^^</li><li>상담 어시스턴트 시스템이 유용할 거 같아요.</li><li>감사</li><li>학력평가 상담툴에 대한설명이 좋았습니다!</li><li>AI 어시스턴트</li><li>ai상담사</li><li>AI상담</li><li>AI상담툴 덕분에 학력평가 결과 상담에 대한 부담이 많이 줄었습니다. 유용하게 사용하겠습니다.</li><li>평가의 중요성을 알게됩니다</li><li>날로 발전하는 윤선생입니다. 분명 도움이 될꺼 같습니다.</li><li>학력평가 결과의 활용도가 높다는 것을 배운 시간이었다.</li><li>상담 AI툴 활용도가 높을거같아요</li><li>원장님의 현장사례소개 좋았습니다 / 변화된 리포트 좋았습니다</li><li>오늘 회의 도입부에서 / / 미취학 학생은 &#x27;진단평가&#x27;랑 &#x27;학력평가&#x27; 둘 다 응시 할 수 없다고 해서 문의드려요. / / 학력평가 응시 불가는 조금 이해가 가지만 진단평가도 응시 못하게 하면 미취학 학생을 신규로 유치하기 힘든 구조가 아닐까요? / / 그럼 미취학 학생 신규 등록은 안되는건가요? 답변 부탁드립니다. 감사합니다. / / HP 010.5519.3210</li><li>파닉스 및 저득점 학부모 상담화법</li><li>좋아요.</li><li>학력평가 활용방법이 좋았습니다</li><li>AI 상담 좋았어요</li><li>윤선생학력평가 우수사례에 매우 도움됨</li><li>학력평가를 보고 잘 본 학생 어머니도 컴플레인이 있으셔서 상당히 난감한 부분이 있었는데 AI 상담 어시스턴트 메뉴가 있어서 상담을 잘 할 수 있도록 매뉴얼을 만들어 주셔서 큰 도움이 될 것 같습니다. 감사합니다~~</li><li>처음이라 자세히 설명해주셔서 좋았습니다</li><li>만족</li><li>현장 사례 인터뷰</li><li>병원 다녀오느라 10분정도 들었는데 다른 원장님들이 요약해준 내용 참고 하겠습니다.</li><li>학력평가 시스템 및 결과분석 상담리포트등.. / 업그레이드 부분이 현장 원장님들께 많은 도움이 될것 같습니다. / 수고해 주신 모는 분들게 감사드립니다.</li><li>AI툴을 만들어주셔서 저같은 초보원장이 상담하는데 아주 도움이 많이 될것 같습니다. 감사합니다❤️</li><li>안내문을 간략하게 보냈었는데 좀 더 구체적으로 체계화해서 보내야겠다는 생각..</li><li>학력평가에 관리에 대해 알수있어좋았다</li><li>결과분석 상담,</li><li>신학기 상담은 늘 부담이되는데 학력평가라는 좋은 도구를 이용할 수 있어 도움이 될 듯 합니다.</li><li>수고하셨습니다.</li><li>사례가 좋았어요</li><li>학력평가 ai 시스템 개선 및 상담법</li><li>달라진 리포트와 상세한 상담멘트 많은 도움이 되겠습니다.</li><li>실제사례로 a to z까지 자세한 안내와 적용까지 많은 도움이 되었습니다</li><li>AI툴로 학력평가 상담할 내용을 학부모님들께 자세히 안내해드릴 수 있어서 좋은거 같습니다. / 어차피 있는 AI툴로 매달 보내드리는 아이들 피드백에도 쓰일 수 있으면 좋을거 같습니다.</li><li>세종어진더샵 원장님이 학력평가 성장 사례의 내용이 구구절절 도움이 되는 내용이어서 좋았습니다~ 잘 활용하겠습니다</li><li>상담어시스턴트 기능이 활용하기 좋을것 같네요</li><li>학력평가 사전·사후 관리부터 학부모 상담 노하우까지 실제 현장에서 바로 활용할 수 있는 내용이 많아 유익했습니다. 좋은 내용으로 세미나를 준비해 주신 모든 분들께 감사드립니다.</li><li>AI상담</li><li>중등 학력평가에 학년별 문법문제도 있으면 좋을거 같아요. / 특히 6학년,중등부는 문법 수준 파악후 상담 필요함</li><li>자세한 평가방법과 학습결과 학부모상담방법을 알려주셔서 좋았습니다.</li><li>차별한된 학습동기</li><li>학력평가 후에 학부모와 상담할 수 있는 유용한 AI 툴을 만들어 주셔서 감사합니다. / 사례 발표하신 원장님 목소리가 볼륨을 최대로 해도 잘 안들리고 끊기는 점이 아쉬웠습니다.</li><li>영상이 중간중간 안들렸습니다.</li><li>학력평가 피드백</li><li>원장님의 학력평가 경험담이 정말 많은 도움이 되었어요~^^</li><li>사례를 발표하는 중에는 오디오가 좀 작아서 이해가 어려웠습니다</li><li>학력평가 ai상담</li><li>자료로 부족했던 부분을 자세히 설명해주셔서 많은 도움이 되었습니다. 감사합니다.</li><li>학력평가 결과 ai 상담</li><li>소리가 적어서../ 방송영상 올려주세요</li><li>AI assistant 활용법과 ysat test의update / 내용이 상담에 도움이 되겠습니다.</li><li>ai 활용법이 도움이 되었어요</li><li>미리시험유형을 알수 있게하는방법이 있으면 좋을것 같습니다.~</li><li>한드폰으로 들을 때 영상 소리가 잘 안 들렸어요</li><li>학부모님 상담이 걱정이였는데 감사합니다. / 내용복사해서 문자 보낼수 있는것도 감사🩷</li><li>학력 평가 ai 상담 툴이 좋았어요</li><li>AI활용이 점점 많아져서 좋았습니다</li><li>학력평가대비상담</li><li>학력평가 후, 성적에 따른 학부모 상담.</li><li>학력평가 사례가 좋았습니다</li><li>학력펑가를 해마다 치면서 후 상담이 항상 고민이었는데 AI상담분석에 많은 도움을 받을것같아 기대가 됩니다. / 잘 활용해보도록 하겠습니다.</li><li>학력평가에대한 자세한 정보</li><li>변화한 YSAT 분석결과표와 AI상담이 좋았습니다</li><li>같은 주제로 조금은 다른 내용도있으면.좋을듯 합니디ㅡ.</li><li>가려운곳을 콕 짚어서 교육해주시니 현장에서 잘 사용하겠습니다</li><li>a.i를 활용한 상담 프로세스 가이드가 유익했습니다</li><li>학력평가 ai상담부분이 좋았어요. / 더샆원장님이 있는 아이 잘 관리해야겠다 라는 말씀도 다 아느 얘기지만 더 깊이 와 닿았어요. / / 오늘 교육 준비해주신 모든분 감사드립니다.</li><li>학력평가 자세한 설명</li><li>AI상담 어시스턴트 내용이 좋았어요. / 잘 활용해보겠습니다.</li><li>학력평가 적극활용하겠습니다</li><li>학력평가 변화</li><li>AI 상담툴 도입이 좋았어요. 감사합니다.</li><li>ai 상담 어시스턴트 도움이 많이 될 것 같습니다.</li><li>다 좋았습니다</li><li>AI를 통한 학력평가 실시 후 학부모와 상담할 수 내용이 좋았습니다.</li><li>경험 공유</li><li>AI 상담어시스턴트</li><li>카툰 잉글리시 등 사회과학수학 교재를 우영에서도 사용할수 있도록 해주시길 부탁드려여</li><li>세종시에서 운영하시는 원장님이 말씀할때 소리가 너무 작아 잘 안들려서 아쉬웠습니다.</li></ol></div>
+    </details>
+
+    <details>
+      <summary>[8/25 학원/우영] 향후 희망 주제 원문 (105건)</summary>
+      <div class="appendix-list"><ol><li>이런사례가담긴노하우공유좋아요</li><li>교육정보</li><li>교재리포트도 AI적용되기를 바랍니다</li><li>단어 암기 효과보는법</li><li>화상영어</li><li>교재 단계별 차례 ㅡ특히 리딩교재연구</li><li>신규교재 활용방법</li><li>새로운 홍보방향</li><li>레벨테스트 회원상담</li><li>학습우수사례</li><li>교재지도방안</li><li>항상 감사드립니다</li><li>교재 학습 로드맵</li><li>이제 막 시작해서... 열심히 배우겠습니다.</li><li>고등영어</li><li>초등학교 5.6학년 용 리딩 교재를 보강해주시면 좋겠습니다.</li><li>교재 내용 분석</li><li>워크북 활용방안</li><li>큐미르에대한소개</li><li>교재 단어를 미리 공부시키는데 음성을 들을 수 있도록 큐알 코드 등을 만들어주셨으면 합니다.</li><li>교육정책 큰 틀</li><li>취학아동 주는데 생존전략</li><li>파닉스 활동지 활용법(수업인원에 따라)</li><li>학습리포트 관련 설명</li><li>B,C,D교재 활용법 중등 대비 교재 티칭 팁</li><li>화상 영어에 대해 다뤄주세요</li><li>중3관리비법</li><li>교재별로 지도해야할 방향</li><li>교재연구</li><li>Lms 화면 전체아이들 학습현황 한페이지 볼수 있게 만들어주시는거 안될까요? 예전lms 는 그게 가능해서 곧 어떤 애들이 교재가 끝날지 알아볼수있고 다른교재도 미리 준비할수 있는데 지금은 일일이 한명한명 들어가서 봐야해서 이게 번거롭습니다. / 예전의 좋은 시스템은 다시 살려주시면 좋을것 같은데요</li><li>오늘 처럼 현장에서 바로 활용할수 있는 유익한 정보들을 주시면 감사하겠습니다</li><li>학원내 트러블러 탈퇴시키는기준과 상담법 초고6학년 학원적응법(적응못하고단기탈퇴ㅠ)</li><li>영업.상담</li><li>많은 사례들을 보여 주셨음 합니다.</li><li>저는 현재 당월교재 신청가능금액이 많이 남는데 기존처럼 필요교재보다 추가로 넘치게 신청해서 교재를 저장할 공간이 없어요. 매달 남는 교재 신청금액 활용방안 없을까요?</li><li>학력평가 결과 성적이 떨어진경우 어떻게 상담했는지 실제 상담한 내용들을 들어보고싶어요.</li><li>늘 알아서 해주심</li><li>마케팅 특강</li><li>학원홍보방법: off line에서 on line 으로 홍보 강화 / 방향과 윤선생 본사의 윤선생 브랜드 홍보전략이 궁금합니다^^</li><li>효과적인 중등 내신과 서술형 평가 대비 전략에 / 대해 좀 더 알고 싶어요.</li><li>감사</li><li>시험대비</li><li>쓰기교재활용</li><li>영단어픽 큐알음원 방식 변경 건의드립니다. 유튜브 사용이 제한된 학생들도 많고 광고까지 나와서 불편합니다</li><li>노력에 감사드려요</li><li>학력평가 뿐아니라 상담테스트에도 적용되면 좋겠습니다.</li><li>문법 교재 활용 사례</li><li>영단어 픽활용노ᄒᆢ우</li><li>요즘 엄마들은 윤선생 브랜드를 잘 모릅니다 / 윤선생 광고를 다양하게 해주셨으면 좋겠어요</li><li>대입개편안에 따른 준비사항 및 태도</li><li>중고등반 내신대비</li><li>기존회원들의 이탈방지 방법</li><li>초등 문법 문제가 부족해서 좀더많았으면좋겠어요</li><li>중학생신입 상담시 평가시험지 필요합니다</li><li>저학년용 교재 특히 A단계로 넘어가기 전 pre단계 교재가 조금 더 있으면 좋겠는데 각 단계별로 학생들이 진도 나갈때 편차가 커서 가끔 고민 될 때가 있습니다. 다른 원장님들께서는 이런부분들을 어떻게 헤쳐나가시는지 상담을 어떻게 해야 할지 아니면 지루해하는 단어학습을 꾸준히 시켜야하는지 등등 상담에 관한 내용도 더 다뤄주시면 감사하겠습니다.</li><li>경험많으신 원장들에 비해 처음하시는 원장들은 프로그램에 미숙합니다 이 부분에 중점을두고 해주셨으면 합니다</li><li>교재연구</li><li>2학기 영업 전반</li><li>원장님들의 후기가 가장 와 닿습니다. / 초등.중등부 관리</li><li>시간 교재 개발 및 기존 교재 학습 시스템 업그레이드 부분이 있으면 현장에 공유했으면 합니다.</li><li>윤선생 영어공부방을 6개월을 하고 있자니 커리큘럼이며 교재며 너무 좋고 ai도 개발을 너무 잘해주셔서 이렇게 시대에 잘따라가고있는데 저희 단지에선 윤선생 인지도가 없어도 너무 없고 올드하다는 이미지뿐이에요ㅠㅠ 삼x, 뮤x영어처럼 본사에서 홍보를 해주시면 좋을거같아요. 저도 엄청 열심히 홍보를 하지만 브랜드이미지 자체를 본사에서 홍보해주시는게 제일 좋을것 같습니다. 너무 좋은 윤선생 저만 알고싶지않아요~~ 오래오래 많은 사람들과 하고싶습니다.🫶</li><li>더 다양한 현장소리를 듣고싮다</li><li>소개 받을 때 좋은 예시( 기존 회원 통해)</li><li>회원들 특히 중등부 수업중 아이들의 언행관련해 교사들이 힘들어하는 경우가 종종 있습니다. 수업도 중요하지만 아이들과의 소통법도 중요한듯해요. 그런것에 관한 내용도 다루었으면 합니다.</li><li>수고하셨습니다</li><li>Ai에 관한 학습교재나 방법 발전된 교육 계속해서 부탁드리겠습니다</li><li>중등 교재 문법 학년별 지도법과 신간 교재 많이 늘려주세요</li><li>변화된 입시와 방향성</li><li>필요한 부분을 잘 캐치해서 매달 세마나에서 좋은 내용으로 보여주셔서 감사드립니다 🙏</li><li>클래스카드 사용하시는 원장님들 계시는데, 기초부터 조금씩 활용해 볼 수 있게 비기너용, 심화용 두 가지로 요청드립니다 (윤스TV에서는 상세하게)</li><li>세무 관계 내용을 좀 다루었으면 좋겠습니다</li><li>학력평가 결과를 학생별 학습 방향과 수업에 효과적으로 연결하는 방법도 함께 다뤄주시면 많은 도움이 될 것 같습니다.</li><li>별개로 학려평가가 3학년인 경우 3월엔 2학년과정 9월엔 3학년과정이 포함되는지 알고 싶어요~</li><li>학력평가 문법 문제</li><li>효율적인 교재배본과정에 대해서 알고 싶습니다.</li><li>Grammar Quest Time 시험 문제를 교재 마지막에 4회 시험지로 있는데, 이것을 단원별로 나눠서 문제를 내주셨으면 좋겠습니다. (질문에 안맞는 내용 같지만 강력하게 건의드립니다.)</li><li>AI상담툴을 진단평가에도 적용시켜주세요</li><li>Ai. 활용법</li><li>계속해서 경험담과 실질적인 화법들 많이 다루어주셨으면 좋겠어요~오늘 하루도 정말 수고많으셨어요~^^</li><li>문법교재가 2~3권 정도로 통합되면 좋겠습니다.</li><li>중등부 내신</li><li>문법교재 수준 재배치 / A단계 문법교재가 C단계 보다 어려워요 / C단계 문법교재 다시 만들었으면 좋겠습니다 / 더불어 A단계 문법을 B단계로 넘기고 진짜 1~2학년들이(저학년) 할수 있는 A단계 문법 교재 만들어주세요.</li><li>예비중 관리방안</li><li>교재 이용과 다양한 활용 제안 과 공유</li><li>다양한 월말평가지</li><li>공부방을 오래 하시면서도 꾸준히 인원 유지하는 법</li><li>클래스카드 활용법</li><li>2학기 신규회원 모집 상담</li><li>고학년파닉스 단기완성/ 직독직해/ 초등문법 문제풀게많고 단순하게 만든 교재(초등3800제교재느낌)</li><li>바로 공지드릴수 있는 문구</li><li>상담스킬</li><li>신교재 발표에 목마름을 표현하고싶네요..ㅎ</li><li>오늘도 그 부분이 좋았는데 잘 적용 중인 센터 원장님의 실제사례 인터뷰가 계속 있으면 좋을거같습니다^^</li><li>다양한 경우의 배본 교육이 필요합니다</li><li>초등 고학년 이상의 중등대비 부교재 활용에 대해서도 자세히 알고 싶습니다. (추가로 윤선생 브랜드 매체 홍보 계획은 없으신지 여쭈어요.)</li><li>윤선생시스템 한개씩 다시 설명해주시면 좋을듯싶어요.</li><li>교재관련</li><li>윤선생시스템에서 AI활용에 관한 더 많은 정보 알려주세요</li><li>다음 세미나도 기대합니다</li><li>학습관리-어휘테스트에서 루키와 올 스타 1500단어를 일일이 출력해서 단어 시험을 치고 있습니다. 이것도 영단어 pick처럼 몇 권씩 나누어서라도 단어장 책으로 만들어주시면 좋겠습니다. 간절히 원합니다. 정말. 매일 인쇄 너무 번거러워서 한 꺼번에 여러장 인쇄해 주면 잃어버렸다고 합니다.ㅠㅠ</li><li>회원 소개 유도하는 방법</li><li>감정코칭</li><li>교재연구</li><li>원서 읽기</li><li>학력평가 결과 성적이 떨어진경우 어떻게 상담했는지 실제 상담한 내용들을 들어보고싶어요.</li></ol></div>
+    </details>
+
+    <p class="appendix-note">※ 원본 응답 파일 기준 유효 응답은 204건이며, 이 보고서의 모든 수치는 해당 204건을 기준으로 산출했습니다. 세션 구분은 응답 일자(8/25 · 8/26) 기준입니다.</p>
+  </section>
+
+</div>
+
+<footer>Business_HQ</footer>
+
+</body>
+</html>

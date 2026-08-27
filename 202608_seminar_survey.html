@@ -79,6 +79,36 @@
     color:#a9b4c7;
   }
   .meta-bar b{color:#fff;font-weight:700;}
+  .attend{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+    margin:26px 0 0;
+  }
+  .attend-card{
+    background:rgba(255,255,255,.06);
+    border:1px solid rgba(255,255,255,.16);
+    border-radius:10px;
+    padding:16px 18px;
+  }
+  .attend-card .ac-top{
+    display:flex;
+    align-items:baseline;
+    gap:8px;
+    flex-wrap:wrap;
+  }
+  .attend-card .ac-day{
+    font-size:11px;font-weight:800;letter-spacing:.05em;
+    color:var(--gold);border:1px solid rgba(201,164,92,.45);
+    padding:2px 7px;border-radius:4px;
+  }
+  .attend-card .ac-name{font-size:13.5px;font-weight:700;color:#fff;}
+  .attend-card .ac-num{
+    font-size:24px;font-weight:800;color:#fff;
+    margin-top:8px;letter-spacing:-.01em;
+  }
+  .attend-card .ac-num span{font-size:14px;font-weight:600;color:#a9b4c7;margin-left:2px;}
+  .attend-card .ac-sub{font-size:12px;color:#a9b4c7;margin-top:4px;}
 
   section{margin-bottom:56px;}
   .sec-head{
@@ -286,6 +316,7 @@
     .hero-logo img{height:28px;}
     .session-head .n{margin-left:0;width:100%;}
     .session-head{flex-wrap:wrap;}
+    .attend{grid-template-columns:1fr;}
   }
 </style>
 </head>
@@ -309,6 +340,18 @@
       <span>세션 구성 &nbsp;<b>영어교실 69 · 학원/우영 135</b></span>
       <span>만족도 척도 &nbsp;<b>5점 척도</b></span>
       <span>주관식 분석 &nbsp;<b>다중 키워드 분류</b></span>
+    </div>
+    <div class="attend">
+      <div class="attend-card">
+        <div class="ac-top"><span class="ac-day">8/26</span><span class="ac-name">영어교실</span></div>
+        <div class="ac-num">376<span>명 참석</span></div>
+        <div class="ac-sub">본사 35명 · 현장 341명 &nbsp;|&nbsp; 소감서 응답 69건</div>
+      </div>
+      <div class="attend-card">
+        <div class="ac-top"><span class="ac-day">8/25</span><span class="ac-name">학원/우영</span></div>
+        <div class="ac-num">431<span>명 참석</span></div>
+        <div class="ac-sub">본사 39명 · 현장 392명 &nbsp;|&nbsp; 소감서 응답 135건</div>
+      </div>
     </div>
   </div>
 </div>

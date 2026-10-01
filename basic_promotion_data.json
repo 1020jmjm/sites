@@ -1,7 +1,12 @@
 {
     "asof":  "2026-09-30",
     "activeMonth":  9,
-    "generated":  "2026-10-01T09:12:37+09:00",
+    "confirmed":  {
+                      "9":  true,
+                      "10":  false,
+                      "11":  false
+                  },
+    "generated":  "2026-10-01T09:22:07+09:00",
     "rows":  [
                  {
                      "name":  "제1센터",

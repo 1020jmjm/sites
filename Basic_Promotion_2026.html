@@ -179,7 +179,7 @@ h2 .asof{float:none;display:block;padding-top:4px}
           <th colspan="4" class="grp sum">3개월 합산</th>
         </tr>
         <tr>
-          <th>25년<br>신규</th><th>26년<br>신규</th><th>순증</th><th>순위<br>(미확정)</th>
+          <th>25년<br>신규</th><th>26년<br>신규</th><th>순증</th><th>순위</th>
           <th>25년<br>신규</th><th>26년<br>신규</th><th>순증</th><th>순위<br>(미확정)</th>
           <th>25년<br>신규</th><th>26년<br>신규</th><th>순증</th><th>순위<br>(미확정)</th>
           <th>25년<br>신규</th><th>26년<br>신규</th><th>순증</th><th>순위<br>(미확정)</th>
@@ -257,6 +257,15 @@ var POLL_MS    = 10 * 60 * 1000;   /* 열어둔 탭도 10분마다 최신으로 
     document.title = BASE_TITLE+' ('+y+'.'+m+'.'+dd+' 기준)';
     document.getElementById('asof').textContent = y+'. '+m+'. '+dd+'. 기준';
     document.getElementById('asofNote').textContent = y+'. '+pad(m)+'. '+pad(dd)+'.(산정일)';
+
+    /* 월별 확정 여부에 따라 머리글을 '순위' / '순위(미확정)' 으로.
+       머리글 둘째 줄은 4칸씩 9월·10월·11월·합산 순서 → 각 묶음의 4번째 칸이 순위 */
+    var cf = d.confirmed || {};
+    var hs = document.querySelectorAll('table.board thead tr:last-child th');
+    [9,10,11].forEach(function(mo, i){
+      var th = hs[i*4 + 3];
+      if (th) { th.innerHTML = cf[String(mo)] ? '순위' : '순위<br>(미확정)'; }
+    });
 
     var html='';
     for(var i=0;i<d.rows.length;i++){
